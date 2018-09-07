@@ -1,6 +1,7 @@
 setup:
 	yarn install
 	cd api-server && yarn install
+	cp sample-env .env
 
 run: run.apiserver run.client 
 
