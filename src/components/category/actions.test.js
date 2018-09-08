@@ -3,8 +3,16 @@ import thunk from 'redux-thunk'
 import fetchMock from 'fetch-mock'
 import * as actions from './actions'
 import * as types from './constants/ActionTypes'
+import { initialCategoriesState } from './constants/ReducersInitialState'
+import { categoriesMock } from './constants/Fixtures'
 
 describe('actions', () => {
+  const middlewares = [thunk]
+  const mockStore = configureMockStore(middlewares)
+  const headers = {
+    'Accept': 'application/json',
+    'Authorization': 'whatever-you-want'
+  }
 
   describe('ListCategories', () => {
     it('should create an action to invalidate categories', () => {
@@ -28,65 +36,25 @@ describe('actions', () => {
     })
 
     it('should create an action to receive categories', () => {
-      const categories = [{
-          "name": "react",
-          "path": "react"
-        },
-        {
-          "name": "redux",
-          "path": "redux"
-        },
-        {
-          "name": "udacity",
-          "path": "udacity"
-        }
-      ]
       const expectedAction = {
         type: types.RECEIVE_CATEGORIES,
-        items: categories
+        items: categoriesMock.categories,
       }
 
-      expect(actions.receiveCategories({categories})).toEqual(expectedAction)
+      expect(actions.receiveCategories({categories: categoriesMock.categories})).toEqual(expectedAction)
     })
 
     describe('async actions', () => {
-
-      const middlewares = [thunk]
-      const mockStore = configureMockStore(middlewares)
-
       afterEach(() => {
         fetchMock.reset()
         fetchMock.restore()
       })
 
       it('creates RECEIVE_CATEGORIES when fetching categories has been done', () => {
-        const initialCategoriesState = {
-          isFetching: false,
-          didInvalidate: false,
-          items: [],
-          lastUpdated: ''
-        }
-        const headers = {
-
-        }
-        const categories = [{
-            "name": "react",
-            "path": "react"
-          },
-          {
-            "name": "redux",
-            "path": "redux"
-          },
-          {
-            "name": "udacity",
-            "path": "udacity"
-          }
-        ]
-
-        fetchMock.getOnce('/categories', { body: { categories }, headers })
+        fetchMock.getOnce('/categories', { body: {categories: categoriesMock.categories}, headers })
         const expectedActions = [
           { type: types.REQUEST_CATEGORIES, isFetching: true },
-          { type: types.RECEIVE_CATEGORIES, items: categories },
+          { type: types.RECEIVE_CATEGORIES, items: categoriesMock.categories },
         ]
         const store = mockStore({ categories: initialCategoriesState })
         return store.dispatch(actions.categoriesFetchData()).then(() => {

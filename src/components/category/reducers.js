@@ -3,13 +3,7 @@ import {
   RECEIVE_CATEGORIES, 
   INVALIDATE_CATEGORIES 
 } from './constants/ActionTypes'
-
-const initialCategoriesState = {
-  isFetching: false,
-  didInvalidate: false,
-  items: [],
-  lastUpdated: ''
-}
+import { initialCategoriesState } from './constants/ReducersInitialState'
 
 export const categories = (state = initialCategoriesState, action) => {
   switch (action.type) {
@@ -17,17 +11,15 @@ export const categories = (state = initialCategoriesState, action) => {
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
-        items: action.items,
-        lastUpdated: action.receivedAt
+        items: action.items
       })
     case REQUEST_CATEGORIES:
       return Object.assign({}, state, {
-        isFetching: true,
-        didInvalidate: false
+        isFetching: action.isFetching
       })
     case INVALIDATE_CATEGORIES:
       return Object.assign({}, state, {
-        didInvalidate: true
+        didInvalidate: action.didInvalidate
       })
     default:
         return state;

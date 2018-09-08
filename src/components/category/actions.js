@@ -19,7 +19,7 @@ export const requestCategories = (bool) => {
 export const receiveCategories = (data) => {
   return {
       type: types.RECEIVE_CATEGORIES,
-      items: data.categories
+      items: data.categories,
   }
 }
 
