@@ -2,7 +2,7 @@ import {
   REQUEST_CATEGORIES, 
   RECEIVE_CATEGORIES, 
   INVALIDATE_CATEGORIES 
-} from './actions'
+} from './constants/ActionTypes'
 
 const initialCategoriesState = {
   isFetching: false,

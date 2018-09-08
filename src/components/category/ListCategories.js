@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { categoriesFetchData } from './actions';
-import { headers, listCategoriesUrl } from 'api/cms';
 
 class ListCategories extends Component {
   static propTypes = {
@@ -14,7 +13,7 @@ class ListCategories extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchData(listCategoriesUrl, headers);
+    this.props.fetchData()
   }
 
   render() {
@@ -61,7 +60,7 @@ const mapStateToProps = ({ categories }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (listCategoriesUrl, headers) => dispatch(categoriesFetchData(listCategoriesUrl, headers))
+    fetchData: () => dispatch(categoriesFetchData())
   };
 };
 

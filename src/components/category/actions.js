@@ -1,40 +1,34 @@
-export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
-export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
-export const INVALIDATE_CATEGORIES = 'INVALIDATE_CATEGORIES'
+import fetch from 'cross-fetch'
+import * as types from './constants/ActionTypes'
+import { headers, listCategoriesUrl } from 'api/cms';
 
 export const invalidateCategories = (bool) => {
   return {
-      type: 'INVALIDATE_CATEGORIES',
+      type: types.INVALIDATE_CATEGORIES,
       didInvalidate: bool
   }
 }
 
 export const requestCategories = (bool) => {
   return {
-      type: 'REQUEST_CATEGORIES',
+      type: types.REQUEST_CATEGORIES,
       isFetching: bool
   }
 }
 
 export const receiveCategories = (data) => {
   return {
-      type: 'RECEIVE_CATEGORIES',
+      type: types.RECEIVE_CATEGORIES,
       items: data.categories
   }
 }
 
-export function categoriesFetchData(url, headers) {
-  return (dispatch) => {
-    dispatch(requestCategories(true));
-    fetch(url, { headers })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
-      })
-      .then((response) => response.json())
-      .then((json) => dispatch(receiveCategories(json)))
-      .catch(() => dispatch(invalidateCategories(true)));
-  };
+export function categoriesFetchData() {
+  return dispatch => {
+    dispatch(requestCategories(true))
+    return fetch(listCategoriesUrl, { headers })
+      .then(res => res.json())
+      .then(body => dispatch(receiveCategories(body)))
+      .catch(ex => dispatch(invalidateCategories(true)))
+  }
 }
