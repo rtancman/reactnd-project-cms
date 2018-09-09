@@ -5,14 +5,11 @@ import * as actions from './actions'
 import * as types from './constants/ActionTypes'
 import { initialCategoriesState } from './constants/ReducersInitialState'
 import { categoriesMock } from './constants/Fixtures'
+import { headers, listCategoriesUrl } from 'api/cms';
 
 describe('actions', () => {
   const middlewares = [thunk]
   const mockStore = configureMockStore(middlewares)
-  const headers = {
-    'Accept': 'application/json',
-    'Authorization': 'whatever-you-want'
-  }
 
   describe('ListCategories', () => {
     it('should create an action to invalidate categories', () => {
@@ -51,7 +48,7 @@ describe('actions', () => {
       })
 
       it('creates RECEIVE_CATEGORIES when fetching categories has been done', () => {
-        fetchMock.getOnce('/categories', { body: {categories: categoriesMock.categories}, headers })
+        fetchMock.getOnce(listCategoriesUrl, { body: {categories: categoriesMock.categories}, headers })
         const expectedActions = [
           { type: types.REQUEST_CATEGORIES, isFetching: true },
           { type: types.RECEIVE_CATEGORIES, items: categoriesMock.categories },

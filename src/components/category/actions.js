@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch'
 import * as types from './constants/ActionTypes'
 import { headers, listCategoriesUrl } from 'api/cms';
 
