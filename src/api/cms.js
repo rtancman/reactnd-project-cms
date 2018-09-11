@@ -9,6 +9,6 @@ export const headers = {
   'Authorization': token
 }
 
-
 export const listCategoriesUrl = `${baseApi}/categories`
 export const listPostsUrl = `${baseApi}/posts`
+export const categoryPostsUrl = (categoryId) => `${baseApi}/${categoryId}/posts`
