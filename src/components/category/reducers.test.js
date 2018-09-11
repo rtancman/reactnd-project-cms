@@ -1,7 +1,7 @@
-import { categories } from './reducers'
+import { categories, categoryPosts } from './reducers'
 import * as types from './constants/ActionTypes'
-import { initialCategoriesState } from './constants/ReducersInitialState'
-import { categoriesMock } from './constants/Fixtures'
+import { initialCategoriesState, initialCategoryPostsState } from './constants/ReducersInitialState'
+import { categoriesMock, categoryPostsMock } from './constants/Fixtures'
 
 
 describe('reducers', () => {
@@ -51,4 +51,51 @@ describe('reducers', () => {
       expect(categories(undefined, action)).toEqual(expected)
     })
   })
+
+  describe('category posts', () => {
+    it('should return the initial state', () => {
+      expect(categoryPosts(undefined, {})).toEqual(initialCategoryPostsState)
+    })
+
+    it('should handle REQUEST_CATEGORY_POSTS', () => {
+      const action = {
+        type: types.REQUEST_CATEGORY_POSTS,
+        isFetching: true
+      }
+      const expected = {
+        ...initialCategoryPostsState,
+        isFetching: true
+      }
+
+      expect(categoryPosts(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle INVALIDATE_CATEGORY_POSTS', () => {
+      const action = {
+        type: types.INVALIDATE_CATEGORY_POSTS,
+        didInvalidate: true
+      }
+      const expected = {
+        ...initialCategoryPostsState,
+        didInvalidate: true
+      }
+
+      expect(categoryPosts(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle RECEIVE_CATEGORY_POSTS', () => {
+      const action = {
+        type: types.RECEIVE_CATEGORY_POSTS,
+        isFetching: false,
+        didInvalidate: false,
+        items: categoryPostsMock,
+      }
+      const expected = {
+        ...initialCategoriesState,
+        items: categoryPostsMock,
+      }
+      
+      expect(categoryPosts(undefined, action)).toEqual(expected)
+    })
+  })    
 })
