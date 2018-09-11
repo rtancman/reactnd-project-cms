@@ -1,11 +1,11 @@
-import { posts } from './reducers'
+import { posts, post } from './reducers'
 import * as types from './constants/ActionTypes'
-import { initialListPostState } from './constants/ReducersInitialState'
-import { postsMock } from './constants/Fixtures'
+import { initialListPostState, initialPostState } from './constants/ReducersInitialState'
+import { postsMock, postMock } from './constants/Fixtures'
 
 
 describe('reducers', () => {
-  describe('posts', () => {
+  describe('list posts', () => {
     it('should return the initial state', () => {
       expect(posts(undefined, {})).toEqual(initialListPostState)
     })
@@ -49,6 +49,53 @@ describe('reducers', () => {
       }
       
       expect(posts(undefined, action)).toEqual(expected)
+    })
+  })
+
+  describe('post', () => {
+    it('should return the initial state', () => {
+      expect(post(undefined, {})).toEqual(initialPostState)
+    })
+
+    it('should handle REQUEST_POST', () => {
+      const action = {
+        type: types.REQUEST_POST,
+        isFetching: true
+      }
+      const expected = {
+        ...initialPostState,
+        isFetching: true
+      }
+
+      expect(post(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle INVALIDATE_POST', () => {
+      const action = {
+        type: types.INVALIDATE_POST,
+        didInvalidate: true
+      }
+      const expected = {
+        ...initialPostState,
+        didInvalidate: true
+      }
+      
+      expect(post(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle RECEIVE_POST', () => {
+      const action = {
+        type: types.RECEIVE_POST,
+        isFetching: false,
+        didInvalidate: false,
+        ...postMock,
+      }
+      const expected = {
+        ...initialPostState,
+        ...postMock,
+      }
+      
+      expect(post(undefined, action)).toEqual(expected)
     })
   })
 })
