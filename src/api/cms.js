@@ -12,3 +12,4 @@ export const headers = {
 export const listCategoriesUrl = `${baseApi}/categories`
 export const listPostsUrl = `${baseApi}/posts`
 export const categoryPostsUrl = (categoryId) => `${baseApi}/${categoryId}/posts`
+export const postUrl = (postId) => `${baseApi}/posts/${postId}`
