@@ -19,5 +19,5 @@ const post = {
 export const initialPostState = {
   isFetching: false,
   didInvalidate: false,
-  ...post
+  content: {}
 }

@@ -88,11 +88,13 @@ describe('reducers', () => {
         type: types.RECEIVE_POST,
         isFetching: false,
         didInvalidate: false,
-        ...postMock,
+        ...postMock
       }
       const expected = {
         ...initialPostState,
-        ...postMock,
+        content: {
+          ...postMock
+        }
       }
       
       expect(post(undefined, action)).toEqual(expected)

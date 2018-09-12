@@ -35,15 +35,17 @@ export const post = (state = initialPostState, action) => {
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
-        id: action.id,
-        timestamp: action.timestamp,
-        title: action.title,
-        body: action.body,
-        author: action.author,
-        category: action.category,
-        voteScore: action.voteScore,
-        deleted: action.deleted,
-        commentCount: action.commentCount
+        content: {
+          id: action.id,
+          timestamp: action.timestamp,
+          title: action.title,
+          body: action.body,
+          author: action.author,
+          category: action.category,
+          voteScore: action.voteScore,
+          deleted: action.deleted,
+          commentCount: action.commentCount
+        }
       })
     case REQUEST_POST:
       return Object.assign({}, state, {
