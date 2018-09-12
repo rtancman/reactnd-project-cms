@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { postsFetchData } from './actions';
+import { Link } from "react-router-dom";
 
 class ListPosts extends Component {
   static propTypes = {
@@ -34,7 +35,7 @@ class ListPosts extends Component {
         <ul>
           {items.map((item) => (
             <li key={item.id}>
-              {item.title}
+              <Link to={`/posts/${item.id}`}>{item.title}</Link>
             </li>
           ))}
         </ul>
