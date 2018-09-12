@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './pages/Home'
 import CategoryPage from './pages/CategoryPage'
-import Post from './pages/Post'
+import PostPage from './pages/PostPage'
 
 class App extends Component {
   render() {
@@ -16,8 +16,8 @@ class App extends Component {
         <Route path='/category/:id' render={(props) => (
           <CategoryPage {...props} />
         )}/>
-        <Route path='/post/:id' render={(props) => (
-          <Post {...props} />
+        <Route path='/posts/:id' render={(props) => (
+          <PostPage {...props} />
         )}/>
       </div>
     );
