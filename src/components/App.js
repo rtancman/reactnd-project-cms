@@ -6,11 +6,13 @@ import Home from './pages/Home'
 import CategoryPage from './pages/CategoryPage'
 import PostPage from './pages/PostPage'
 import PostAdminPage from './pages/PostAdminPage'
+import Menu from './navigation/Menu'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <Menu />
         <Switch>
           <Route exact path='/' render={(props) => (
             <Home {...props} />
