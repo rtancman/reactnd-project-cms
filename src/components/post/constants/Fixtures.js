@@ -35,7 +35,7 @@ export const postMock = {
   "commentCount": 2
 }
 
-export const postComments = [
+export const postCommentsMock = [
   {
       "id": "894tuq4ut84ut8v4t8wun89g",
       "parentId": "8xf0y6ziyjabvozdd253nd",

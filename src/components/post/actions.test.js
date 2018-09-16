@@ -4,7 +4,7 @@ import fetchMock from 'fetch-mock'
 import * as actions from './actions'
 import * as types from './constants/ActionTypes'
 import { initialListPostState, initialPostState } from './constants/ReducersInitialState'
-import { listPostsMock, postMock, postComments } from './constants/Fixtures'
+import { listPostsMock, postMock, postCommentsMock } from './constants/Fixtures'
 import { listPostsUrl, headers, postUrl, postCreateUrl, postCommentsUrl } from 'api/cms';
 
 
@@ -204,10 +204,10 @@ describe('actions', () => {
       it('to receive post comments', () => {
         const expectedAction = {
           type: types.RECEIVE_POST_COMMENTS,
-          comments: postComments
+          comments: postCommentsMock
         }
 
-        expect(actions.receivePostComments(postComments)).toEqual(expectedAction)
+        expect(actions.receivePostComments(postCommentsMock)).toEqual(expectedAction)
       })
     })
 
@@ -219,10 +219,10 @@ describe('actions', () => {
 
       it('creates RECEIVE_POST when fetching post has been done', () => {
         const postId = 'postlala123'
-        fetchMock.getOnce(postCommentsUrl(postId), { body: postComments })
+        fetchMock.getOnce(postCommentsUrl(postId), { body: postCommentsMock })
         const expectedActions = [
           { type: types.REQUEST_POST_COMMENTS, isFetching: true },
-          { type: types.RECEIVE_POST_COMMENTS, comments: postComments },
+          { type: types.RECEIVE_POST_COMMENTS, comments: postCommentsMock },
         ]
         const store = mockStore({ posts: initialPostState })
         return store.dispatch(actions.postCommentsFetchData(postId)).then(() => {
