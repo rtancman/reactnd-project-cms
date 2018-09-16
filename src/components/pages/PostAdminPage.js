@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import PostForm from 'components/post/PostForm'
+import AddPost from 'components/post/AddPost'
 
 const styles = theme => ({
   root: {
@@ -18,7 +18,7 @@ const PostAdminPage = (props) => {
       <h1>Post</h1>
       <Grid container spacing={24}>
         <Grid item xs={12}>
-          <PostForm  />
+          <AddPost  />
         </Grid>
       </Grid>
     </div>
