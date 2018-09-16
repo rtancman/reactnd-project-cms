@@ -1,6 +1,6 @@
-import { posts, post } from './reducers'
+import { posts, post, createPost } from './reducers'
 import * as types from './constants/ActionTypes'
-import { initialListPostState, initialPostState } from './constants/ReducersInitialState'
+import { initialListPostState, initialPostState, initialCreatePostState } from './constants/ReducersInitialState'
 import { postsMock, postMock } from './constants/Fixtures'
 
 
@@ -96,8 +96,53 @@ describe('reducers', () => {
           ...postMock
         }
       }
-      
+
       expect(post(undefined, action)).toEqual(expected)
+    })
+  })
+
+  describe('create post', () => {
+    it('should return the initial state', () => {
+      expect(createPost(undefined, {})).toEqual(initialCreatePostState)
+    })
+
+    it('should handle REQUEST_CREATE_POST', () => {
+      const action = {
+        type: types.REQUEST_CREATE_POST,
+        isFetching: true
+      }
+      const expected = {
+        ...initialCreatePostState,
+        isFetching: true
+      }
+
+      expect(createPost(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle INVALIDATE_CREATE_POST', () => {
+      const action = {
+        type: types.INVALIDATE_CREATE_POST,
+        didInvalidate: true
+      }
+      const expected = {
+        ...initialCreatePostState,
+        didInvalidate: true
+      }
+
+      expect(createPost(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle POST_HAS_BEEN_CREATED', () => {
+      const action = {
+        type: types.POST_HAS_BEEN_CREATED,
+        created: true
+      }
+      const expected = {
+        ...initialCreatePostState,
+        created: true
+      }
+
+      expect(createPost(undefined, action)).toEqual(expected)
     })
   })
 })

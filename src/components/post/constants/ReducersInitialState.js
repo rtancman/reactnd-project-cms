@@ -21,3 +21,9 @@ export const initialPostState = {
   didInvalidate: false,
   content: {}
 }
+
+export const initialCreatePostState = {
+  isFetching: false,
+  didInvalidate: false,
+  created: false
+}

@@ -1,5 +1,5 @@
 import * as types from './constants/ActionTypes'
-import { initialListPostState, initialPostState } from './constants/ReducersInitialState'
+import { initialListPostState, initialPostState, initialCreatePostState } from './constants/ReducersInitialState'
 
 export const posts = (state = initialListPostState, action) => {
   switch (action.type) {
@@ -51,6 +51,31 @@ export const post = (state = initialPostState, action) => {
     case types.INVALIDATE_POST:
       return Object.assign({}, state, {
         didInvalidate: action.didInvalidate
+      })
+    default:
+        return state;
+  }
+}
+
+export const createPost = (state = initialCreatePostState, action) => {
+  switch (action.type) {
+    case types.POST_HAS_BEEN_CREATED:
+      return Object.assign({}, state, {
+        created: action.created,
+        isFetching: false,
+        didInvalidate: false
+      })
+    case types.REQUEST_CREATE_POST:
+      return Object.assign({}, state, {
+        isFetching: action.isFetching,
+        created: false,
+        didInvalidate: false,
+      })
+    case types.INVALIDATE_CREATE_POST:
+      return Object.assign({}, state, {
+        didInvalidate: action.didInvalidate,
+        created: false,
+        isFetching: false,
       })
     default:
         return state;
