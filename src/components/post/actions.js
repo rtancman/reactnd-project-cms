@@ -71,45 +71,60 @@ export function postFetchData(postId) {
   }
 }
 
-export const invalidateAddPost = (bool) => {
+export const invalidateCreatePost = (bool) => {
   return {
-      type: types.INVALIDATE_ADD_POST,
+      type: types.INVALIDATE_CREATE_POST,
       didInvalidate: bool
   }
 }
 
-export const requestAddPost = (bool) => {
+export const requestCreatePost = (bool) => {
   return {
-      type: types.REQUEST_ADD_POST,
+      type: types.REQUEST_CREATE_POST,
       isFetching: bool
   }
 }
 
-export const addPost = (post) => {
+export const postHasBeenCreated = (bool) => {
   return {
-      type: types.ADD_POST,
-      id: post.id,
-      timestamp: post.timestamp,
-      title: post.title,
-      body: post.body,
-      author: post.author,
-      category: post.category,
-      voteScore: post.voteScore,
-      deleted: post.deleted,
-      commentCount: post.commentCount
+      type: types.POST_HAS_BEEN_CREATED,
+      created: bool
+  }
+}
+
+export const pushListPost = (post) => {
+  return {
+      type: types.PUSH_LIST_POSTS,
+      post: {
+        id: post.id,
+        timestamp: post.timestamp,
+        title: post.title,
+        body: post.body,
+        author: post.author,
+        category: post.category,
+        voteScore: post.voteScore,
+        deleted: post.deleted,
+        commentCount: post.commentCount
+      }
   }
 }
 
 export function createPostFetch(post) {
   return dispatch => {
-    dispatch(requestAddPost(true))
+    dispatch(requestCreatePost(true))
     return fetch(postCreateUrl, { 
-        headers,
         method: 'POST',
+        headers: {
+          ...headers,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(post)
       })
       .then(res => res.json())
-      .then(body => dispatch(addPost(body)))
-      .catch(ex => dispatch(invalidateAddPost(true)))
+      .then(body => {
+        dispatch(pushListPost(body))
+        dispatch(postHasBeenCreated(true))
+      })
+      .catch(ex => dispatch(invalidateCreatePost(true)))
   }
 }

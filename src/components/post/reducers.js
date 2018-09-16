@@ -1,28 +1,25 @@
-import { 
-  REQUEST_POSTS, 
-  RECEIVE_POSTS, 
-  INVALIDATE_POSTS,
-  REQUEST_POST, 
-  RECEIVE_POST, 
-  INVALIDATE_POST
-} from './constants/ActionTypes'
+import * as types from './constants/ActionTypes'
 import { initialListPostState, initialPostState } from './constants/ReducersInitialState'
 
 export const posts = (state = initialListPostState, action) => {
   switch (action.type) {
-    case RECEIVE_POSTS:
+    case types.RECEIVE_POSTS:
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
         items: action.items
       })
-    case REQUEST_POSTS:
+    case types.REQUEST_POSTS:
       return Object.assign({}, state, {
         isFetching: action.isFetching
       })
-    case INVALIDATE_POSTS:
+    case types.INVALIDATE_POSTS:
       return Object.assign({}, state, {
         didInvalidate: action.didInvalidate
+      })
+    case types.POST_HAS_BEEN_CREATED:
+      return Object.assign({}, state, {
+        items: [...state.items, action.post]
       })
     default:
         return state;
@@ -31,7 +28,7 @@ export const posts = (state = initialListPostState, action) => {
 
 export const post = (state = initialPostState, action) => {
   switch (action.type) {
-    case RECEIVE_POST:
+    case types.RECEIVE_POST:
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
@@ -47,11 +44,11 @@ export const post = (state = initialPostState, action) => {
           commentCount: action.commentCount
         }
       })
-    case REQUEST_POST:
+    case types.REQUEST_POST:
       return Object.assign({}, state, {
         isFetching: action.isFetching
       })
-    case INVALIDATE_POST:
+    case types.INVALIDATE_POST:
       return Object.assign({}, state, {
         didInvalidate: action.didInvalidate
       })

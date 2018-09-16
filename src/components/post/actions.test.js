@@ -117,34 +117,44 @@ describe('actions', () => {
 
 
   describe('AddPost', () => {
+    const post = {
+      id: postMock.id,
+      timestamp: postMock.timestamp,
+      title: postMock.title,
+      body: postMock.body,
+      author: postMock.author,
+      category: postMock.category,
+    }
+
     describe('should create an action ', () => {
-      it('to invalidate add post', () => {
+      it('to invalidate create post', () => {
         const bool = false
         const expectedAction = {
-          type: types.INVALIDATE_ADD_POST,
+          type: types.INVALIDATE_CREATE_POST,
           didInvalidate: bool
         }
 
-        expect(actions.invalidateAddPost(bool)).toEqual(expectedAction)
+        expect(actions.invalidateCreatePost(bool)).toEqual(expectedAction)
       })
 
-      it('to request add post', () => {
+      it('to request create post', () => {
         const bool = true
         const expectedAction = {
-          type: types.REQUEST_ADD_POST,
+          type: types.REQUEST_CREATE_POST,
           isFetching: bool
         }
 
-        expect(actions.requestAddPost(bool)).toEqual(expectedAction)
+        expect(actions.requestCreatePost(bool)).toEqual(expectedAction)
       })
 
-      it('to add post', () => {
+      it('to post has been created', () => {
+        const bool = true
         const expectedAction = {
-          type: types.ADD_POST,
-          ...postMock,
+          type: types.POST_HAS_BEEN_CREATED,
+          created: bool,
         }
-
-        expect(actions.addPost(postMock)).toEqual(expectedAction)
+        
+        expect(actions.postHasBeenCreated(bool)).toEqual(expectedAction)
       })
     })
 
@@ -154,19 +164,12 @@ describe('actions', () => {
         fetchMock.restore()
       })
 
-      it('creates ADD_POST when fetching new post has been done', () => {
-        const post = {
-          id: postMock.id,
-          timestamp: postMock.timestamp,
-          title: postMock.title,
-          body: postMock.body,
-          author: postMock.author,
-          category: postMock.category,
-        }
+      it('creates POST_HAS_BEEN_CREATED when fetching new post has been done', () => {
         fetchMock.post(postCreateUrl, { body: postMock })
         const expectedActions = [
-          { type: types.REQUEST_ADD_POST, isFetching: true },
-          { type: types.ADD_POST, ...postMock },
+          { type: types.REQUEST_CREATE_POST, isFetching: true },
+          { type: types.PUSH_LIST_POSTS, post: postMock },
+          { type: types.POST_HAS_BEEN_CREATED, created: true },
         ]
         const store = mockStore({ posts: initialListPostState })
         return store.dispatch(actions.createPostFetch(post)).then(() => {
