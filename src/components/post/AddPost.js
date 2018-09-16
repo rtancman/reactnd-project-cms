@@ -10,6 +10,7 @@ class AddPost extends Component {
     fetchData: PropTypes.func.isRequired,
     categories: PropTypes.array.isRequired,
     posts: PropTypes.object.isRequired,
+
   }
 
   addPost = (post) => {
@@ -17,22 +18,23 @@ class AddPost extends Component {
   }
 
   render() {
-      const { categories } = this.props;
+      const { categories, createPost } = this.props;
       return (
         <div>
           <PostForm
             handleSubmit={this.addPost}
             categories={categories.items}
+            {...createPost}
           />
         </div>
       );
   }
 }
 
-const mapStateToProps = ({posts, categories}) => {
+const mapStateToProps = ({categories, createPost}) => {
   return {
     categories,
-    posts
+    createPost
   };
 };
 

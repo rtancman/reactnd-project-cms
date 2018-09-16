@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import uuidv4 from 'uuid/v4'
 import { ValidatorForm, TextValidator, SelectValidator} from 'react-material-ui-form-validator';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   textField: {
@@ -16,7 +17,10 @@ class PostForm extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    categories: PropTypes.array.isRequired
+    categories: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    didInvalidate: PropTypes.bool.isRequired,
+    created: PropTypes.bool.isRequired,
   }
 
   state = {
@@ -40,7 +44,7 @@ class PostForm extends Component {
 
   render() {
     const { title, body, author, category } = this.state;
-    const { categories } = this.props;
+    const { categories, isFetching } = this.props;
 
     return (
       <ValidatorForm
@@ -89,7 +93,13 @@ class PostForm extends Component {
           validators={['required']}
           errorMessages={['this field is required']}
         />
-        <Button variant="contained" type="submit">Submit</Button>
+        <Button 
+          variant="contained" 
+          type="submit"
+          disabled={isFetching}
+        >
+          {isFetching && <CircularProgress size={20} />} Submit
+        </Button>
       </ValidatorForm>
     );
   }
