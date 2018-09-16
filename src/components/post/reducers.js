@@ -52,6 +52,26 @@ export const post = (state = initialPostState, action) => {
       return Object.assign({}, state, {
         didInvalidate: action.didInvalidate
       })
+    case types.INVALIDATE_POST_COMMENTS:
+      return Object.assign({}, state, {
+        comment: {
+          didInvalidate: action.didInvalidate
+        }
+      })
+    case types.REQUEST_POST_COMMENTS:
+      return Object.assign({}, state, {
+        comment: {
+          isFetching: action.isFetching
+        }
+      })
+    case types.RECEIVE_POST_COMMENTS:
+      return Object.assign({}, state, {
+        comment: {
+          isFetching: false,
+          didInvalidate: false,
+          items: action.comments
+        }
+      })
     default:
         return state;
   }

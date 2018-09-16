@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { postFetchData } from './actions';
+import { postFetchData, postCommentsFetchData } from './actions';
 import { Link } from "react-router-dom";
 
 class Post extends Component {
@@ -11,17 +11,19 @@ class Post extends Component {
     postId: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
     didInvalidate: PropTypes.bool.isRequired,
-    content: PropTypes.object.isRequired
+    content: PropTypes.object.isRequired,
+    comment: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
     this.props.fetchData(this.props.postId)
+    this.props.fetchCommentsData(this.props.postId)
   }
 
   render() {
     let content = ''
     const postContent = this.props.content
-    const { isFetching, didInvalidate } = this.props
+    const { isFetching, didInvalidate, comment } = this.props
 
     if (didInvalidate) {
       content = (<p>Sorry! There was an error loading the items</p>)
@@ -35,7 +37,11 @@ class Post extends Component {
     } else if ( postContent ) {
       content = (
         <div>
-          { postContent.title }
+          <p>{ postContent.title }</p>
+          <p>comments</p>
+          {comment.items && comment.items.map((comment) => (
+            <p key={comment.id}>{comment.body}</p>
+          ))}
         </div>
       )
     }
@@ -53,13 +59,15 @@ const mapStateToProps = ({ post }) => {
   return {
     content: post.content,
     didInvalidate: post.didInvalidate,
-    isFetching: post.isFetching
+    isFetching: post.isFetching,
+    comment: post.comment
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (postId) => dispatch(postFetchData(postId))
+    fetchData: (postId) => dispatch(postFetchData(postId)),
+    fetchCommentsData: (postId) => dispatch(postCommentsFetchData(postId))
   };
 };
 

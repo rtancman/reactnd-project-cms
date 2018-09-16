@@ -1,7 +1,7 @@
 import { posts, post, createPost } from './reducers'
 import * as types from './constants/ActionTypes'
 import { initialListPostState, initialPostState, initialCreatePostState } from './constants/ReducersInitialState'
-import { postsMock, postMock } from './constants/Fixtures'
+import { postsMock, postMock, postCommentsMock } from './constants/Fixtures'
 
 
 describe('reducers', () => {
@@ -94,6 +94,53 @@ describe('reducers', () => {
         ...initialPostState,
         content: {
           ...postMock
+        }
+      }
+
+      expect(post(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle REQUEST_POST_COMMENTS', () => {
+      const action = {
+        type: types.REQUEST_POST_COMMENTS,
+        isFetching: true
+      }
+      const expected = {
+        ...initialPostState,
+        comment: {
+          isFetching: true
+        }
+      }
+
+      expect(post(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle INVALIDATE_POST_COMMENTS', () => {
+      const action = {
+        type: types.INVALIDATE_POST_COMMENTS,
+        didInvalidate: true
+      }
+      const expected = {
+        ...initialPostState,
+        comment: {
+          didInvalidate: true
+        }
+      }
+
+      expect(post(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle RECEIVE_POST_COMMENTS', () => {
+      const action = {
+        type: types.RECEIVE_POST_COMMENTS,
+        comments: postCommentsMock
+      }
+      const expected = {
+        ...initialPostState,
+        comment: {
+          didInvalidate: false,
+          isFetching: false,
+          items: postCommentsMock
         }
       }
 
