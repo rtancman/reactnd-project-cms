@@ -4,8 +4,8 @@ import fetchMock from 'fetch-mock'
 import * as actions from './actions'
 import * as types from './constants/ActionTypes'
 import { initialListPostState, initialPostState } from './constants/ReducersInitialState'
-import { listPostsMock, postMock } from './constants/Fixtures'
-import { listPostsUrl, headers, postUrl, postCreateUrl } from 'api/cms';
+import { listPostsMock, postMock, postComments } from './constants/Fixtures'
+import { listPostsUrl, headers, postUrl, postCreateUrl, postCommentsUrl } from 'api/cms';
 
 
 describe('actions', () => {
@@ -173,6 +173,59 @@ describe('actions', () => {
         ]
         const store = mockStore({ posts: initialListPostState })
         return store.dispatch(actions.createPostFetch(post)).then(() => {
+          expect(store.getActions()).toEqual(expectedActions)
+        })
+      })
+    })
+  })
+
+  describe('Post Comments', () => {
+    describe('should create an action ', () => {
+      it('to invalidate post comments', () => {
+        const bool = false
+        const expectedAction = {
+          type: types.INVALIDATE_POST_COMMENTS,
+          didInvalidate: bool
+        }
+
+        expect(actions.invalidatePostComments(bool)).toEqual(expectedAction)
+      })
+
+      it('to request post comments', () => {
+        const bool = false
+        const expectedAction = {
+          type: types.REQUEST_POST_COMMENTS,
+          isFetching: bool
+        }
+
+        expect(actions.requestPostComments(bool)).toEqual(expectedAction)
+      })
+
+      it('to receive post comments', () => {
+        const expectedAction = {
+          type: types.RECEIVE_POST_COMMENTS,
+          comments: postComments
+        }
+
+        expect(actions.receivePostComments(postComments)).toEqual(expectedAction)
+      })
+    })
+
+    describe('async actions', () => {
+      afterEach(() => {
+        fetchMock.reset()
+        fetchMock.restore()
+      })
+
+      it('creates RECEIVE_POST when fetching post has been done', () => {
+        const postId = 'postlala123'
+        fetchMock.getOnce(postCommentsUrl(postId), { body: postComments })
+        const expectedActions = [
+          { type: types.REQUEST_POST_COMMENTS, isFetching: true },
+          { type: types.RECEIVE_POST_COMMENTS, comments: postComments },
+        ]
+        const store = mockStore({ posts: initialPostState })
+        return store.dispatch(actions.postCommentsFetchData(postId)).then(() => {
           expect(store.getActions()).toEqual(expectedActions)
         })
       })

@@ -19,7 +19,8 @@ const post = {
 export const initialPostState = {
   isFetching: false,
   didInvalidate: false,
-  content: {}
+  content: {},
+  comment: {}
 }
 
 export const initialCreatePostState = {

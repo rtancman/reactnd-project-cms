@@ -1,5 +1,5 @@
 import * as types from './constants/ActionTypes'
-import { headers, listPostsUrl, postUrl, postCreateUrl } from 'api/cms';
+import { headers, listPostsUrl, postUrl, postCreateUrl, postCommentsUrl } from 'api/cms';
 
 export const invalidatePosts = (bool) => {
   return {
@@ -126,5 +126,36 @@ export function createPostFetch(post) {
         dispatch(postHasBeenCreated(true))
       })
       .catch(ex => dispatch(invalidateCreatePost(true)))
+  }
+}
+
+export const invalidatePostComments = (bool) => {
+  return {
+      type: types.INVALIDATE_POST_COMMENTS,
+      didInvalidate: bool
+  }
+}
+
+export const requestPostComments = (bool) => {
+  return {
+      type: types.REQUEST_POST_COMMENTS,
+      isFetching: bool
+  }
+}
+
+export const receivePostComments = (comments) => {
+  return {
+      type: types.RECEIVE_POST_COMMENTS,
+      comments
+  }
+}
+
+export function postCommentsFetchData(postId) {
+  return dispatch => {
+    dispatch(requestPostComments(true))
+    return fetch(postCommentsUrl(postId), { headers })
+      .then(res => res.json())
+      .then(body => dispatch(receivePostComments(body)))
+      .catch(ex => dispatch(invalidatePostComments(true)))
   }
 }
