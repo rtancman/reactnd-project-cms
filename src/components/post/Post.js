@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { postFetchData, postCommentsFetchData } from './actions';
 import { Link } from "react-router-dom";
+import Comment from 'components/comment'
 
 class Post extends Component {
   static propTypes = {
@@ -23,7 +24,7 @@ class Post extends Component {
   render() {
     let content = ''
     const postContent = this.props.content
-    const { isFetching, didInvalidate, comment } = this.props
+    const { isFetching, didInvalidate, comment, postId } = this.props
 
     if (didInvalidate) {
       content = (<p>Sorry! There was an error loading the items</p>)
@@ -38,10 +39,12 @@ class Post extends Component {
       content = (
         <div>
           <p>{ postContent.title }</p>
-          <p>comments</p>
-          {comment.items && comment.items.map((comment) => (
-            <p key={comment.id}>{comment.body}</p>
-          ))}
+          {comment.items && (
+            <Comment
+              items={comment.items}
+              postId={postId}
+            />
+          )}
         </div>
       )
     }
