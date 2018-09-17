@@ -159,3 +159,39 @@ export function postCommentsFetchData(postId) {
       .catch(ex => dispatch(invalidatePostComments(true)))
   }
 }
+
+export const invalidateRemovePost = (bool) => {
+  return {
+      type: types.INVALIDATE_REMOVE_POST,
+      didInvalidate: bool
+  }
+}
+
+export const requestRemovePost = (bool) => {
+  return {
+      type: types.REQUEST_REMOVE_POST,
+      isFetching: bool
+  }
+}
+
+export const postHasBeenRemoved = (bool) => {
+  return {
+      type: types.POST_HAS_BEEN_REMOVED,
+      removed: bool
+  }
+}
+
+export function removePostFetch(postId) {
+  return dispatch => {
+    dispatch(requestRemovePost(true))
+    return fetch(postUrl(postId), { 
+        method: 'DELETE',
+        headers,
+      })
+      .then(res => res.json())
+      .then(body => {
+        dispatch(postHasBeenRemoved(true))
+      })
+      .catch(ex => dispatch(invalidateRemovePost(true)))
+  }
+}
