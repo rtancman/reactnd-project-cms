@@ -241,13 +241,16 @@ describe('reducers', () => {
     })
 
     it('should handle REQUEST_REMOVE_POST', () => {
+      const postId = '12345'
       const action = {
         type: types.REQUEST_REMOVE_POST,
-        isFetching: true
+        isFetching: true,
+        id: postId
       }
       const expected = {
         ...initialRemovePostState,
-        isFetching: true
+        isFetching: true,
+        id: postId
       }
 
       expect(removePost(undefined, action)).toEqual(expected)

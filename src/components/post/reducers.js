@@ -112,19 +112,22 @@ export const removePost = (state = initialRemovePostState, action) => {
       return Object.assign({}, state, {
         removed: action.removed,
         isFetching: false,
-        didInvalidate: false
+        didInvalidate: false,
+        id: '',
       })
     case types.REQUEST_REMOVE_POST:
       return Object.assign({}, state, {
         isFetching: action.isFetching,
         removed: false,
         didInvalidate: false,
+        id: action.id,
       })
     case types.INVALIDATE_REMOVE_POST:
       return Object.assign({}, state, {
         didInvalidate: action.didInvalidate,
         removed: false,
         isFetching: false,
+        id: '',
       })
     default:
         return state;

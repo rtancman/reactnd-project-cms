@@ -255,13 +255,17 @@ describe('actions', () => {
       })
 
       it('to request remove post', () => {
-        const bool = true
+        const data = {
+          bool: true,
+          postId: '88112233'
+        }
         const expectedAction = {
           type: types.REQUEST_REMOVE_POST,
-          isFetching: bool
+          isFetching: data.bool,
+          id: data.postId
         }
 
-        expect(actions.requestRemovePost(bool)).toEqual(expectedAction)
+        expect(actions.requestRemovePost(data)).toEqual(expectedAction)
       })
 
       it('to post has been removed', () => {
@@ -285,7 +289,7 @@ describe('actions', () => {
         const postId = 'postlala123'
         fetchMock.delete(postUrl(postId), { body: {...postMock, id: postId } })
         const expectedActions = [
-          { type: types.REQUEST_REMOVE_POST, isFetching: true },
+          { type: types.REQUEST_REMOVE_POST, isFetching: true, id: postId },
           { type: types.REMOVE_POST_IN_LIST_POSTS, postId },
           { type: types.POST_HAS_BEEN_REMOVED, removed: true },
         ]

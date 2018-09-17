@@ -167,10 +167,11 @@ export const invalidateRemovePost = (bool) => {
   }
 }
 
-export const requestRemovePost = (bool) => {
+export const requestRemovePost = ({ bool, postId }) => {
   return {
       type: types.REQUEST_REMOVE_POST,
-      isFetching: bool
+      isFetching: bool,
+      id: postId
   }
 }
 
@@ -190,7 +191,7 @@ export const removePostInListPost = (postId) => {
 
 export function removePostFetch(postId) {
   return dispatch => {
-    dispatch(requestRemovePost(true))
+    dispatch(requestRemovePost({ bool: true, postId }))
     return fetch(postUrl(postId), { 
         method: 'DELETE',
         headers,
