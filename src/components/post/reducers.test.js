@@ -50,6 +50,48 @@ describe('reducers', () => {
       
       expect(posts(undefined, action)).toEqual(expected)
     })
+
+
+    it('should handle REMOVE_POST_IN_LIST_POSTS', () => {
+      const listPost = [
+        {
+          id: '0664afa6-bac2-11e8-b5a3-fcaa142a9210',
+          timestamp: 1467166872634,
+          title: 'Post 1 title',
+          body: 'Post 1 body',
+          author: 'lala',
+          category: 'react',
+          voteScore: 6,
+          deleted: false,
+          commentCount: 2
+        },
+        {
+          id: '052f8016-bac2-11e8-aa21-fcaa142a9210',
+          timestamp: 1467166872634,
+          title: 'Post 2 title',
+          body: 'Post 2 body',
+          author: 'lele',
+          category: 'react',
+          voteScore: 6,
+          deleted: false,
+          commentCount: 2
+        },
+      ]
+      const action = {
+        type: types.REMOVE_POST_IN_LIST_POSTS,
+        postId: '052f8016-bac2-11e8-aa21-fcaa142a9210'
+      }
+      const expected = {
+        ...initialListPostState,
+        items: [listPost[0]],
+      }
+      const customInitialState = {
+        ...initialListPostState,
+        items: listPost
+      }
+
+      expect(posts(customInitialState, action)).toEqual(expected)
+    })
   })
 
   describe('post', () => {

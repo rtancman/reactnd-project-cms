@@ -32,5 +32,6 @@ export const initialCreatePostState = {
 export const initialRemovePostState = {
   isFetching: false,
   didInvalidate: false,
-  removed: false
+  removed: false,
+  id: '',
 }

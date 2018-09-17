@@ -17,9 +17,13 @@ export const posts = (state = initialListPostState, action) => {
       return Object.assign({}, state, {
         didInvalidate: action.didInvalidate
       })
-    case types.POST_HAS_BEEN_CREATED:
+    case types.PUSH_LIST_POSTS:
       return Object.assign({}, state, {
         items: [...state.items, action.post]
+      })
+    case types.REMOVE_POST_IN_LIST_POSTS:
+      return Object.assign({}, state, {
+        items: state.items.filter((post) => post.id !== action.postId)
       })
     default:
         return state;
