@@ -181,6 +181,13 @@ export const postHasBeenRemoved = (bool) => {
   }
 }
 
+export const removePostInListPost = (postId) => {
+  return {
+      type: types.REMOVE_POST_IN_LIST_POSTS,
+      postId
+  }
+}
+
 export function removePostFetch(postId) {
   return dispatch => {
     dispatch(requestRemovePost(true))
@@ -190,6 +197,7 @@ export function removePostFetch(postId) {
       })
       .then(res => res.json())
       .then(body => {
+        dispatch(removePostInListPost(body.id))
         dispatch(postHasBeenRemoved(true))
       })
       .catch(ex => dispatch(invalidateRemovePost(true)))

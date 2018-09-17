@@ -42,6 +42,16 @@ describe('actions', () => {
       expect(actions.receivePosts(listPostsMock)).toEqual(expectedAction)
     })
 
+    it('should create an action to remove post in list posts', () => {
+      const postId = 'lala123456'
+      const expectedAction = {
+        type: types.REMOVE_POST_IN_LIST_POSTS,
+        postId,
+      }
+
+      expect(actions.removePostInListPost(postId)).toEqual(expectedAction)
+    })
+
     describe('async actions', () => {
       afterEach(() => {
         fetchMock.reset()
@@ -273,9 +283,10 @@ describe('actions', () => {
 
       it('creates POST_HAS_BEEN_REMOVED when fetching remove post has been done', () => {
         const postId = 'postlala123'
-        fetchMock.delete(postUrl(postId), { body: postCommentsMock })
+        fetchMock.delete(postUrl(postId), { body: {...postMock, id: postId } })
         const expectedActions = [
           { type: types.REQUEST_REMOVE_POST, isFetching: true },
+          { type: types.REMOVE_POST_IN_LIST_POSTS, postId },
           { type: types.POST_HAS_BEEN_REMOVED, removed: true },
         ]
         const store = mockStore({})
