@@ -1,5 +1,5 @@
 import * as types from './constants/ActionTypes'
-import { commentCreateUrl, headers } from 'api/cms'
+import { commentCreateUrl, headers, commentUrl } from 'api/cms'
 import { pushListComments } from 'components/post/actions'
 
 export const invalidateCreateComment = (bool) => {
@@ -40,5 +40,42 @@ export function createCommentFetch(comment) {
         dispatch(commentHasBeenCreated(true))
       })
       .catch(ex => dispatch(invalidateCreateComment(true)))
+  }
+}
+
+export const invalidateRemoveComment = (bool) => {
+  return {
+      type: types.INVALIDATE_REMOVE_COMMENT,
+      didInvalidate: bool
+  }
+}
+
+export const requestRemoveComment = ({ bool, commentId }) => {
+  return {
+      type: types.REQUEST_REMOVE_COMMENT,
+      isFetching: bool,
+      id: commentId
+  }
+}
+
+export const commentHasBeenRemoved = (bool) => {
+  return {
+      type: types.COMMENT_HAS_BEEN_REMOVED,
+      removed: bool
+  }
+}
+
+export function removeCommentFetch(commentId) {
+  return dispatch => {
+    dispatch(requestRemoveComment({ bool: true, commentId }))
+    return fetch(commentUrl(commentId), { 
+        method: 'DELETE',
+        headers,
+      })
+      .then(res => res.json())
+      .then(body => {
+        dispatch(commentHasBeenRemoved(true))
+      })
+      .catch(ex => dispatch(invalidateRemoveComment(true)))
   }
 }

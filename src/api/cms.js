@@ -16,3 +16,4 @@ export const postUrl = (postId) => `${baseApi}/posts/${postId}`
 export const postCreateUrl = `${baseApi}/posts`
 export const postCommentsUrl = (postId) => `${baseApi}/posts/${postId}/comments`
 export const commentCreateUrl = `${baseApi}/comments`
+export const commentUrl = (commentId) => `${baseApi}/comments/${commentId}`
