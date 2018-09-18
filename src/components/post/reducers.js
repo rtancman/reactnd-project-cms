@@ -76,6 +76,13 @@ export const post = (state = initialPostState, action) => {
           items: action.comments
         }
       })
+    case types.PUSH_LIST_COMMENTS:
+      return Object.assign({}, state, {
+        comment: {
+          ...state.comment,
+          items: [...state.comment.items, action.comment]
+        }
+      })
     default:
         return state;
   }

@@ -1,6 +1,7 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import fetchMock from 'fetch-mock'
+import { PUSH_LIST_COMMENTS } from 'components/post/constants/ActionTypes'
 import * as types from './constants/ActionTypes'
 import * as actions from './actions'
 import { commentCreateUrl } from 'api/cms'
@@ -59,6 +60,7 @@ describe('actions', () => {
         fetchMock.post(commentCreateUrl, { body: commentMock })
         const expectedActions = [
           { type: types.REQUEST_CREATE_COMMENT, isFetching: true },
+          { type: PUSH_LIST_COMMENTS, comment: commentMock },
           { type: types.COMMENT_HAS_BEEN_CREATED, created: true },
         ]
         const store = mockStore({})

@@ -1,5 +1,6 @@
 import * as types from './constants/ActionTypes'
 import { commentCreateUrl, headers } from 'api/cms'
+import { pushListComments } from 'components/post/actions'
 
 export const invalidateCreateComment = (bool) => {
   return {
@@ -35,7 +36,7 @@ export function createCommentFetch(comment) {
       })
       .then(res => res.json())
       .then(body => {
-        // dispatch(pushListPost(body))
+        dispatch(pushListComments(body))
         dispatch(commentHasBeenCreated(true))
       })
       .catch(ex => dispatch(invalidateCreateComment(true)))

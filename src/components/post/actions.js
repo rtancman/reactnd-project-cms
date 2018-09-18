@@ -204,3 +204,19 @@ export function removePostFetch(postId) {
       .catch(ex => dispatch(invalidateRemovePost(true)))
   }
 }
+
+export const pushListComments = (comment) => {
+  return {
+      type: types.PUSH_LIST_COMMENTS,
+      comment: {
+        id: comment.id,
+        timestamp: comment.timestamp,
+        parentId: comment.parentId,
+        body: comment.body,
+        author: comment.author,
+        voteScore: comment.voteScore,
+        deleted: comment.deleted,
+        parentDeleted: comment.parentDeleted
+      }
+  }
+}
