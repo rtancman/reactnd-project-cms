@@ -2,6 +2,7 @@ import { posts, post, createPost, removePost } from './reducers'
 import * as types from './constants/ActionTypes'
 import { initialListPostState, initialPostState, initialCreatePostState, initialRemovePostState } from './constants/ReducersInitialState'
 import { postsMock, postMock, postCommentsMock } from './constants/Fixtures'
+import { commentMock } from 'components/comment/constants/Fixtures'
 
 
 describe('reducers', () => {
@@ -187,6 +188,31 @@ describe('reducers', () => {
       }
 
       expect(post(undefined, action)).toEqual(expected)
+    })
+
+    it('should handle PUSH_LIST_COMMENTS', () => {
+      const customInitialState = {
+        ...initialPostState,
+        comment: {
+          didInvalidate: false,
+          isFetching: false,
+          items: postCommentsMock
+        }
+      }
+      const action = {
+        type: types.PUSH_LIST_COMMENTS,
+        comment: commentMock
+      }
+      const expected = {
+        ...initialPostState,
+        comment: {
+          didInvalidate: false,
+          isFetching: false,
+          items: [...postCommentsMock, commentMock]
+        }
+      }
+
+      expect(post(customInitialState, action)).toEqual(expected)
     })
   })
 
