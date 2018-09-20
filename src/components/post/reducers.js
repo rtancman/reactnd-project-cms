@@ -83,6 +83,13 @@ export const post = (state = initialPostState, action) => {
           items: [...state.comment.items, action.comment]
         }
       })
+    case types.REMOVE_COMMENT_IN_LIST_COMMENTS:
+      return Object.assign({}, state, {
+        comment: {
+          ...state.comment,
+          items: state.comment.items.filter((comment) => comment.id !== action.commentId)
+        }
+      })
     default:
         return state;
   }

@@ -214,6 +214,31 @@ describe('reducers', () => {
 
       expect(post(customInitialState, action)).toEqual(expected)
     })
+
+    it('should handle REMOVE_COMMENT_IN_LIST_COMMENTS', () => {
+      const customInitialState = {
+        ...initialPostState,
+        comment: {
+          didInvalidate: false,
+          isFetching: false,
+          items: [ ...postCommentsMock, commentMock ]
+        }
+      }
+      const action = {
+        type: types.REMOVE_COMMENT_IN_LIST_COMMENTS,
+        commentId: commentMock.id
+      }
+      const expected = {
+        ...initialPostState,
+        comment: {
+          didInvalidate: false,
+          isFetching: false,
+          items: postCommentsMock
+        }
+      }
+
+      expect(post(customInitialState, action)).toEqual(expected)
+    })
   })
 
   describe('create post', () => {
