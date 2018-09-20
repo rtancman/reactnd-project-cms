@@ -1,29 +1,53 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { removeCommentFetch } from './actions';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
+class ListComments extends Component {
+  static propTypes = {
+    remove: PropTypes.func.isRequired,
+    items: PropTypes.array.isRequired,
+    statusRemove: PropTypes.object.isRequired
   }
-});
 
-const ListComments = (props) => {
-  const { classes, items } = props;
+  remove(postId) {
+    this.props.remove(postId)
+  }
 
-  return (
-    <div className={classes.root}>
-      <p>comments</p>
-      {items && items.map((comment) => (
-        <p key={comment.id}>{comment.body}</p>
-      ))}
-    </div>
-  )
+  linkRemove(commentId, statusRemove) {
+    if (commentId === statusRemove.id) {
+      return (<a href='#'><CircularProgress size={20} /> Removing...</a>)
+    }
+    return (<a href='#' onClick={() => this.remove(commentId)}>Remove</a>)
+  }
+
+  render() {
+    const { statusRemove, items } = this.props
+
+    return (
+      <div>
+        <p>comments</p>
+        <ul>
+          {items && items.map((comment) => (
+            <li key={comment.id}>{comment.body}  - { this.linkRemove(comment.id, statusRemove) }</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
 }
 
-ListComments.propTypes = {
-  classes: PropTypes.object.isRequired,
-  items: PropTypes.array
-}
+const mapStateToProps = ({ removeComment }) => {
+  return {
+    statusRemove: removeComment,
+  };
+};
 
-export default withStyles(styles)(ListComments);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    remove: (commentId) => dispatch(removeCommentFetch(commentId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListComments);
