@@ -14,43 +14,45 @@ describe('actions', () => {
   const mockStore = configureMockStore(middlewares)
 
   describe('ListPosts', () => {
-    it('should create an action to invalidate posts', () => {
-      const bool = false
-      const expectedAction = {
-        type: types.INVALIDATE_POSTS,
-        didInvalidate: bool
-      }
+    describe('should create an action ', () => {
+      it('to invalidate posts', () => {
+        const bool = false
+        const expectedAction = {
+          type: types.INVALIDATE_POSTS,
+          didInvalidate: bool
+        }
 
-      expect(actions.invalidatePosts(bool)).toEqual(expectedAction)
-    })
+        expect(actions.invalidatePosts(bool)).toEqual(expectedAction)
+      })
 
-    it('should create an action to request posts', () => {
-      const bool = true
-      const expectedAction = {
-        type: types.REQUEST_POSTS,
-        isFetching: bool
-      }
+      it('to request posts', () => {
+        const bool = true
+        const expectedAction = {
+          type: types.REQUEST_POSTS,
+          isFetching: bool
+        }
 
-      expect(actions.requestPosts(bool)).toEqual(expectedAction)
-    })
+        expect(actions.requestPosts(bool)).toEqual(expectedAction)
+      })
 
-    it('should create an action to receive posts', () => {
-      const expectedAction = {
-        type: types.RECEIVE_POSTS,
-        items: listPostsMock,
-      }
+      it('to receive posts', () => {
+        const expectedAction = {
+          type: types.RECEIVE_POSTS,
+          items: listPostsMock,
+        }
 
-      expect(actions.receivePosts(listPostsMock)).toEqual(expectedAction)
-    })
+        expect(actions.receivePosts(listPostsMock)).toEqual(expectedAction)
+      })
 
-    it('should create an action to remove post in list posts', () => {
-      const postId = 'lala123456'
-      const expectedAction = {
-        type: types.REMOVE_POST_IN_LIST_POSTS,
-        postId,
-      }
+      it('to remove post in list posts', () => {
+        const postId = 'lala123456'
+        const expectedAction = {
+          type: types.REMOVE_POST_IN_LIST_POSTS,
+          postId,
+        }
 
-      expect(actions.removePostInListPost(postId)).toEqual(expectedAction)
+        expect(actions.removePostInListPost(postId)).toEqual(expectedAction)
+      })
     })
 
     describe('async actions', () => {
@@ -112,6 +114,16 @@ describe('actions', () => {
         }
 
         expect(actions.pushListComments(commentMock)).toEqual(expectedAction)
+      })
+
+      it('to remove comment in list comments', () => {
+        const commentId = commentMock.id
+        const expectedAction = {
+          type: types.REMOVE_COMMENT_IN_LIST_COMMENTS,
+          commentId
+        }
+
+        expect(actions.removeCommentInListComments(commentId)).toEqual(expectedAction)
       })
     })
 

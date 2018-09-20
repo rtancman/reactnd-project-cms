@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import fetchMock from 'fetch-mock'
-import { PUSH_LIST_COMMENTS } from 'components/post/constants/ActionTypes'
+import { PUSH_LIST_COMMENTS, REMOVE_COMMENT_IN_LIST_COMMENTS } from 'components/post/constants/ActionTypes'
 import * as types from './constants/ActionTypes'
 import * as actions from './actions'
 import { commentCreateUrl, commentUrl } from 'api/cms'
@@ -118,6 +118,7 @@ describe('actions', () => {
         fetchMock.delete(commentUrl(commentMock.id), { body: commentMock })
         const expectedActions = [
           { type: types.REQUEST_REMOVE_COMMENT, isFetching: true, id: commentMock.id },
+          { type: REMOVE_COMMENT_IN_LIST_COMMENTS, commentId: commentMock.id },
           { type: types.COMMENT_HAS_BEEN_REMOVED, removed: true },
         ]
         const store = mockStore({})

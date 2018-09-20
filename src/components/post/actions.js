@@ -220,3 +220,10 @@ export const pushListComments = (comment) => {
       }
   }
 }
+
+export const removeCommentInListComments = (commentId) => {
+  return {
+    type: types.REMOVE_COMMENT_IN_LIST_COMMENTS,
+    commentId
+  }
+}

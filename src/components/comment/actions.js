@@ -1,6 +1,6 @@
 import * as types from './constants/ActionTypes'
 import { commentCreateUrl, headers, commentUrl } from 'api/cms'
-import { pushListComments } from 'components/post/actions'
+import { pushListComments, removeCommentInListComments } from 'components/post/actions'
 
 export const invalidateCreateComment = (bool) => {
   return {
@@ -74,6 +74,7 @@ export function removeCommentFetch(commentId) {
       })
       .then(res => res.json())
       .then(body => {
+        dispatch(removeCommentInListComments(body.id))
         dispatch(commentHasBeenRemoved(true))
       })
       .catch(ex => dispatch(invalidateRemoveComment(true)))
