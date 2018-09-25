@@ -15,10 +15,19 @@ class AddComment extends Component {
   state = {
     id: this.props.id || uuidv4(),
     timestamp: Date.now(),
-    title: '',
     body: '',
     author: '',
     parentId: this.props.postId,
+  }
+
+  reset() {
+    this.setState((state) => ({
+      id: this.props.id || uuidv4(),
+      timestamp: Date.now(),
+      body: '',
+      author: '',
+      parentId: this.props.postId,
+    }))
   }
 
   handleChange = (event) => {
@@ -29,10 +38,11 @@ class AddComment extends Component {
 
   handleSubmit = () => {
     this.props.saveData(this.state)
+    this.reset()
   }
 
   render() {
-    const { title, body, author } = this.state;
+    const { body, author } = this.state;
     const { isFetching } = this.props;
 
     return (
@@ -46,15 +56,6 @@ class AddComment extends Component {
           onChange={this.handleChange}
           name="author"
           value={author}
-          validators={['required']}
-          errorMessages={['this field is required']}
-        />
-        <TextValidator
-          fullWidth
-          label="Title"
-          onChange={this.handleChange}
-          name="title"
-          value={title}
           validators={['required']}
           errorMessages={['this field is required']}
         />
