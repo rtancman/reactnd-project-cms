@@ -13,20 +13,22 @@ class App extends Component {
     return (
       <div className="App">
         <Menu />
-        <Switch>
-          <Route exact path='/' render={(props) => (
-            <Home {...props} />
-          )}/>
-          <Route exact path='/category/:id' render={(props) => (
-            <CategoryPage {...props} />
-          )}/>
-          <Route exact path='/posts/create' render={(props) => (
-            <PostAdminPage {...props} />
-          )}/>
-          <Route exact path='/posts/:id' render={(props) => (
-            <PostPage {...props} />
-          )}/>
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route exact path='/' render={(props) => (
+              <Home {...props} />
+            )}/>
+            <Route exact path='/category/:id' render={(props) => (
+              <CategoryPage {...props} />
+            )}/>
+            <Route exact path='/posts/create' render={(props) => (
+              <PostAdminPage {...props} />
+            )}/>
+            <Route exact path='/posts/:id' render={(props) => (
+              <PostPage {...props} />
+            )}/>
+          </Switch>
+        </div>
       </div>
     );
   }

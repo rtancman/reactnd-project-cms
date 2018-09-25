@@ -1,0 +1,40 @@
+$small-min-width: 576px;
+$medium-min-width: 768px;
+$large-min-width: 992px;
+$xlarge-min-width: 1200px;
+
+@mixin small {
+  @media (min-width: #{$small-min-width}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (min-width: #{$medium-min-width}) {
+    @content;
+  }
+}
+@mixin large {
+  @media (min-width: #{$large-min-width}) {
+    @content;
+  }
+}
+
+@mixin xlarge {
+  @media (min-width: #{$xlarge-min-width}) {
+    @content;
+  }
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 75.875em;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
