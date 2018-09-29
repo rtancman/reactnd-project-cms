@@ -51,7 +51,7 @@ class PostForm extends Component {
   }
 
   handleSubmit = () => {
-    this.props.handleSubmit(this.state, this.reset)
+    this.props.handleSubmit(this.state, () => this.reset())
   }
 
   render() {

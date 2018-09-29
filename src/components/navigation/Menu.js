@@ -15,7 +15,7 @@ const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 class Menu extends Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired,
+    classes: PropTypes.object,
   }
 
   state = {
@@ -55,7 +55,8 @@ class Menu extends Component {
           </div>
         </div>
         <SwipeableDrawer 
-            open={this.state.left} 
+            open={this.state.left}
+            onOpen={() => {}}
             onClose={this.toggleDrawer('left', false)}
             disableBackdropTransition={!iOS} 
             disableDiscovery={iOS} 

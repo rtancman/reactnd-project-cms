@@ -3,22 +3,26 @@ import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 import { connect } from 'react-redux';
 import { createPostFetch } from './actions';
+import { categoriesFetchData } from 'components/category/actions'
 import PostForm from './PostForm'
 
 class AddPost extends Component {
   static propTypes = {
-    fetchData: PropTypes.func.isRequired,
-    categories: PropTypes.array.isRequired,
-    posts: PropTypes.object.isRequired,
-
+    addPost: PropTypes.func.isRequired,
+    categories: PropTypes.object.isRequired,
   }
 
   addPost = (post, resetForm) => {
-    this.props.fetchData(post, resetForm)
+    this.props.addPost(post, resetForm)
+  }
+
+  componentDidMount() {
+    if ( this.props.categories.items.length < 1) this.props.fetchCategoriesData()
   }
 
   render() {
       const { categories, createPost } = this.props;
+
       return (
         <div>
           <div className="content__head">
@@ -44,13 +48,14 @@ class AddPost extends Component {
 const mapStateToProps = ({categories, createPost}) => {
   return {
     categories,
-    createPost
+    createPost,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (post, resetForm) => dispatch(createPostFetch(post, resetForm))
+    addPost: (post, resetForm) => dispatch(createPostFetch(post, resetForm)),
+    fetchCategoriesData: () => dispatch(categoriesFetchData()),
   };
 };
 
