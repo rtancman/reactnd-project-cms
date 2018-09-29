@@ -11,11 +11,11 @@ const styles = theme => ({
 });
 
 const PostPage = (props) => {
-  const { classes, match } = props;
+  const { classes, match, history } = props;
 
   return (
     <div className="content">
-      <Post postId={match.params.id} />
+      <Post history={history} postId={match.params.id} />
     </div>
   )
 }

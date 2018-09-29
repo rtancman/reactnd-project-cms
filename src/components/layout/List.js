@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import moment from 'moment'
 import sortBy from 'sort-by'
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import './List.css'
 
 const orderByOptions = [

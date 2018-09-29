@@ -189,7 +189,7 @@ export const removePostInListPost = (postId) => {
   }
 }
 
-export function removePostFetch(postId) {
+export function removePostFetch(postId, history) {
   return dispatch => {
     dispatch(requestRemovePost({ bool: true, postId }))
     return fetch(postUrl(postId), { 
@@ -200,6 +200,7 @@ export function removePostFetch(postId) {
       .then(body => {
         dispatch(removePostInListPost(body.id))
         dispatch(postHasBeenRemoved(true))
+        history.push('/')
       })
       .catch(ex => dispatch(invalidateRemovePost(true)))
   }
