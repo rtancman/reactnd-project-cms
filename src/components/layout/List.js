@@ -46,7 +46,7 @@ class ListContent extends BaseList {
     return (
       <div className="list_content">
         <h2>{ title }</h2>
-        <div class="row list_content__filter">
+        <div className="row list_content__filter">
           { orderByOptions.map((option) => (
             <div onClick={ () => this.orderBy(option.value)} key={ option.value } className={ `col-xs list_content__filter__item ${option.value === orderBy? 'list_content__filter__item--selected' : ''}` }>
               <span>{ option.label }</span>
@@ -86,7 +86,7 @@ class List extends BaseList {
     return (
       <div className="list_content">
         <h2>{ title }</h2>
-        <div class="row list_content__filter">
+        <div className="row list_content__filter">
           { orderByCategoryOptions.map((option) => (
             <div onClick={ () => this.orderBy(option.value)} key={ option.value } className={ `col-xs list_content__filter__item ${option.value === orderBy? 'list_content__filter__item--selected' : ''}` }>
               <span>{ option.label }</span>

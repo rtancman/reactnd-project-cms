@@ -73,65 +73,6 @@ $xlarge-min-width: 1200px;
     letter-spacing: -.03125rem;
     overflow-wrap: break-word;
   }
-
-  &__comment {
-    &__head {
-      font-size: 30px;
-      letter-spacing: -1.5px;
-      text-transform: uppercase;
-      p {
-        font-weight: 100;
-      }
-      span {
-        font-weight: 900;
-      }
-    }
-
-    &__info {
-      font-size: 12px;
-      line-height: 18px;
-      color: #666;
-    }
-
-    &__body {
-      position: relative;
-      font-size: 14px;
-      line-height: 18px;
-      color: #666;
-      word-wrap: break-word;
-      margin-top: 30px;
-      margin-bottom: 10px;
-
-      &__info {
-        &--avatar {
-          float: left;
-          margin-right: 10px;
-        }
-
-        &--author {
-          text-transform: uppercase;
-          font-weight: 900;
-          margin: 0;
-        }
-
-        &--date {
-          font-size: 12px;
-          line-height: 18px;
-        }
-      }
-
-      &__actions {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-
-    }
-    button {
-      margin-top: 16px;
-      margin-bottom: 8px;
-    }
-  }
 }
 
 .link {

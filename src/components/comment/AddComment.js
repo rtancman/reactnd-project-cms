@@ -49,9 +49,9 @@ class AddComment extends Component {
       <ValidatorForm
         ref="form"
         onSubmit={this.handleSubmit}>
-        <div class="row">
-          <div class="col-xs-12 col-lg-3">
-            <div class="box">
+        <div className="row">
+          <div className="col-xs-12 col-lg-3">
+            <div className="box">
               <TextValidator
                 fullWidth
                 label="Author"
@@ -65,8 +65,8 @@ class AddComment extends Component {
               />
             </div>
           </div>
-          <div class="col-xs-12 col-lg-7">
-            <div class="box">
+          <div className="col-xs-12 col-lg-7">
+            <div className="box">
               <TextValidator
                 fullWidth
                 multiline
@@ -81,8 +81,8 @@ class AddComment extends Component {
               />
             </div>
           </div>
-          <div class="col-xs-12 col-lg-2">
-            <div class="box">
+          <div className="col-xs-12 col-lg-2">
+            <div className="box">
               <Button 
                 variant="contained" 
                 type="submit"

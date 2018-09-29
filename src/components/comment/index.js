@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ListComments from './ListComments'
 import AddComment from './AddComment'
-
+import './Comment.css'
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -15,17 +15,16 @@ const Comment = (props) => {
 
   return (
     <div className="content__comment">
-      <div class="content__comment__head">
+      <div className="content__comment__head">
         <p><span>{ items.length }</span> Comments</p>
       </div>
       <hr />
-      <div class="content__comment__info">
+      <div className="content__comment__info">
         <p>Comments are the sole importance of the authors and do not represent an opinion of this site. If they denounce the terms of use, report. Read more frequently to find out what the animal is or illegal.</p>
       </div>
       <AddComment
         postId={postId}
       />
-      <hr />
       <ListComments 
         items={items}
       />

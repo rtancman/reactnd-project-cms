@@ -13,6 +13,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import { removeCommentFetch } from './actions';
+import sortBy from 'sort-by'
+
+const orderByOptions = [
+  {label: 'Popular', value: 'voteScore'},
+  {label: 'Recent', value: 'timestamp'},
+]
 
 class ListComments extends Component {
   static propTypes = {
@@ -23,6 +29,13 @@ class ListComments extends Component {
   
   state = {
     value: 0,
+    orderBy: 'voteScore'
+  }
+  
+  orderBy(option) {
+    this.setState({
+      orderBy: option
+    })
   }
 
   remove(postId) {
@@ -46,18 +59,21 @@ class ListComments extends Component {
 
   render() {
     const { statusRemove, items } = this.props
-    const { value } = this.state
+    const { value, orderBy } = this.state
+    let showingItems = items
+
+    showingItems.sort(sortBy(orderBy))
 
     return (
       <div>
-          <BottomNavigation
-            value={value}
-            onChange={this.handleFilter}
-            showLabels>
-            <BottomNavigationAction style={{ maxWidth: '50%'}} label="Favorites" icon={<FavoriteIcon />} />
-            <BottomNavigationAction style={{ maxWidth: '50%'}} label="Recents" icon={<RestoreIcon />} />
-          </BottomNavigation>
-          {items && items.map((comment) => (
+          <div className="row content__comment__filter">
+            { orderByOptions.map((option) => (
+              <div onClick={ () => this.orderBy(option.value)} key={ option.value } className={ `col-xs content__comment__filter__item ${option.value === orderBy? 'content__comment__filter__item--selected' : ''}` }>
+                <span>{ option.label }</span>
+              </div>
+            )) }
+          </div>
+          {showingItems && items.map((comment) => (
             <div className="row" key={comment.id} elevation={1}>
               <div className="col-xs-12">
                 <div className="content__comment__body">
