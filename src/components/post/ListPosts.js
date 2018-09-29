@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { postsFetchData, removePostFetch } from './actions';
+import moment from 'moment'
 import { Link } from "react-router-dom";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { postsFetchData } from './actions';
+import './ListPosts.css'
+import { ListContent } from 'components/layout/List'
 
 class ListPosts extends Component {
   static propTypes = {
     fetchData: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     didInvalidate: PropTypes.bool.isRequired
@@ -18,23 +20,16 @@ class ListPosts extends Component {
     this.props.fetchData()
   }
 
-  remove(postId) {
-    this.props.remove(postId)
-  }
-
-  linkRemove(postId, statusRemove) {
-    if (postId === statusRemove.id) {
-      return (<a href='#'><CircularProgress size={20} /> Removing...</a>)
-    }
-    return (<a href='#' onClick={() => this.remove(postId)}>Remove</a>)
-  }
-
   render() {
     let content = ''
     const { items, isFetching, didInvalidate, statusRemove } = this.props
 
     if (didInvalidate) {
-      content = (<p>Sorry! There was an error loading the items</p>)
+      content = (
+        <div>
+          <p>Sorry! There was an error loading the items</p>
+        </div>
+      )
     } else if (isFetching) {
       content = (
         <div>
@@ -44,37 +39,33 @@ class ListPosts extends Component {
       )
     } else if ( items.length > 0 ) {
       content = (
-        <ul>
-          {items.map((item) => (
-            <li key={item.id}>
-              <Link to={`/posts/${item.id}`}>{item.title}</Link> - { this.linkRemove(item.id, statusRemove) }
-            </li>
-          ))}
-        </ul>
+        <div>
+          <ListContent items={items} />
+        </div>
       )
     }
 
     return (
       <div className="ListPosts">
-        { content }
+        <div className="list_posts">
+          { content }
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ posts, removePost }) => {
+const mapStateToProps = ({ posts }) => {
   return {
     items: posts.items,
     didInvalidate: posts.didInvalidate,
     isFetching: posts.isFetching,
-    statusRemove: removePost,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchData: () => dispatch(postsFetchData()),
-    remove: (postId) => dispatch(removePostFetch(postId)),
   };
 };
 

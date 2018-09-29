@@ -14,13 +14,8 @@ const CategoryPage = (props) => {
   const { classes, match } = props;
 
   return (
-    <div className={classes.root}>
-      <h1>Category</h1>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
-          <Category categoryId={match.params.id} />
-        </Grid>
-      </Grid>
+    <div className="content">
+      <Category categoryId={match.params.id} />
     </div>
   )
 }

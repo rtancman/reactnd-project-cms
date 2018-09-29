@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { categoriesFetchData } from './actions';
 import { Link } from "react-router-dom";
+import { List } from 'components/layout/List'
 
 class ListCategories extends Component {
   static propTypes = {
@@ -32,19 +33,12 @@ class ListCategories extends Component {
       )
     } else if ( items.length > 0 ) {
       content = (
-        <ul>
-          {items.map((item) => (
-            <li key={item.path}>
-              <Link to={`/category/${item.path}`}>{item.name}</Link>
-            </li>
-          ))}
-        </ul>
+        <List items={items} />
       )
     }
 
     return (
       <div className="ListCategories">
-        <h2>Categories</h2>
         { content }
       </div>
     );

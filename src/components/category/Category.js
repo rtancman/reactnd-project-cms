@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { categoryPostsFetchData } from './actions';
-
+import { ListContent } from 'components/layout/List'
 class Category extends Component {
   static propTypes = {
     categoryId: PropTypes.string.isRequired,
@@ -19,7 +19,7 @@ class Category extends Component {
 
   render() {
     let content = ''
-    const { items, isFetching, didInvalidate } = this.props
+    const { items, isFetching, didInvalidate, categoryId } = this.props
 
     if (didInvalidate) {
       content = (<p>Sorry! There was an error loading the items</p>)
@@ -31,21 +31,18 @@ class Category extends Component {
         </div>
       )
     } else if ( items.length > 0 ) {
-      content = (
-        <ul>
-          {items.map((item) => (
-            <li key={item.id}>
-              <p>{item.title}, {item.author}, {item.voteScore}, {item.commentCount}</p>
-            </li>
-          ))}
-        </ul>
-      )
+      content = (<ListContent items={items} />)
     }
 
     return (
       <div className="Category">
-        <h2>Category</h2>
-        { content }
+        <div className="content">
+          <div className="content__head">
+            <h1 className="content__title">{ categoryId }</h1>
+            <hr />
+          </div>
+          { content }
+        </div>
       </div>
     );
   }

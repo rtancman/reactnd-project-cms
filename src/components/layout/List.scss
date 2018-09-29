@@ -1,0 +1,35 @@
+.list_content {
+  &__item {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    border-bottom: 0.5px solid #E1E1E1;
+    
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &--category {
+      padding-bottom: 37px;
+    }
+
+    &__title {
+      font-size: 24px;
+      letter-spacing: -1.25px;
+      line-height: 28px;
+      font-weight: 600;
+    }
+  
+    &__info {
+      color: #999;
+      font-size: 11px;
+      grid-column: 2;
+      line-height: 11px;
+      margin: 6px 0 0;
+      text-transform: uppercase;
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
