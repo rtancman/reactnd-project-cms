@@ -62,6 +62,8 @@ class ListComments extends Component {
     const { value, orderBy } = this.state
     let showingItems = items
 
+    if ( showingItems.length < 1 ) return ''
+    
     showingItems.sort(sortBy(orderBy))
 
     return (

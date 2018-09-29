@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import pluralize from 'pluralize'
 import ListComments from './ListComments'
 import AddComment from './AddComment'
 import './Comment.css'
@@ -12,11 +13,17 @@ const styles = theme => ({
 
 const Comment = (props) => {
   const { classes, items, postId } = props;
+  let messageComment = (<p><span>Be the first to comment</span></p>)
+  const itemsLength = items.length;
+
+  if ( itemsLength >= 1){
+    messageComment = (<p><span>{ itemsLength }</span> { pluralize('Comment', itemsLength) }</p>)
+  }
 
   return (
     <div className="content__comment">
       <div className="content__comment__head">
-        <p><span>{ items.length }</span> Comments</p>
+        { messageComment }
       </div>
       <hr />
       <div className="content__comment__info">
