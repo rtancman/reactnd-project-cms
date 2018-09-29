@@ -27,32 +27,51 @@ class Post extends Component {
     const { isFetching, didInvalidate, comment, postId } = this.props
 
     if (didInvalidate) {
-      content = (<p>Sorry! There was an error loading the items</p>)
+      content = (
+        <div className="content__text">
+          <p>Sorry! There was an error loading the post</p>
+        </div>
+      )
     } else if (isFetching) {
       content = (
         <div>
           <CircularProgress thickness={7} />
-          <p>Loading…</p>
+          <div className="content__text">
+            <p>Loading…</p>
+          </div>
         </div>
       )
     } else if ( postContent ) {
       content = (
         <div>
-          <p>{ postContent.title }</p>
-          {comment.items && (
-            <Comment
-              items={comment.items}
-              postId={postId}
-            />
-          )}
+          <div className="content__head">
+            <div className="container">
+              <h1 className="content__title">{ postContent.title }</h1>
+              <p>By <span>{ postContent.author }</span></p>
+              <hr />
+            </div>
+          </div>
+          <div className="content__body">
+            <div className="container">
+              <p>{ postContent.body }</p>
+              <div className="line"></div>
+              {comment.items && (
+                <Comment
+                  items={comment.items}
+                  postId={postId}
+                />
+              )}
+            </div>
+          </div>
         </div>
       )
     }
 
     return (
       <div className="ListPosts">
-        <h2>Post</h2>
-        { content }
+        <div className="content">
+          { content }
+        </div>
       </div>
     );
   }

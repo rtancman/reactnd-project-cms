@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
+import moment from 'moment'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ThumbUp from '@material-ui/icons/ThumbUp';
+import ThumbDown from '@material-ui/icons/ThumbDown';
 import { removeCommentFetch } from './actions';
 
 class ListComments extends Component {
@@ -9,6 +19,10 @@ class ListComments extends Component {
     remove: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
     statusRemove: PropTypes.object.isRequired
+  }
+  
+  state = {
+    value: 0,
   }
 
   remove(postId) {
@@ -19,20 +33,54 @@ class ListComments extends Component {
     if (commentId === statusRemove.id) {
       return (<a href='#'><CircularProgress size={20} /> Removing...</a>)
     }
-    return (<a href='#' onClick={() => this.remove(commentId)}>Remove</a>)
+    return (
+      <IconButton style={{ margin: 0, padding: '6px' }} onClick={() => this.remove(commentId)} aria-label="Delete">
+        <DeleteIcon />
+      </IconButton>
+    )
+  }
+
+  handleFilter = (event, value) => {
+    this.setState({ value });
   }
 
   render() {
     const { statusRemove, items } = this.props
+    const { value } = this.state
 
     return (
       <div>
-        <p>comments</p>
-        <ul>
+          <BottomNavigation
+            value={value}
+            onChange={this.handleFilter}
+            showLabels>
+            <BottomNavigationAction style={{ maxWidth: '50%'}} label="Favorites" icon={<FavoriteIcon />} />
+            <BottomNavigationAction style={{ maxWidth: '50%'}} label="Recents" icon={<RestoreIcon />} />
+          </BottomNavigation>
           {items && items.map((comment) => (
-            <li key={comment.id}>{comment.body}  - { this.linkRemove(comment.id, statusRemove) }</li>
+            <div className="row" key={comment.id} elevation={1}>
+              <div className="col-xs-12">
+                <div className="content__comment__body">
+                  <div className="content__comment__body__info">
+                    <AccountCircle className="content__comment__body__info--avatar"/>
+                    <p className="content__comment__body__info--author">{ comment.author }</p>
+                    <span className="content__comment__body__info--date">date { moment(comment.timestamp).format('MM-DD-YYYY') }</span>
+                  </div>
+                  <p>{comment.body}</p>
+                  <div className="content__comment__body__actions">
+                    <IconButton style={{ margin: 0, padding: '6px' }} aria-label="Delete">
+                      <ThumbUp />
+                    </IconButton>
+                    <IconButton style={{ margin: 0, padding: '6px' }} aria-label="Delete">
+                      <ThumbDown />
+                    </IconButton>
+                    { this.linkRemove(comment.id, statusRemove) }
+                  </div>
+                </div>
+                <hr />
+              </div>
+            </div>
           ))}
-        </ul>
       </div>
     )
   }

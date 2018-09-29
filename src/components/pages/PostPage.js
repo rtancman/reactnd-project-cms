@@ -14,13 +14,8 @@ const PostPage = (props) => {
   const { classes, match } = props;
 
   return (
-    <div className={classes.root}>
-      <h1>Post</h1>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
-          <Post postId={match.params.id} />
-        </Grid>
-      </Grid>
+    <div className="content">
+      <Post postId={match.params.id} />
     </div>
   )
 }

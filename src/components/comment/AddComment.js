@@ -48,35 +48,50 @@ class AddComment extends Component {
     return (
       <ValidatorForm
         ref="form"
-        onSubmit={this.handleSubmit}
-      >
-        <TextValidator
-          fullWidth
-          label="Author"
-          onChange={this.handleChange}
-          name="author"
-          value={author}
-          validators={['required']}
-          errorMessages={['this field is required']}
-        />
-        <TextValidator
-          fullWidth
-          multiline={true}
-          rows="5"
-          label="Body"
-          onChange={this.handleChange}
-          name="body"
-          value={body}
-          validators={['required']}
-          errorMessages={['this field is required']}
-        />
-        <Button 
-          variant="contained" 
-          type="submit"
-          disabled={isFetching}
-        >
-          {isFetching && <CircularProgress size={20} />} Submit
-        </Button>
+        onSubmit={this.handleSubmit}>
+        <div class="row">
+          <div class="col-xs-12 col-lg-3">
+            <div class="box">
+              <TextValidator
+                fullWidth
+                label="Author"
+                onChange={this.handleChange}
+                name="author"
+                value={author}
+                validators={['required']}
+                errorMessages={['this field is required']}
+                margin="normal"
+                variant="outlined"
+              />
+            </div>
+          </div>
+          <div class="col-xs-12 col-lg-7">
+            <div class="box">
+              <TextValidator
+                fullWidth
+                multiline
+                label="Comment"
+                onChange={this.handleChange}
+                name="body"
+                value={body}
+                validators={['required']}
+                errorMessages={['this field is required']}
+                margin="normal"
+                variant="outlined"
+              />
+            </div>
+          </div>
+          <div class="col-xs-12 col-lg-2">
+            <div class="box">
+              <Button 
+                variant="contained" 
+                type="submit"
+                disabled={isFetching}>
+                {isFetching && <CircularProgress size={20} />} Send
+              </Button>
+            </div>
+          </div>
+        </div>
       </ValidatorForm>
     );
   }
