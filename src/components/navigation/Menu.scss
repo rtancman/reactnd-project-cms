@@ -1,0 +1,40 @@
+// @import '../App.css';
+
+.nav_bar {
+  background: #000;
+  .container {
+    position: relative;
+  }
+
+  * {
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  h1 {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 5px 0;
+  }
+
+  &__menu {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    span {
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+  }
+
+  &__actions {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+  }
+}
