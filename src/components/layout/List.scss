@@ -32,4 +32,32 @@
       }
     }
   }
+
+  &__filter {
+    margin: 0;
+
+    &__item {
+      padding: 12px 0 9px 0;
+      border: 0.5px solid #e0e0e0;
+      font-weight: bold;
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+      text-align: center;
+      cursor: pointer;
+
+      &:first-child {
+        border-radius: 3px 0 0 3px;
+      }
+
+      &:last-child {
+        border-radius: 0 3px 3px 0;
+      }
+
+      &--selected {
+        border-color: #000;
+        color: #000;
+      }
+    }
+  }
 }

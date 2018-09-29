@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { categoriesFetchData } from './actions';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { List } from 'components/layout/List'
 
 class ListCategories extends Component {
@@ -33,12 +33,12 @@ class ListCategories extends Component {
       )
     } else if ( items.length > 0 ) {
       content = (
-        <List items={items} />
+        <List title='Categories' items={items} />
       )
     }
 
     return (
-      <div className="ListCategories">
+      <div className='ListCategories'>
         { content }
       </div>
     );

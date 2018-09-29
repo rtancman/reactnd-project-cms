@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import moment from 'moment'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { postsFetchData } from './actions';
-import './ListPosts.css'
 import { ListContent } from 'components/layout/List'
 
 class ListPosts extends Component {
@@ -40,14 +39,14 @@ class ListPosts extends Component {
     } else if ( items.length > 0 ) {
       content = (
         <div>
-          <ListContent items={items} />
+          <ListContent title='Posts' items={items} />
         </div>
       )
     }
 
     return (
-      <div className="ListPosts">
-        <div className="list_posts">
+      <div className='ListPosts'>
+        <div className='list_posts'>
           { content }
         </div>
       </div>

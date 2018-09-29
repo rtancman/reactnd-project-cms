@@ -31,14 +31,14 @@ class Category extends Component {
         </div>
       )
     } else if ( items.length > 0 ) {
-      content = (<ListContent items={items} />)
+      content = (<ListContent title='Posts' items={items} />)
     }
 
     return (
-      <div className="Category">
-        <div className="content">
-          <div className="content__head">
-            <h1 className="content__title">{ categoryId }</h1>
+      <div className='Category'>
+        <div className='content'>
+          <div className='content__head'>
+            <h1 className='content__title'>{ categoryId }</h1>
             <hr />
           </div>
           { content }
