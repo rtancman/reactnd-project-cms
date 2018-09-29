@@ -14,13 +14,12 @@ const PostAdminPage = (props) => {
   const { classes, match } = props;
 
   return (
-    <div className={classes.root}>
-      <h1>Post</h1>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
+    <div className="page_home">
+      <div className="row">
+        <div className="col-xs">
           <AddPost  />
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </div>
   )
 }

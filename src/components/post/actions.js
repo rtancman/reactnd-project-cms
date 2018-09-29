@@ -109,7 +109,7 @@ export const pushListPost = (post) => {
   }
 }
 
-export function createPostFetch(post) {
+export function createPostFetch(post, resetForm) {
   return dispatch => {
     dispatch(requestCreatePost(true))
     return fetch(postCreateUrl, { 
@@ -124,6 +124,7 @@ export function createPostFetch(post) {
       .then(body => {
         dispatch(pushListPost(body))
         dispatch(postHasBeenCreated(true))
+        resetForm()
       })
       .catch(ex => dispatch(invalidateCreatePost(true)))
   }

@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import uuidv4 from 'uuid/v4'
 import { ValidatorForm, TextValidator, SelectValidator} from 'react-material-ui-form-validator';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { ShowMessage } from 'components/layout/Message.js'
 
 const styles = theme => ({
   textField: {
@@ -32,6 +33,17 @@ class PostForm extends Component {
     category: '',
   }
 
+  reset() {
+    this.setState((state) => ({
+      id: this.props.id || uuidv4(),
+      timestamp: Date.now(),
+      title: '',
+      body: '',
+      author: '',
+      category: '',
+    }))
+  }
+
   handleChange = (event) => {
     const value = event.target.value;
     const field = event.target.name
@@ -39,18 +51,20 @@ class PostForm extends Component {
   }
 
   handleSubmit = () => {
-    this.props.handleSubmit(this.state)
+    this.props.handleSubmit(this.state, this.reset)
   }
 
   render() {
     const { title, body, author, category } = this.state;
-    const { categories, isFetching } = this.props;
+    const { categories, isFetching, created, didInvalidate } = this.props;
 
     return (
       <ValidatorForm
         ref="form"
         onSubmit={this.handleSubmit}
       >
+        { isFetching === false && created === true && ( <ShowMessage message='Post has been created' variant='success' open={true} /> ) }
+        { isFetching === false && didInvalidate === true && ( <ShowMessage message='Error to create Post. Try Again!' variant='error' open={true} /> ) }
         <SelectValidator
           onChange={this.handleChange}
           name="category"
@@ -72,6 +86,7 @@ class PostForm extends Component {
           value={author}
           validators={['required']}
           errorMessages={['this field is required']}
+          margin="normal"
         />
         <TextValidator
           fullWidth
@@ -81,6 +96,7 @@ class PostForm extends Component {
           value={title}
           validators={['required']}
           errorMessages={['this field is required']}
+          margin="normal"
         />
         <TextValidator
           fullWidth
@@ -92,13 +108,16 @@ class PostForm extends Component {
           value={body}
           validators={['required']}
           errorMessages={['this field is required']}
+          variant="outlined"
+          margin="normal"
         />
         <Button 
           variant="contained" 
           type="submit"
           disabled={isFetching}
+          margin="normal"
         >
-          {isFetching && <CircularProgress size={20} />} Submit
+          {isFetching && <CircularProgress size={20} />} Save
         </Button>
       </ValidatorForm>
     );
