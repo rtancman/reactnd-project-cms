@@ -21,16 +21,15 @@ const Home = (props) => {
   const { classes } = props;
 
   return (
-    <div className={classes.root}>
-      <h1>Home</h1>
-      <Grid container spacing={24}>
-        <Grid item xs={6}>
-          <ListCategories />          
-        </Grid>
-        <Grid item xs={6}>
+    <div className="page_home">
+      <div className="row">
+        <div className="col-xs-6">
+          <ListCategories />
+        </div>
+        <div className="col-xs-6">
           <ListPosts />
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </div>
   )
 }
