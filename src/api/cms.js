@@ -17,3 +17,15 @@ export const postCreateUrl = `${baseApi}/posts`
 export const postCommentsUrl = (postId) => `${baseApi}/posts/${postId}/comments`
 export const commentCreateUrl = `${baseApi}/comments`
 export const commentUrl = (commentId) => `${baseApi}/comments/${commentId}`
+
+export function postVoteFetch(url, option) {
+  return fetch(url, { 
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({option})
+    })
+    .then(res => res.json())
+}

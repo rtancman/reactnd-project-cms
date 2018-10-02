@@ -1,0 +1,18 @@
+.vote__bar {
+  height: 36px;
+  display: inline-block;
+
+  &__icons {
+    width: 72px;
+    display: inline-block;
+  }
+
+  &__total {
+    padding: 3px 10px;
+    display: inline-block;
+    margin-right: 7px;
+    border: 1px solid #E1E1E1;
+    border-radius: 50px;
+    font-weight: bold;
+  }
+}

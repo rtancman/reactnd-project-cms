@@ -6,14 +6,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
-import { removeCommentFetch } from './actions';
 import sortBy from 'sort-by'
+import { removeCommentFetch } from './actions';
+import Vote from 'components/vote'
 
 const orderByOptions = [
   {label: 'Popular', value: 'voteScore'},
@@ -86,12 +83,11 @@ class ListComments extends Component {
                   </div>
                   <p>{comment.body}</p>
                   <div className="content__comment__body__actions">
-                    <IconButton style={{ margin: 0, padding: '6px' }} aria-label="Delete">
-                      <ThumbUp />
-                    </IconButton>
-                    <IconButton style={{ margin: 0, padding: '6px' }} aria-label="Delete">
-                      <ThumbDown />
-                    </IconButton>
+                    <Vote 
+                      type='comment' 
+                      id={comment.id}
+                      total={comment.voteScore || 0}
+                    />
                     { this.linkRemove(comment.id, statusRemove) }
                   </div>
                 </div>

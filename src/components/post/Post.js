@@ -5,11 +5,10 @@ import moment from 'moment'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ThumbUp from '@material-ui/icons/ThumbUp';
-import ThumbDown from '@material-ui/icons/ThumbDown';
 import { postFetchData, postCommentsFetchData, removePostFetch } from './actions';
 import { Link } from "react-router-dom";
 import Comment from 'components/comment'
+import Vote from 'components/vote'
 
 class Post extends Component {
   static propTypes = {
@@ -77,12 +76,11 @@ class Post extends Component {
               </p>
               <hr />
               <div className="content__title__actions">
-                <IconButton style={{ margin: 0, padding: '6px' }} aria-label="Delete">
-                  <ThumbUp />
-                </IconButton>
-                <IconButton style={{ margin: 0, padding: '6px' }} aria-label="Delete">
-                  <ThumbDown />
-                </IconButton>
+                <Vote 
+                  type='post' 
+                  id={postId}
+                  total={postContent.voteScore || 0}
+                />
                 { this.linkRemove(postId, statusRemove) }
               </div>
             </div>
