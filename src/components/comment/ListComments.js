@@ -13,8 +13,8 @@ import { removeCommentFetch } from './actions';
 import Vote from 'components/vote'
 
 const orderByOptions = [
-  {label: 'Popular', value: 'voteScore'},
-  {label: 'Recent', value: 'timestamp'},
+  {label: 'Popular', value: '-voteScore'},
+  {label: 'Recent', value: '-timestamp'},
 ]
 
 class ListComments extends Component {
@@ -26,7 +26,7 @@ class ListComments extends Component {
   
   state = {
     value: 0,
-    orderBy: 'voteScore'
+    orderBy: '-voteScore'
   }
   
   orderBy(option) {

@@ -6,9 +6,9 @@ import sortBy from 'sort-by'
 import './List.css'
 
 const orderByOptions = [
-  {label: 'Popular', value: 'voteScore'},
+  {label: 'Popular', value: '-voteScore'},
   {label: 'Category', value: 'category'},
-  {label: 'Recent', value: 'timestamp'},
+  {label: 'Recent', value: '-timestamp'},
 ]
 
 class BaseList extends Component {
@@ -31,7 +31,7 @@ class BaseList extends Component {
 class ListContent extends BaseList {
 
   state = {
-    orderBy: 'voteScore'
+    orderBy: '-voteScore'
   }
 
   render() {
