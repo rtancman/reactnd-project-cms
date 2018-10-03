@@ -1,18 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import pluralize from 'pluralize'
 import ListComments from './ListComments'
 import AddComment from './AddComment'
 import './Comment.css'
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  }
-});
 
 const Comment = (props) => {
-  const { classes, items, postId } = props;
+  const { items, postId } = props;
   let messageComment = (<p><span>Be the first to comment</span></p>)
   const itemsLength = items.length;
 
@@ -40,9 +34,8 @@ const Comment = (props) => {
 }
 
 Comment.propTypes = {
-  classes: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
   items: PropTypes.array
 }
 
-export default withStyles(styles)(Comment);
+export default Comment;

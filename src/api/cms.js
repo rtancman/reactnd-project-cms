@@ -41,3 +41,28 @@ export function editPostFetch(postId, post) {
   })
   .then(res => res.json())
 }
+
+export function createCommentFetch(comment) {
+  return fetch(commentCreateUrl, { 
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(comment)
+    })
+    .then(res => res.json())
+}
+
+export function editCommentFetch(commentId, comment) {
+  return fetch(commentUrl(commentId), { 
+      method: 'PUT',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(comment)
+    })
+    .then(res => res.json())
+}
+

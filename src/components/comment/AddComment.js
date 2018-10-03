@@ -1,113 +1,69 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import uuidv4 from 'uuid/v4'
-import { ValidatorForm, TextValidator, SelectValidator} from 'react-material-ui-form-validator';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { createCommentFetch } from './actions'
+import { createCommentFetch } from 'api/cms'
+import CommentForm from './CommentForm'
+import { pushListComments } from 'components/post/actions'
+import { ShowMessage } from 'components/layout/Message.js'
 
 class AddComment extends Component {
   static propTypes = {
     postId: PropTypes.string.isRequired,
+    pushComment: PropTypes.func.isRequired
   }
 
   state = {
-    id: this.props.id || uuidv4(),
-    timestamp: Date.now(),
-    body: '',
-    author: '',
-    parentId: this.props.postId,
+    created: false,
+    isFetching: false,
+    didInvalidate: false,
   }
 
-  reset() {
+  save = (comment, resetForm) => {
     this.setState((state) => ({
-      id: this.props.id || uuidv4(),
-      timestamp: Date.now(),
-      body: '',
-      author: '',
-      parentId: this.props.postId,
+      isFetching: true,
+      didInvalidate: false,
     }))
-  }
 
-  handleChange = (event) => {
-    const value = event.target.value;
-    const field = event.target.name
-    this.setState({ [field]: value });
-  }
-
-  handleSubmit = () => {
-    this.props.saveData(this.state)
-    this.reset()
+    createCommentFetch(comment)
+    .then(body => {
+      this.props.pushComment(body)
+      this.setState((state) => ({
+        isFetching: false,
+        didInvalidate: false,
+      }))
+      resetForm()
+    })
+    .catch(ex => {
+      this.setState((state) => ({
+        isFetching: false,
+        didInvalidate: true,
+      }))
+    })
   }
 
   render() {
-    const { body, author } = this.state;
-    const { isFetching } = this.props;
+    const { isFetching, didInvalidate } = this.state;
+    const { postId } = this.props;
 
     return (
-      <ValidatorForm
-        ref="form"
-        onSubmit={this.handleSubmit}>
-        <div className="row">
-          <div className="col-xs-12 col-lg-3">
-            <div className="box">
-              <TextValidator
-                fullWidth
-                label="Author"
-                onChange={this.handleChange}
-                name="author"
-                value={author}
-                validators={['required']}
-                errorMessages={['this field is required']}
-                margin="normal"
-                variant="outlined"
-              />
-            </div>
-          </div>
-          <div className="col-xs-12 col-lg-7">
-            <div className="box">
-              <TextValidator
-                fullWidth
-                multiline
-                label="Comment"
-                onChange={this.handleChange}
-                name="body"
-                value={body}
-                validators={['required']}
-                errorMessages={['this field is required']}
-                margin="normal"
-                variant="outlined"
-              />
-            </div>
-          </div>
-          <div className="col-xs-12 col-lg-2">
-            <div className="box">
-              <Button 
-                variant="contained" 
-                type="submit"
-                disabled={isFetching}>
-                {isFetching && <CircularProgress size={20} />} Send
-              </Button>
-            </div>
-          </div>
-        </div>
-      </ValidatorForm>
-    );
+      <div>
+          { isFetching === false && didInvalidate === true && ( <ShowMessage message='Error to create comment. Try Again!' variant='error' open={true} /> ) }
+          <CommentForm
+            handleSubmit={this.save}
+            isFetching={isFetching}
+            postId={postId}
+          />
+      </div>
+    )
   }
 }
 
-const mapStateToProps = ({createComment}) => {
-  return {
-    ...createComment
-  };
-};
+const mapStateToProps = () => { return {} }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveData: (comment) => dispatch(createCommentFetch(comment))
-  };
-};
+    pushComment: (comment) => dispatch(pushListComments(comment))
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddComment);
-
