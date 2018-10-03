@@ -5,6 +5,7 @@ import moment from 'moment'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import { postFetchData, postCommentsFetchData, removePostFetch } from './actions';
 import { Link } from "react-router-dom";
 import Comment from 'components/comment'
@@ -39,7 +40,7 @@ class Post extends Component {
     }
 
     return (
-      <IconButton style={{ margin: 0, padding: '6px' }} onClick={() => this.remove(postId)} aria-label="Delete">
+      <IconButton alt="Remove" title="Remove" style={{ margin: 0, padding: '6px' }} onClick={() => this.remove(postId)} aria-label="Delete">
         <DeleteIcon />
       </IconButton>
     )
@@ -48,7 +49,7 @@ class Post extends Component {
   render() {
     let content = ''
     const postContent = this.props.content
-    const { isFetching, didInvalidate, comment, postId, statusRemove } = this.props
+    const { isFetching, didInvalidate, comment, postId, statusRemove, history } = this.props
 
     if (didInvalidate) {
       content = (
@@ -81,6 +82,9 @@ class Post extends Component {
                   id={postId}
                   total={postContent.voteScore || 0}
                 />
+                <IconButton alt="Edit" title="Edit" onClick={() => history.push(`/posts/edit/${postId}`)} style={{ margin: 0, padding: '6px' }} aria-label="Delete">
+                  <EditIcon />
+                </IconButton>
                 { this.linkRemove(postId, statusRemove) }
               </div>
             </div>

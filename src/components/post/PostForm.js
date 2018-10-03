@@ -19,18 +19,21 @@ class PostForm extends Component {
     classes: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     categories: PropTypes.array.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    didInvalidate: PropTypes.bool.isRequired,
-    created: PropTypes.bool.isRequired,
+    id: PropTypes.string,
+    timestamp: PropTypes.number,
+    title: PropTypes.string,
+    body: PropTypes.string,
+    author: PropTypes.string,
+    category: PropTypes.string,
   }
 
   state = {
     id: this.props.id || uuidv4(),
-    timestamp: Date.now(),
-    title: '',
-    body: '',
-    author: '',
-    category: '',
+    timestamp: this.props.timestamp || Date.now(),
+    title: this.props.title || '',
+    body: this.props.body || '',
+    author: this.props.author || '',
+    category: this.props.category || '',
   }
 
   reset() {

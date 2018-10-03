@@ -92,6 +92,7 @@ class ShowMessage extends Component {
     open: PropTypes.bool.isRequired,
     message: PropTypes.string.isRequired,
     variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
+    autoHideDuration: PropTypes.number,
   }
 
   state = {
@@ -112,15 +113,15 @@ class ShowMessage extends Component {
 
   render() {
     const { open } = this.state
-    const { variant, message } = this.props
+    const { variant, message, autoHideDuration } = this.props
     return (
       <Snackbar
+        autoHideDuration={autoHideDuration || 3000 }
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'center',
         }}
         open={this.state.open}
-        autoHideDuration={6000}
         onClose={this.handleClose}
         >
         <MySnackbarContentWrapper

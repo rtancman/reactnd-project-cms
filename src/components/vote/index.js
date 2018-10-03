@@ -75,10 +75,10 @@ class Vote extends Component {
     }else if (isFetching === false) {
       content = (
         <div className="vote__bar__icons">
-          <IconButton onClick={() => {this.voteOption('upVote')}} style={{ margin: 0, padding: '6px' }} aria-label="Up Vote">
+          <IconButton alt="Up Vote" title="Up Vote" onClick={() => {this.voteOption('upVote')}} style={{ margin: 0, padding: '6px' }} aria-label="Up Vote">
             <ThumbUp />
           </IconButton>
-          <IconButton onClick={() => {this.voteOption('downVote')}} style={{ margin: 0, padding: '6px' }} aria-label="Down Vote">
+          <IconButton alt="Down Vote" title="Down Vote" onClick={() => {this.voteOption('downVote')}} style={{ margin: 0, padding: '6px' }} aria-label="Down Vote">
             <ThumbDown />
           </IconButton>
         </div>
