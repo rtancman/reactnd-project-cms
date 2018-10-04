@@ -139,28 +139,6 @@ export function postCommentsFetchData(postId) {
   }
 }
 
-export const invalidateRemovePost = (bool) => {
-  return {
-      type: types.INVALIDATE_REMOVE_POST,
-      didInvalidate: bool
-  }
-}
-
-export const requestRemovePost = ({ bool, postId }) => {
-  return {
-      type: types.REQUEST_REMOVE_POST,
-      isFetching: bool,
-      id: postId
-  }
-}
-
-export const postHasBeenRemoved = (bool) => {
-  return {
-      type: types.POST_HAS_BEEN_REMOVED,
-      removed: bool
-  }
-}
-
 export const removePostInListPost = (postId) => {
   return {
       type: types.REMOVE_POST_IN_LIST_POSTS,
@@ -204,5 +182,42 @@ export const removeCommentInListComments = (commentId) => {
   return {
     type: types.REMOVE_COMMENT_IN_LIST_COMMENTS,
     commentId
+  }
+}
+
+export const updatePostInListPost = (post) => {
+  return {
+      type: types.UPDATE_POST_IN_LIST_POSTS,
+      post: {
+        id: post.id,
+        timestamp: post.timestamp,
+        title: post.title,
+        body: post.body,
+        author: post.author,
+        category: post.category,
+        voteScore: post.voteScore,
+        deleted: post.deleted,
+        commentCount: post.commentCount
+      }
+  }
+}
+
+export function editPostFetch(postId, post) {
+  return dispatch => {
+    return fetch(postUrl(postId), {
+      method: 'PUT',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(post)
+    })
+    .then(res => res.json())
+    .then(body => {
+      dispatch(updatePostInListPost(body))
+      return new Promise(function(resolve) {
+        resolve(body);
+      })
+    })
   }
 }

@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createPostFetch, postFetchData } from './actions';
-import { categoriesFetchData } from 'components/category/actions'
-import { editPostFetch } from 'api/cms'
 import { Link } from "react-router-dom";
+import { postFetchData, editPostFetch } from './actions';
+import { categoriesFetchData } from 'components/category/actions'
 import PostForm from './PostForm'
 import { ShowMessage } from 'components/layout/Message.js'
 
 class EditPost extends Component {
   static propTypes = {
+    save: PropTypes.func.isRequired,
+    fetchData: PropTypes.func.isRequired,
+    fetchCategoriesData: PropTypes.func.isRequired,
     categories: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
     postId: PropTypes.string.isRequired,
@@ -21,14 +23,14 @@ class EditPost extends Component {
     didInvalidate: false,
   }
 
-  editPost = (post, resetForm) => {
+  editPost = (post) => {
     this.setState((state) => ({
       isFetching: true,
       created: false,
       didInvalidate: false,
     }))
 
-    editPostFetch(this.props.postId, post)
+    this.props.save(this.props.postId, post)
     .then(body => {
       this.setState((state) => ({
         isFetching: false,
@@ -98,7 +100,7 @@ const mapStateToProps = ({categories, post}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    save: (post, resetForm) => dispatch(createPostFetch(post, resetForm)),
+    save: (post) => dispatch(editPostFetch(post)),
     fetchData: (postId) => dispatch(postFetchData(postId)),
     fetchCategoriesData: () => dispatch(categoriesFetchData()),
   };

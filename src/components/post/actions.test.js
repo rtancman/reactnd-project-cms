@@ -231,42 +231,6 @@ describe('actions', () => {
   })
 
   describe('Remove Post', () => {
-    describe('should create an action ', () => {
-      it('to invalidate remove post', () => {
-        const bool = true
-        const expectedAction = {
-          type: types.INVALIDATE_REMOVE_POST,
-          didInvalidate: bool
-        }
-
-        expect(actions.invalidateRemovePost(bool)).toEqual(expectedAction)
-      })
-
-      it('to request remove post', () => {
-        const data = {
-          bool: true,
-          postId: '88112233'
-        }
-        const expectedAction = {
-          type: types.REQUEST_REMOVE_POST,
-          isFetching: data.bool,
-          id: data.postId
-        }
-
-        expect(actions.requestRemovePost(data)).toEqual(expectedAction)
-      })
-
-      it('to post has been removed', () => {
-        const bool = true
-        const expectedAction = {
-          type: types.POST_HAS_BEEN_REMOVED,
-          removed: bool
-        }
-
-        expect(actions.postHasBeenRemoved(bool)).toEqual(expectedAction)
-      })
-    })
-
     describe('async actions', () => {
       afterEach(() => {
         fetchMock.reset()
@@ -281,6 +245,51 @@ describe('actions', () => {
         ]
         const store = mockStore({})
         return store.dispatch(actions.removePostFetch(postId)).then(() => {
+          expect(store.getActions()).toEqual(expectedActions)
+        })
+      })
+    })
+  })
+
+
+  describe('EditPost', () => {
+    const post = {
+      id: '6edd5334-b028-49c0-9885-8e03fcdd1c5e',
+      timestamp: Date.now(),
+      title: 'Title edit post',
+      body: 'Body edit post',
+      author: 'Raffael Tancman',
+      category: 'redux',
+      voteScore: 100,
+      deleted: false,
+      commentCount: 10
+    }
+
+    describe('should create an action ', () => {
+      it('to update post in list posts', () => {
+        const expectedAction = {
+          type: types.UPDATE_POST_IN_LIST_POSTS,
+          post
+        }
+
+        expect(actions.updatePostInListPost(post)).toEqual(expectedAction)
+      })
+
+    })
+
+    describe('async actions', () => {
+      afterEach(() => {
+        fetchMock.reset()
+        fetchMock.restore()
+      })
+
+      it('creates UPDATE_POST_IN_LIST_POSTS when fetching edit post has been done', () => {
+        fetchMock.put(postUrl(post.id), { body: post })
+        const expectedActions = [
+          { type: types.UPDATE_POST_IN_LIST_POSTS, post },
+        ]
+        const store = mockStore({ posts: {...initialListPostState, items: [post]} })
+        return store.dispatch(actions.editPostFetch(post.id, post)).then(() => {
           expect(store.getActions()).toEqual(expectedActions)
         })
       })
