@@ -1,30 +1,60 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MenuItem from '@material-ui/core/MenuItem';
 import { connect } from 'react-redux';
 import { createPostFetch } from './actions';
 import { categoriesFetchData } from 'components/category/actions'
 import PostForm from './PostForm'
+import { ShowMessage } from 'components/layout/Message.js'
 
 class AddPost extends Component {
   static propTypes = {
     addPost: PropTypes.func.isRequired,
     categories: PropTypes.object.isRequired,
+    fetchCategories: PropTypes.func.isRequired,
+  }
+
+  state = {
+    created: false,
+    isFetching: false,
+    didInvalidate: false,
   }
 
   addPost = (post, resetForm) => {
-    this.props.addPost(post, resetForm)
+    this.setState((state) => ({
+      isFetching: true,
+      created: false,
+      didInvalidate: false,
+    }))
+
+    this.props.addPost(post).then(body => {
+      this.setState((state) => ({
+        created: true,
+        isFetching: false,
+        didInvalidate: false,
+      }))
+      resetForm()
+    })
+    .catch(ex => {
+      this.setState((state) => ({
+        isFetching: true,
+        created: false,
+        didInvalidate: true,
+      }))
+    })
   }
 
   componentDidMount() {
-    if ( this.props.categories.items.length < 1) this.props.fetchCategoriesData()
+    if ( this.props.categories.items.length < 1) this.props.fetchCategories()
   }
 
   render() {
-      const { categories, createPost } = this.props;
+      const { categories } = this.props;
+      const { isFetching, created, didInvalidate } = this.state;
 
       return (
         <div>
+          { isFetching === false && created === true && ( <ShowMessage message='Post has been created' variant='success' open={true} /> ) }
+          { isFetching === false && didInvalidate === true && ( <ShowMessage message='Error to create Post. Try Again!' variant='error' open={true} /> ) }
           <div className="content__head">
             <div className="container">
               <h1 className="content__title">Create Post</h1>
@@ -36,7 +66,7 @@ class AddPost extends Component {
               <PostForm
                 handleSubmit={this.addPost}
                 categories={categories.items}
-                {...createPost}
+                isFetching={isFetching}
               />
             </div>
           </div>
@@ -45,17 +75,16 @@ class AddPost extends Component {
   }
 }
 
-const mapStateToProps = ({categories, createPost}) => {
+const mapStateToProps = ({ categories }) => {
   return {
-    categories,
-    createPost,
+    categories
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addPost: (post, resetForm) => dispatch(createPostFetch(post, resetForm)),
-    fetchCategoriesData: () => dispatch(categoriesFetchData()),
+    addPost: (post) => dispatch(createPostFetch(post)),
+    fetchCategories: () => dispatch(categoriesFetchData()),
   };
 };
 

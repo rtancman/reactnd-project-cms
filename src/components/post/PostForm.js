@@ -16,9 +16,9 @@ const styles = theme => ({
 
 class PostForm extends Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     categories: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool.isRequired,
     id: PropTypes.string,
     timestamp: PropTypes.number,
     title: PropTypes.string,
@@ -59,15 +59,13 @@ class PostForm extends Component {
 
   render() {
     const { title, body, author, category } = this.state;
-    const { categories, isFetching, created, didInvalidate } = this.props;
+    const { categories, isFetching } = this.props;
 
     return (
       <ValidatorForm
         ref="form"
         onSubmit={this.handleSubmit}
       >
-        { isFetching === false && created === true && ( <ShowMessage message='Post has been created' variant='success' open={true} /> ) }
-        { isFetching === false && didInvalidate === true && ( <ShowMessage message='Error to create Post. Try Again!' variant='error' open={true} /> ) }
         <SelectValidator
           onChange={this.handleChange}
           name="category"

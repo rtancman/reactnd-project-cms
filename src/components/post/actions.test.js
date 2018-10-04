@@ -148,7 +148,6 @@ describe('actions', () => {
     })
   })
 
-
   describe('AddPost', () => {
     const post = {
       id: postMock.id,
@@ -159,38 +158,6 @@ describe('actions', () => {
       category: postMock.category,
     }
 
-    describe('should create an action ', () => {
-      it('to invalidate create post', () => {
-        const bool = false
-        const expectedAction = {
-          type: types.INVALIDATE_CREATE_POST,
-          didInvalidate: bool
-        }
-
-        expect(actions.invalidateCreatePost(bool)).toEqual(expectedAction)
-      })
-
-      it('to request create post', () => {
-        const bool = true
-        const expectedAction = {
-          type: types.REQUEST_CREATE_POST,
-          isFetching: bool
-        }
-
-        expect(actions.requestCreatePost(bool)).toEqual(expectedAction)
-      })
-
-      it('to post has been created', () => {
-        const bool = true
-        const expectedAction = {
-          type: types.POST_HAS_BEEN_CREATED,
-          created: bool,
-        }
-        
-        expect(actions.postHasBeenCreated(bool)).toEqual(expectedAction)
-      })
-    })
-
     describe('async actions', () => {
       afterEach(() => {
         fetchMock.reset()
@@ -200,9 +167,7 @@ describe('actions', () => {
       it('creates POST_HAS_BEEN_CREATED when fetching new post has been done', () => {
         fetchMock.post(postCreateUrl, { body: postMock })
         const expectedActions = [
-          { type: types.REQUEST_CREATE_POST, isFetching: true },
           { type: types.PUSH_LIST_POSTS, post: postMock },
-          { type: types.POST_HAS_BEEN_CREATED, created: true },
         ]
         const store = mockStore({ posts: initialListPostState })
         return store.dispatch(actions.createPostFetch(post)).then(() => {
@@ -312,9 +277,7 @@ describe('actions', () => {
         const postId = 'postlala123'
         fetchMock.delete(postUrl(postId), { body: {...postMock, id: postId } })
         const expectedActions = [
-          { type: types.REQUEST_REMOVE_POST, isFetching: true, id: postId },
-          { type: types.REMOVE_POST_IN_LIST_POSTS, postId },
-          { type: types.POST_HAS_BEEN_REMOVED, removed: true },
+          { type: types.REMOVE_POST_IN_LIST_POSTS, postId }
         ]
         const store = mockStore({})
         return store.dispatch(actions.removePostFetch(postId)).then(() => {

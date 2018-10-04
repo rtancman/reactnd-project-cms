@@ -71,27 +71,6 @@ export function postFetchData(postId) {
   }
 }
 
-export const invalidateCreatePost = (bool) => {
-  return {
-      type: types.INVALIDATE_CREATE_POST,
-      didInvalidate: bool
-  }
-}
-
-export const requestCreatePost = (bool) => {
-  return {
-      type: types.REQUEST_CREATE_POST,
-      isFetching: bool
-  }
-}
-
-export const postHasBeenCreated = (bool) => {
-  return {
-      type: types.POST_HAS_BEEN_CREATED,
-      created: bool
-  }
-}
-
 export const pushListPost = (post) => {
   return {
       type: types.PUSH_LIST_POSTS,
@@ -111,7 +90,6 @@ export const pushListPost = (post) => {
 
 export function createPostFetch(post, resetForm) {
   return dispatch => {
-    dispatch(requestCreatePost(true))
     return fetch(postCreateUrl, { 
         method: 'POST',
         headers: {
@@ -123,10 +101,10 @@ export function createPostFetch(post, resetForm) {
       .then(res => res.json())
       .then(body => {
         dispatch(pushListPost(body))
-        dispatch(postHasBeenCreated(true))
-        resetForm()
+        return new Promise(function(resolve) {
+          resolve(body);
+        })
       })
-      .catch(ex => dispatch(invalidateCreatePost(true)))
   }
 }
 
@@ -192,7 +170,6 @@ export const removePostInListPost = (postId) => {
 
 export function removePostFetch(postId, history) {
   return dispatch => {
-    dispatch(requestRemovePost({ bool: true, postId }))
     return fetch(postUrl(postId), { 
         method: 'DELETE',
         headers,
@@ -200,10 +177,10 @@ export function removePostFetch(postId, history) {
       .then(res => res.json())
       .then(body => {
         dispatch(removePostInListPost(body.id))
-        dispatch(postHasBeenRemoved(true))
-        history.push('/')
+        return new Promise(function(resolve) {
+          resolve(body);
+        })
       })
-      .catch(ex => dispatch(invalidateRemovePost(true)))
   }
 }
 
