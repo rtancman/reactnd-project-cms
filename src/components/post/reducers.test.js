@@ -52,7 +52,6 @@ describe('reducers', () => {
       expect(posts(undefined, action)).toEqual(expected)
     })
 
-
     it('should handle REMOVE_POST_IN_LIST_POSTS', () => {
       const listPost = [
         {
@@ -85,6 +84,60 @@ describe('reducers', () => {
       const expected = {
         ...initialListPostState,
         items: [listPost[0]],
+      }
+      const customInitialState = {
+        ...initialListPostState,
+        items: listPost
+      }
+
+      expect(posts(customInitialState, action)).toEqual(expected)
+    })
+
+    it('should handle UPDATE_POST_IN_LIST_POSTS', () => {
+      const listPost = [
+        {
+          id: '6edd5334-b028-49c0-9885-8e03fcdd1c5e',
+          timestamp: 1467166872634,
+          title: 'Post 1 title',
+          body: 'Post 1 body',
+          author: 'lala',
+          category: 'react',
+          voteScore: 6,
+          deleted: false,
+          commentCount: 2
+        },
+        {
+          id: '052f8016-bac2-11e8-aa21-fcaa142a9210',
+          timestamp: 1467166872634,
+          title: 'Post 2 title',
+          body: 'Post 2 body',
+          author: 'lele',
+          category: 'react',
+          voteScore: 6,
+          deleted: false,
+          commentCount: 2
+        },
+      ]
+
+      const newContentPost = {
+        id: '6edd5334-b028-49c0-9885-8e03fcdd1c5e',
+        timestamp: Date.now(),
+        title: 'Title edit post',
+        body: 'Body edit post',
+        author: 'Raffael Tancman',
+        category: 'redux',
+        voteScore: 100,
+        deleted: false,
+        commentCount: 10
+      }
+  
+      const action = {
+        type: types.UPDATE_POST_IN_LIST_POSTS,
+        post: newContentPost
+      }
+      const expected = {
+        ...initialListPostState,
+        items: [newContentPost, listPost[1]],
       }
       const customInitialState = {
         ...initialListPostState,

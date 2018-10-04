@@ -25,6 +25,10 @@ export const posts = (state = initialListPostState, action) => {
       return Object.assign({}, state, {
         items: state.items.filter((post) => post.id !== action.postId)
       })
+    case types.UPDATE_POST_IN_LIST_POSTS:
+      return Object.assign({}, state, {
+        items: state.items.map((post) => post.id !== action.post.id ? post : action.post )
+      })
     default:
         return state;
   }
