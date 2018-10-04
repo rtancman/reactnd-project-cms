@@ -1,0 +1,14 @@
+.search__bar {
+  &__result{
+    width: auto;
+    margin-left: 8px;
+
+    * {
+      color: #000;
+    }
+
+    .search__bar__result__box{
+      border-radius: 0 0 4px 4px;
+    }
+  }
+}

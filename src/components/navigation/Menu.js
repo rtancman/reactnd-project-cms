@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 import './Menu.css';
+import Search from 'components/search'
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 class Menu extends Component {
   static propTypes = {
     classes: PropTypes.object,
+    categories: PropTypes.object.isRequired,
+    posts: PropTypes.object.isRequired,
   }
 
   state = {
@@ -31,9 +34,14 @@ class Menu extends Component {
     });
   }
 
-  render(){
-    const { classes, match } = this.props;
+  makeListSearch(){
+    const listPosts = this.props.posts.items.map((p) => {return {name: p.title, path: `/posts/${p.id}`}})
+    const listCategories = this.props.categories.items.map((c) => {return {name: c.name, path: `/category/${c.path}`}})
+    return [...listCategories, ...listPosts]
+  }
 
+  render(){
+    const { categories } = this.props;
     return (
       <div>
         <div className="nav_bar">
@@ -50,7 +58,9 @@ class Menu extends Component {
                 </IconButton>
               </div>
               <div className="nav_bar__actions">    
-                <Link to='/posts/create'>Create post</Link>
+                <Search 
+                  options={this.makeListSearch()}
+                />
               </div>
           </div>
         </div>
@@ -71,15 +81,29 @@ class Menu extends Component {
                 <List component="nav">
                   <ListItem button>
                     <ListItemText>
-                      <Link to='/'>Home</Link>
+                      <Link className='link' to='/'>Home</Link>
                     </ListItemText>
                   </ListItem>
                   <ListItem button>
                     <ListItemText>
-                      <Link to='/posts/create'>Create post</Link>
+                      <Link className='link' to='/posts/create'>Create post</Link>
                     </ListItemText>
                   </ListItem>
                 </List>
+                {categories.items && (
+                  <div>
+                    <Divider />
+                    <List component="nav">
+                      {categories.items.map((item) => (
+                        <ListItem key={`menu${item.path}`} button>
+                          <ListItemText>
+                            <Link className="link" to={`/category/${item.path}`}>{item.name}</Link>
+                          </ListItemText>
+                        </ListItem>
+                      ))}
+                    </List>
+                  </div>
+                )}
               </div>
             </div>
           </SwipeableDrawer>
@@ -88,4 +112,11 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+const mapStateToProps = ({ categories, posts }) => {
+  return {
+    categories,
+    posts
+  };
+};
+
+export default connect(mapStateToProps)(Menu);
