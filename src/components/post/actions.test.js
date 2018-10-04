@@ -179,26 +179,6 @@ describe('actions', () => {
 
   describe('Post Comments', () => {
     describe('should create an action ', () => {
-      it('to invalidate post comments', () => {
-        const bool = false
-        const expectedAction = {
-          type: types.INVALIDATE_POST_COMMENTS,
-          didInvalidate: bool
-        }
-
-        expect(actions.invalidatePostComments(bool)).toEqual(expectedAction)
-      })
-
-      it('to request post comments', () => {
-        const bool = false
-        const expectedAction = {
-          type: types.REQUEST_POST_COMMENTS,
-          isFetching: bool
-        }
-
-        expect(actions.requestPostComments(bool)).toEqual(expectedAction)
-      })
-
       it('to receive post comments', () => {
         const expectedAction = {
           type: types.RECEIVE_POST_COMMENTS,
@@ -219,7 +199,6 @@ describe('actions', () => {
         const postId = 'postlala123'
         fetchMock.getOnce(postCommentsUrl(postId), { body: postCommentsMock })
         const expectedActions = [
-          { type: types.REQUEST_POST_COMMENTS, isFetching: true },
           { type: types.RECEIVE_POST_COMMENTS, comments: postCommentsMock },
         ]
         const store = mockStore({ posts: initialPostState })

@@ -108,20 +108,6 @@ export function createPostFetch(post, resetForm) {
   }
 }
 
-export const invalidatePostComments = (bool) => {
-  return {
-      type: types.INVALIDATE_POST_COMMENTS,
-      didInvalidate: bool
-  }
-}
-
-export const requestPostComments = (bool) => {
-  return {
-      type: types.REQUEST_POST_COMMENTS,
-      isFetching: bool
-  }
-}
-
 export const receivePostComments = (comments) => {
   return {
       type: types.RECEIVE_POST_COMMENTS,
@@ -131,11 +117,9 @@ export const receivePostComments = (comments) => {
 
 export function postCommentsFetchData(postId) {
   return dispatch => {
-    dispatch(requestPostComments(true))
     return fetch(postCommentsUrl(postId), { headers })
       .then(res => res.json())
       .then(body => dispatch(receivePostComments(body)))
-      .catch(ex => dispatch(invalidatePostComments(true)))
   }
 }
 
@@ -146,7 +130,7 @@ export const removePostInListPost = (postId) => {
   }
 }
 
-export function removePostFetch(postId, history) {
+export function removePostFetch(postId) {
   return dispatch => {
     return fetch(postUrl(postId), { 
         method: 'DELETE',

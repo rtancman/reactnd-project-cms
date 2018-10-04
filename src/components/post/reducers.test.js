@@ -1,6 +1,6 @@
-import { posts, post, createPost, removePost } from './reducers'
+import { posts, post, removePost } from './reducers'
 import * as types from './constants/ActionTypes'
-import { initialListPostState, initialPostState, initialCreatePostState, initialRemovePostState } from './constants/ReducersInitialState'
+import { initialListPostState, initialPostState, initialRemovePostState } from './constants/ReducersInitialState'
 import { postsMock, postMock, postCommentsMock } from './constants/Fixtures'
 import { commentMock } from 'components/comment/constants/Fixtures'
 
@@ -143,36 +143,6 @@ describe('reducers', () => {
       expect(post(undefined, action)).toEqual(expected)
     })
 
-    it('should handle REQUEST_POST_COMMENTS', () => {
-      const action = {
-        type: types.REQUEST_POST_COMMENTS,
-        isFetching: true
-      }
-      const expected = {
-        ...initialPostState,
-        comment: {
-          isFetching: true
-        }
-      }
-
-      expect(post(undefined, action)).toEqual(expected)
-    })
-
-    it('should handle INVALIDATE_POST_COMMENTS', () => {
-      const action = {
-        type: types.INVALIDATE_POST_COMMENTS,
-        didInvalidate: true
-      }
-      const expected = {
-        ...initialPostState,
-        comment: {
-          didInvalidate: true
-        }
-      }
-
-      expect(post(undefined, action)).toEqual(expected)
-    })
-
     it('should handle RECEIVE_POST_COMMENTS', () => {
       const action = {
         type: types.RECEIVE_POST_COMMENTS,
@@ -238,99 +208,6 @@ describe('reducers', () => {
       }
 
       expect(post(customInitialState, action)).toEqual(expected)
-    })
-  })
-
-  describe('create post', () => {
-    it('should return the initial state', () => {
-      expect(createPost(undefined, {})).toEqual(initialCreatePostState)
-    })
-
-    it('should handle REQUEST_CREATE_POST', () => {
-      const action = {
-        type: types.REQUEST_CREATE_POST,
-        isFetching: true
-      }
-      const expected = {
-        ...initialCreatePostState,
-        isFetching: true
-      }
-
-      expect(createPost(undefined, action)).toEqual(expected)
-    })
-
-    it('should handle INVALIDATE_CREATE_POST', () => {
-      const action = {
-        type: types.INVALIDATE_CREATE_POST,
-        didInvalidate: true
-      }
-      const expected = {
-        ...initialCreatePostState,
-        didInvalidate: true
-      }
-
-      expect(createPost(undefined, action)).toEqual(expected)
-    })
-
-    it('should handle POST_HAS_BEEN_CREATED', () => {
-      const action = {
-        type: types.POST_HAS_BEEN_CREATED,
-        created: true
-      }
-      const expected = {
-        ...initialCreatePostState,
-        created: true
-      }
-
-      expect(createPost(undefined, action)).toEqual(expected)
-    })
-  })
-
-  describe('remove post', () => {
-    it('should return the initial state', () => {
-      expect(removePost(undefined, {})).toEqual(initialRemovePostState)
-    })
-
-    it('should handle REQUEST_REMOVE_POST', () => {
-      const postId = '12345'
-      const action = {
-        type: types.REQUEST_REMOVE_POST,
-        isFetching: true,
-        id: postId
-      }
-      const expected = {
-        ...initialRemovePostState,
-        isFetching: true,
-        id: postId
-      }
-
-      expect(removePost(undefined, action)).toEqual(expected)
-    })
-
-    it('should handle INVALIDATE_REMOVE_POST', () => {
-      const action = {
-        type: types.INVALIDATE_REMOVE_POST,
-        didInvalidate: true
-      }
-      const expected = {
-        ...initialRemovePostState,
-        didInvalidate: true
-      }
-
-      expect(removePost(undefined, action)).toEqual(expected)
-    })
-
-    it('should handle POST_HAS_BEEN_REMOVED', () => {
-      const action = {
-        type: types.POST_HAS_BEEN_REMOVED,
-        removed: true
-      }
-      const expected = {
-        ...initialRemovePostState,
-        removed: true
-      }
-
-      expect(removePost(undefined, action)).toEqual(expected)
     })
   })
 })
