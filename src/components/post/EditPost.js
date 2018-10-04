@@ -30,7 +30,7 @@ class EditPost extends Component {
       didInvalidate: false,
     }))
 
-    this.props.save(this.props.postId, post)
+    this.props.save(this.props.postId, { ...post, timestamp: Date.now() })
     .then(body => {
       this.setState((state) => ({
         isFetching: false,
@@ -100,7 +100,7 @@ const mapStateToProps = ({categories, post}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    save: (post) => dispatch(editPostFetch(post)),
+    save: (postId, post) => dispatch(editPostFetch(postId, post)),
     fetchData: (postId) => dispatch(postFetchData(postId)),
     fetchCategoriesData: () => dispatch(categoriesFetchData()),
   };
