@@ -8,29 +8,12 @@ import { List } from 'components/layout/List'
 
 class ListCategories extends Component {
   static propTypes = {
-    fetchData: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
   }
 
   state = {
-    isFetching: true,
+    isFetching: false,
     didInvalidate: false,
-  }
-
-  componentDidMount() {
-    this.props.fetchData()
-    .then(body => {
-      this.setState((state) => ({
-        isFetching: false,
-        didInvalidate: false,
-      }))
-    })
-    .catch(ex => {
-      this.setState((state) => ({
-        didInvalidate: true,
-        isFetching: false,
-      }))
-    })
   }
 
   render() {
@@ -67,10 +50,4 @@ const mapStateToProps = ({ categories }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchData: () => dispatch(categoriesFetchData())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListCategories);
+export default connect(mapStateToProps)(ListCategories);
