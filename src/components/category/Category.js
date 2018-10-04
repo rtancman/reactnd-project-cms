@@ -9,17 +9,33 @@ class Category extends Component {
     categoryId: PropTypes.string.isRequired,
     fetchData: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    didInvalidate: PropTypes.bool.isRequired
+  }
+
+  state = {
+    isFetching: true,
+    didInvalidate: false,
   }
 
   componentDidMount() {
     this.props.fetchData(this.props.categoryId)
+    .then(body => {
+      this.setState((state) => ({
+        isFetching: false,
+        didInvalidate: false,
+      }))
+    })
+    .catch(ex => {
+      this.setState((state) => ({
+        didInvalidate: true,
+        isFetching: false,
+      }))
+    })
   }
 
   render() {
     let content = ''
-    const { items, isFetching, didInvalidate, categoryId } = this.props
+    const { items, categoryId } = this.props
+    const { isFetching, didInvalidate } = this.state
 
     if (didInvalidate) {
       content = (<p>Sorry! There was an error loading the items</p>)
@@ -51,8 +67,6 @@ class Category extends Component {
 const mapStateToProps = ({ categoryPosts }) => {
   return {
     items: categoryPosts.items,
-    didInvalidate: categoryPosts.didInvalidate,
-    isFetching: categoryPosts.isFetching
   };
 };
 

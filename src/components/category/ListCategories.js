@@ -10,17 +10,33 @@ class ListCategories extends Component {
   static propTypes = {
     fetchData: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    didInvalidate: PropTypes.bool.isRequired
+  }
+
+  state = {
+    isFetching: true,
+    didInvalidate: false,
   }
 
   componentDidMount() {
     this.props.fetchData()
+    .then(body => {
+      this.setState((state) => ({
+        isFetching: false,
+        didInvalidate: false,
+      }))
+    })
+    .catch(ex => {
+      this.setState((state) => ({
+        didInvalidate: true,
+        isFetching: false,
+      }))
+    })
   }
 
   render() {
     let content = ''
-    const { items, isFetching, didInvalidate } = this.props
+    const { items } = this.props
+    const { isFetching, didInvalidate } = this.state
 
     if (didInvalidate) {
       content = (<p>Sorry! There was an error loading the items</p>)
@@ -48,8 +64,6 @@ class ListCategories extends Component {
 const mapStateToProps = ({ categories }) => {
   return {
     items: categories.items,
-    didInvalidate: categories.didInvalidate,
-    isFetching: categories.isFetching
   };
 };
 
