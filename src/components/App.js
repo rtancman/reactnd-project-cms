@@ -9,6 +9,7 @@ import CategoryPage from './pages/CategoryPage'
 import PostPage from './pages/PostPage'
 import PostCreatePage from './pages/PostCreatePage'
 import Menu from './navigation/Menu'
+import Footer from './navigation/Footer'
 import PostEditPage from './pages/PostEditPage'
 import { postsFetchData } from 'components/post/actions';
 import { categoriesFetchData } from 'components/category/actions'
@@ -42,6 +43,7 @@ class App extends Component {
             )}/>
           </Switch>
         </div>
+        <Footer />
       </div>
     );
   }
