@@ -75,7 +75,9 @@ class EditComment extends Component {
     const { comment } = this.props;
     let content = (
       <div>
-        <p>{comment.body}</p>
+        { comment.body && comment.body.split('\n').map((content, key) => {
+          return content ? (<p key={key}>{content}</p>) : ''
+        }) }
         <div className="content__comment__body__actions">
           <Vote 
             type='comment' 

@@ -98,7 +98,9 @@ class Post extends Component {
           </div>
           <div className="content__body">
             <div className="container">
-              <p>{ postContent.body }</p>
+              { postContent.body && postContent.body.split('\n').map((content, key) => {
+                return content ? (<p key={key}>{content}</p>) : ''
+              }) }
               <div className="line"></div>
               {comment.items && (
                 <Comment
