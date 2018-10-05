@@ -5,7 +5,7 @@ import moment from 'moment'
 import CommentForm from './CommentForm'
 import { pushListComments } from 'components/post/actions'
 import { ShowMessage } from 'components/layout/Message.js'
-import { removeCommentFetch } from './actions';
+import { removeCommentFetch, editCommentFetch } from './actions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -13,11 +13,12 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Vote from 'components/vote'
-import { editCommentFetch } from 'api/cms'
 
 class EditComment extends Component {
   static propTypes = {
     pushComment: PropTypes.func.isRequired,
+    editComment: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired,
     comment: PropTypes.object.isRequired,
   }
 
@@ -34,9 +35,8 @@ class EditComment extends Component {
       didInvalidate: false,
     }))
     
-    editCommentFetch(comment.id, {body: comment.body, timestamp: Date.now()})
+    this.props.editComment(comment.id, {body: comment.body, timestamp: Date.now()})
     .then(body => {
-      // this.props.pushComment(body)
       this.setState((state) => ({
         isFetching: false,
         didInvalidate: false,
@@ -130,6 +130,7 @@ const mapStateToProps = () => { return {} }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    editComment: (commentId, comment) => dispatch(editCommentFetch(commentId, comment)),
     pushComment: (comment) => dispatch(pushListComments(comment)),
     remove: (commentId) => dispatch(removeCommentFetch(commentId)),
   }

@@ -262,5 +262,36 @@ describe('reducers', () => {
 
       expect(post(customInitialState, action)).toEqual(expected)
     })
+
+
+    it('should handle UPDATE_COMMENT_IN_LIST_COMNENTS', () => {
+      const newComment = {
+        ...postCommentsMock[0],
+        timestamp: 1536967930576,
+        body: "New Comment",
+      }
+      const customInitialState = {
+        ...initialPostState,
+        comment: {
+          didInvalidate: false,
+          isFetching: false,
+          items: [ postCommentsMock[0], postCommentsMock[1] ]
+        }
+      }
+      const action = {
+        type: types.UPDATE_COMMENT_IN_LIST_COMNENTS,
+        comment: newComment
+      }
+      const expected = {
+        ...initialPostState,
+        comment: {
+          didInvalidate: false,
+          isFetching: false,
+          items: [ newComment, postCommentsMock[1] ]
+        }
+      }
+
+      expect(post(customInitialState, action)).toEqual(expected)
+    })
   })
 })

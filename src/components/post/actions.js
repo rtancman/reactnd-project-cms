@@ -205,3 +205,19 @@ export function editPostFetch(postId, post) {
     })
   }
 }
+
+export const updateCommentInListComments = (comment) => {
+  return {
+      type: types.UPDATE_COMMENT_IN_LIST_COMNENTS,
+      comment: {
+        id: comment.id,
+        parentId: comment.parentId,
+        timestamp: comment.timestamp,
+        body: comment.body,
+        author: comment.author,
+        voteScore: comment.voteScore,
+        deleted: comment.deleted,
+        parentDeleted: comment.parentDeleted,
+      }
+  }
+}

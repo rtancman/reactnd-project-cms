@@ -82,6 +82,14 @@ export const post = (state = initialPostState, action) => {
           items: state.comment.items.filter((comment) => comment.id !== action.commentId)
         }
       })
+    case types.UPDATE_COMMENT_IN_LIST_COMNENTS:
+
+      return Object.assign({}, state, {
+        comment: {
+          ...state.comment,
+          items: state.comment.items.map((comment) => comment.id !== action.comment.id ? comment : action.comment )
+        }
+      })
     default:
         return state;
   }
