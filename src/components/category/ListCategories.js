@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { categoriesFetchData } from './actions';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { List } from 'components/layout/List'
 
 class ListCategories extends Component {
@@ -40,14 +38,14 @@ class ListCategories extends Component {
       <div className='ListCategories'>
         { content }
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = ({ categories }) => {
   return {
     items: categories.items,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps)(ListCategories);
+export default connect(mapStateToProps)(ListCategories)
