@@ -1,0 +1,705 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List Component when component renders without crashing 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <List
+    items={Array []}
+    title="Title list"
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <h2>
+          Title list
+</h2>,
+        <div
+          className="row list_content__filter"
+>
+          <div
+                    className="col-xs list_content__filter__item list_content__filter__item--selected"
+                    data-filter-option-value={false}
+                    onClick={[Function]}
+          >
+                    <span>
+                              Default
+                    </span>
+          </div>
+          <div
+                    className="col-xs list_content__filter__item "
+                    data-filter-option-value="path"
+                    onClick={[Function]}
+          >
+                    <span>
+                              Name
+                    </span>
+          </div>
+</div>,
+        Array [],
+      ],
+      "className": "list_content",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Title list",
+        },
+        "ref": null,
+        "rendered": "Title list",
+        "type": "h2",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="col-xs list_content__filter__item list_content__filter__item--selected"
+              data-filter-option-value={false}
+              onClick={[Function]}
+>
+              <span>
+                            Default
+              </span>
+</div>,
+            <div
+              className="col-xs list_content__filter__item "
+              data-filter-option-value="path"
+              onClick={[Function]}
+>
+              <span>
+                            Name
+              </span>
+</div>,
+          ],
+          "className": "row list_content__filter",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": "false",
+            "nodeType": "host",
+            "props": Object {
+              "children": <span>
+                Default
+</span>,
+              "className": "col-xs list_content__filter__item list_content__filter__item--selected",
+              "data-filter-option-value": false,
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Default",
+              },
+              "ref": null,
+              "rendered": "Default",
+              "type": "span",
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": "path",
+            "nodeType": "host",
+            "props": Object {
+              "children": <span>
+                Name
+</span>,
+              "className": "col-xs list_content__filter__item ",
+              "data-filter-option-value": "path",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Name",
+              },
+              "ref": null,
+              "rendered": "Name",
+              "type": "span",
+            },
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h2>
+            Title list
+</h2>,
+          <div
+            className="row list_content__filter"
+>
+            <div
+                        className="col-xs list_content__filter__item list_content__filter__item--selected"
+                        data-filter-option-value={false}
+                        onClick={[Function]}
+            >
+                        <span>
+                                    Default
+                        </span>
+            </div>
+            <div
+                        className="col-xs list_content__filter__item "
+                        data-filter-option-value="path"
+                        onClick={[Function]}
+            >
+                        <span>
+                                    Name
+                        </span>
+            </div>
+</div>,
+          Array [],
+        ],
+        "className": "list_content",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Title list",
+          },
+          "ref": null,
+          "rendered": "Title list",
+          "type": "h2",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="col-xs list_content__filter__item list_content__filter__item--selected"
+                data-filter-option-value={false}
+                onClick={[Function]}
+>
+                <span>
+                                Default
+                </span>
+</div>,
+              <div
+                className="col-xs list_content__filter__item "
+                data-filter-option-value="path"
+                onClick={[Function]}
+>
+                <span>
+                                Name
+                </span>
+</div>,
+            ],
+            "className": "row list_content__filter",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "false",
+              "nodeType": "host",
+              "props": Object {
+                "children": <span>
+                  Default
+</span>,
+                "className": "col-xs list_content__filter__item list_content__filter__item--selected",
+                "data-filter-option-value": false,
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Default",
+                },
+                "ref": null,
+                "rendered": "Default",
+                "type": "span",
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": "path",
+              "nodeType": "host",
+              "props": Object {
+                "children": <span>
+                  Name
+</span>,
+                "className": "col-xs list_content__filter__item ",
+                "data-filter-option-value": "path",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Name",
+                },
+                "ref": null,
+                "rendered": "Name",
+                "type": "span",
+              },
+              "type": "div",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;
+
+exports[`ListContent Component when component renders without crashing 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ListContent
+    items={Array []}
+    title="Title list content"
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <h2>
+          Title list content
+</h2>,
+        <div
+          className="row list_content__filter"
+>
+          <div
+                    className="col-xs list_content__filter__item list_content__filter__item--selected"
+                    data-filter-option-value="-voteScore"
+                    onClick={[Function]}
+          >
+                    <span>
+                              Popular
+                    </span>
+          </div>
+          <div
+                    className="col-xs list_content__filter__item "
+                    data-filter-option-value="category"
+                    onClick={[Function]}
+          >
+                    <span>
+                              Category
+                    </span>
+          </div>
+          <div
+                    className="col-xs list_content__filter__item "
+                    data-filter-option-value="-timestamp"
+                    onClick={[Function]}
+          >
+                    <span>
+                              Recent
+                    </span>
+          </div>
+</div>,
+        Array [],
+      ],
+      "className": "list_content",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Title list content",
+        },
+        "ref": null,
+        "rendered": "Title list content",
+        "type": "h2",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="col-xs list_content__filter__item list_content__filter__item--selected"
+              data-filter-option-value="-voteScore"
+              onClick={[Function]}
+>
+              <span>
+                            Popular
+              </span>
+</div>,
+            <div
+              className="col-xs list_content__filter__item "
+              data-filter-option-value="category"
+              onClick={[Function]}
+>
+              <span>
+                            Category
+              </span>
+</div>,
+            <div
+              className="col-xs list_content__filter__item "
+              data-filter-option-value="-timestamp"
+              onClick={[Function]}
+>
+              <span>
+                            Recent
+              </span>
+</div>,
+          ],
+          "className": "row list_content__filter",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": "-voteScore",
+            "nodeType": "host",
+            "props": Object {
+              "children": <span>
+                Popular
+</span>,
+              "className": "col-xs list_content__filter__item list_content__filter__item--selected",
+              "data-filter-option-value": "-voteScore",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Popular",
+              },
+              "ref": null,
+              "rendered": "Popular",
+              "type": "span",
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": "category",
+            "nodeType": "host",
+            "props": Object {
+              "children": <span>
+                Category
+</span>,
+              "className": "col-xs list_content__filter__item ",
+              "data-filter-option-value": "category",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Category",
+              },
+              "ref": null,
+              "rendered": "Category",
+              "type": "span",
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": "-timestamp",
+            "nodeType": "host",
+            "props": Object {
+              "children": <span>
+                Recent
+</span>,
+              "className": "col-xs list_content__filter__item ",
+              "data-filter-option-value": "-timestamp",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Recent",
+              },
+              "ref": null,
+              "rendered": "Recent",
+              "type": "span",
+            },
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h2>
+            Title list content
+</h2>,
+          <div
+            className="row list_content__filter"
+>
+            <div
+                        className="col-xs list_content__filter__item list_content__filter__item--selected"
+                        data-filter-option-value="-voteScore"
+                        onClick={[Function]}
+            >
+                        <span>
+                                    Popular
+                        </span>
+            </div>
+            <div
+                        className="col-xs list_content__filter__item "
+                        data-filter-option-value="category"
+                        onClick={[Function]}
+            >
+                        <span>
+                                    Category
+                        </span>
+            </div>
+            <div
+                        className="col-xs list_content__filter__item "
+                        data-filter-option-value="-timestamp"
+                        onClick={[Function]}
+            >
+                        <span>
+                                    Recent
+                        </span>
+            </div>
+</div>,
+          Array [],
+        ],
+        "className": "list_content",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Title list content",
+          },
+          "ref": null,
+          "rendered": "Title list content",
+          "type": "h2",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="col-xs list_content__filter__item list_content__filter__item--selected"
+                data-filter-option-value="-voteScore"
+                onClick={[Function]}
+>
+                <span>
+                                Popular
+                </span>
+</div>,
+              <div
+                className="col-xs list_content__filter__item "
+                data-filter-option-value="category"
+                onClick={[Function]}
+>
+                <span>
+                                Category
+                </span>
+</div>,
+              <div
+                className="col-xs list_content__filter__item "
+                data-filter-option-value="-timestamp"
+                onClick={[Function]}
+>
+                <span>
+                                Recent
+                </span>
+</div>,
+            ],
+            "className": "row list_content__filter",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "-voteScore",
+              "nodeType": "host",
+              "props": Object {
+                "children": <span>
+                  Popular
+</span>,
+                "className": "col-xs list_content__filter__item list_content__filter__item--selected",
+                "data-filter-option-value": "-voteScore",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Popular",
+                },
+                "ref": null,
+                "rendered": "Popular",
+                "type": "span",
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": "category",
+              "nodeType": "host",
+              "props": Object {
+                "children": <span>
+                  Category
+</span>,
+                "className": "col-xs list_content__filter__item ",
+                "data-filter-option-value": "category",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Category",
+                },
+                "ref": null,
+                "rendered": "Category",
+                "type": "span",
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": "-timestamp",
+              "nodeType": "host",
+              "props": Object {
+                "children": <span>
+                  Recent
+</span>,
+                "className": "col-xs list_content__filter__item ",
+                "data-filter-option-value": "-timestamp",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Recent",
+                },
+                "ref": null,
+                "rendered": "Recent",
+                "type": "span",
+              },
+              "type": "div",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;

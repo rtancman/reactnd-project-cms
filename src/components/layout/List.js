@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from "react-router-dom"
 import moment from 'moment'
 import sortBy from 'sort-by'
 import './List.css'
@@ -18,7 +18,7 @@ class BaseList extends Component {
   }
 
   state = {
-    orderBy: false
+    orderBy: false,
   }
 
   orderBy(option) {
@@ -35,8 +35,8 @@ class ListContent extends BaseList {
   }
 
   render() {
-    const { items, title } = this.props;
-    const { orderBy } = this.state;
+    const { items, title } = this.props
+    const { orderBy } = this.state
     let showingPosts = items
 
     showingPosts.sort(sortBy(orderBy))
@@ -46,7 +46,7 @@ class ListContent extends BaseList {
         <h2>{ title }</h2>
         <div className="row list_content__filter">
           { orderByOptions.map((option) => (
-            <div onClick={ () => this.orderBy(option.value)} key={ option.value } className={ `col-xs list_content__filter__item ${option.value === orderBy? 'list_content__filter__item--selected' : ''}` }>
+            <div data-filter-option-value={ option.value } onClick={ () => this.orderBy(option.value)} key={ option.value } className={ `col-xs list_content__filter__item ${option.value === orderBy? 'list_content__filter__item--selected' : ''}` }>
               <span>{ option.label }</span>
             </div>
           )) }
@@ -74,8 +74,8 @@ const orderByCategoryOptions = [
 ]
 class List extends BaseList {
   render() {
-    const { items, title } = this.props;
-    const { orderBy } = this.state;
+    const { items, title } = this.props
+    const { orderBy } = this.state
     let showingItems = items
     if ( orderBy ){
       showingItems.sort(sortBy(orderBy))
@@ -86,7 +86,7 @@ class List extends BaseList {
         <h2>{ title }</h2>
         <div className="row list_content__filter">
           { orderByCategoryOptions.map((option) => (
-            <div onClick={ () => this.orderBy(option.value)} key={ option.value } className={ `col-xs list_content__filter__item ${option.value === orderBy? 'list_content__filter__item--selected' : ''}` }>
+            <div data-filter-option-value={ option.value } onClick={ () => this.orderBy(option.value)} key={ option.value } className={ `col-xs list_content__filter__item ${option.value === orderBy? 'list_content__filter__item--selected' : ''}` }>
               <span>{ option.label }</span>
             </div>
           )) }
@@ -107,4 +107,4 @@ List.propTypes = {
   items: PropTypes.array.isRequired,
 }
 
-export { ListContent, List };
+export { ListContent, List }
