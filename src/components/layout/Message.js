@@ -56,7 +56,7 @@ function MySnackbarContent(props) {
       className={classNames(classes[variant], className)}
       aria-describedby="client-snackbar"
       message={
-        <span id="client-snackbar" className={classes.message}>
+        <span className={`client__snackbar ${classes.message}`}>
           <Icon className={classNames(classes.icon, classes.iconVariant)} />
           {message}
         </span>
@@ -99,15 +99,7 @@ class ShowMessage extends Component {
     open: this.props.open,
   }
 
-  handleClick = () => {
-    this.setState({ open: true })
-  }
-
-  handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
-    }
-
+  handleClose = () => {
     this.setState({ open: false })
   }
 
