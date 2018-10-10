@@ -22,6 +22,7 @@ const CategoryPage = (props) => {
 
 CategoryPage.propTypes = {
   classes: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(CategoryPage);

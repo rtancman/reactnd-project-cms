@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import EditPost from 'components/post/EditPost'
 
-const PostAdminPage = (props) => {
+const PostEditPage = (props) => {
   const { match } = props
 
   return (
@@ -15,4 +16,8 @@ const PostAdminPage = (props) => {
   )
 }
 
-export default PostAdminPage;
+PostEditPage.propTypes = {
+  match: PropTypes.object.isRequired,
+}
+
+export default PostEditPage;
