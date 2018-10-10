@@ -8,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { debounce } from 'throttle-debounce';
-import { Link } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 import './Search.css'
 
@@ -131,6 +130,7 @@ class Search extends Component {
             <SearchIcon />
           </div>
           <Input
+            name='query'
             placeholder="Search…"
             disableUnderline
             classes={{
