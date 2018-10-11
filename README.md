@@ -8,26 +8,15 @@ make run
 ```
 
 ## Installation
-### Clone repository
+
+1. Clone repository.
+2. Create .env by sample-env
+3. Install dependencies
+4. Run project 
 
 ```sh
 git clone git@github.com:rtancman/reactnd-project-cms.git
-```
-
-### Install dependencies
-```sh
-npm install
-
-or
-
-yarn install
-```
-
-### Run project 
-```sh
-npm start
-
-or
-
-yarn start
+cp sample-env .env
+npm install or yarn install
+npm start or yarn start
 ```
