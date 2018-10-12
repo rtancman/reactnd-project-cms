@@ -5,30 +5,36 @@ import fetchMock from 'fetch-mock'
 import { MemoryRouter } from 'react-router';
 import thunk from 'redux-thunk'
 import Category from './Category'
-import { initialCategoryPostsState } from './constants/ReducersInitialState'
-import { categoryPostsMock } from './constants/Fixtures'
-import { categoryPostsUrl } from '../../api/cms';
 import { Provider } from 'react-redux';
+import { listCategoriesUrl, listPostsUrl } from '../../api/cms';
+import { listPostsMock } from '../post/constants/Fixtures'
+import { initialListPostState } from '../post/constants/ReducersInitialState'
+import { initialCategoriesState } from './constants/ReducersInitialState'
+import { categoriesMock } from './constants/Fixtures'
 
 
 describe('Category Component', () => {
+  fetchMock.getOnce(listCategoriesUrl, { body: {categories: categoriesMock.categories} })
+  fetchMock.getOnce(listPostsUrl, { body: listPostsMock })
   const middlewares = [thunk]
   const mockStore = configureStore(middlewares)
-  const categoryId = 'd98340dc-ca67-11e8-9479-1866dafe6ab0'
+  const categoryId = categoriesMock.categories[0].path
   const fetchData = jest.fn(() => Promise.resolve({body:{}}))
   let store
   
   describe('when component renders', () => {
     beforeEach(() => {
-      store = mockStore({categoryPosts: {...initialCategoryPostsState, items: categoryPostsMock} })
-      fetchMock.getOnce(categoryPostsUrl(categoryId), { body: categoryPostsMock })
+      store = mockStore({
+        categories: {...initialCategoriesState, items: categoriesMock.categories},
+        posts: {...initialListPostState, items: listPostsMock},
+      })
     })
 
     it('without crashing', () => {
       const props = {
         store: store,
-        fetchData: fetchData,
-        items: [],
+        categories: {},
+        posts: {},
         categoryId: categoryId,
       }
       let wrapper = shallow(<Category {...props} />)
@@ -41,9 +47,9 @@ describe('Category Component', () => {
       fetchMock.restore()
     })
 
-    it('displays the CircularProgress component when request category posts', () => {
+    it('displays the NotFoundPage component when request category posts', () => {
       const props = {
-        categoryId: categoryId,
+        categoryId: '1111',
       }
       const root = mount(
         <Provider store={store}>
@@ -55,7 +61,7 @@ describe('Category Component', () => {
 
       const wrapper = root.find('Category')
       expect(wrapper.length).toBe(1)
-      expect(wrapper.find('CircularProgress').length).toBe(1);
+      expect(wrapper.find('NotFoundPage').length).toBe(1);
       expect(wrapper.find('ListContent').length).toBe(0);
     })
 
@@ -76,7 +82,7 @@ describe('Category Component', () => {
       wrapper.instance().setState({isFetching: false})
       root.update()
       wrapper = root.find('Category')
-      expect(wrapper.find('CircularProgress').length).toBe(0);
+      expect(wrapper.find('NotFoundPage').length).toBe(0);
       expect(wrapper.find('ListContent').length).toBe(1);
     })
 

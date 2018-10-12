@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const NotFoundPage = () => {
   return (
@@ -8,10 +7,6 @@ const NotFoundPage = () => {
       <p>Page not found</p>
     </div>
   )
-}
-
-NotFoundPage.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default NotFoundPage;

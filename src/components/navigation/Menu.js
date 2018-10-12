@@ -97,7 +97,7 @@ class Menu extends Component {
                       {categories.items.map((item) => (
                         <ListItem key={`menu${item.path}`} button>
                           <ListItemText>
-                            <Link className="link" to={`/category/${item.path}`}>{item.name}</Link>
+                            <Link className="link" to={`/${item.path}`}>{item.name}</Link>
                           </ListItemText>
                         </ListItem>
                       ))}
