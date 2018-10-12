@@ -6,7 +6,7 @@ const Footer = (props) => {
     return (
       <footer className="nav__footer">
         <div className="nav__footer__content container">
-          <p>© 2018 - { (new Date()).getFullYear() } Projct CMS</p>
+          <p>© 2018 - { (new Date()).getFullYear() } Project CMS</p>
         </div>
       </footer>
     )

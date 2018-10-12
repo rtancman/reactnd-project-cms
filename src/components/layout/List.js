@@ -54,11 +54,11 @@ class ListContent extends BaseList {
         {showingPosts.map((item) => (
           <div className="list_content__item" key={item.id}>
             <div className="list_content__item__title">
-              <Link className="link" to={`/posts/${item.id}`}>{item.title}</Link>
+              <Link className="link" to={`/${item.category}/${item.id}`}>{item.title}</Link>
             </div>
             <div className="list_content__item__info">
               <p>
-                date { moment(item.timestamp).format('MM-DD-YYYY') } - in <Link className="link" to={`/category/${item.category}`}>{ item.category }</Link> - by <span className="list_posts__item__info--author">{ item.author }</span> 
+                date { moment(item.timestamp).format('MM-DD-YYYY') } - in <Link className="link" to={`/${item.category}`}>{ item.category }</Link> - by <span className="list_posts__item__info--author">{ item.author }</span> 
               </p>
             </div>
           </div>
@@ -94,7 +94,7 @@ class List extends BaseList {
         {showingItems.map((item) => (
           <div className="list_content__item list_content__item--category" key={item.path}>
             <div className="list_content__item__title">
-              <Link className="link" to={`/category/${item.path}`}>{item.name}</Link>
+              <Link className="link" to={`/${item.path}`}>{item.name}</Link>
             </div>
           </div>
         ))}

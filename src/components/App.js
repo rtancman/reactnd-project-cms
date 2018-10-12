@@ -11,10 +11,18 @@ import PostCreatePage from './pages/PostCreatePage'
 import Menu from './navigation/Menu'
 import Footer from './navigation/Footer'
 import PostEditPage from './pages/PostEditPage'
-import { postsFetchData } from 'components/post/actions';
-import { categoriesFetchData } from 'components/category/actions'
+import NotFoundPage from './pages/NotFoundPage'
+import { postsFetchData } from './post/actions';
+import { categoriesFetchData } from './category/actions'
 
 class App extends Component {
+  static propTypes = {
+    categories: PropTypes.object.isRequired,
+    posts: PropTypes.object.isRequired,
+    fetchCategories: PropTypes.func.isRequired,
+    fetchPosts: PropTypes.func.isRequired,
+  }
+
   componentDidMount() {
     if ( this.props.categories.items.length < 1) this.props.fetchCategories()
     if ( this.props.posts.items.length < 1) this.props.fetchPosts()
@@ -29,17 +37,20 @@ class App extends Component {
             <Route exact path='/' render={(props) => (
               <Home {...props} />
             )}/>
-            <Route exact path='/category/:id' render={(props) => (
-              <CategoryPage {...props} />
-            )}/>
             <Route exact path='/posts/create' render={(props) => (
               <PostCreatePage {...props} />
             )}/>
             <Route exact path='/posts/edit/:id' render={(props) => (
               <PostEditPage {...props} />
             )}/>
-            <Route exact path='/posts/:id' render={(props) => (
+            <Route exact path='/:category/:id' render={(props) => (
               <PostPage {...props} />
+            )}/>
+            <Route exact path='/:id' render={(props) => (
+              <CategoryPage {...props} />
+            )}/>
+            <Route render={(props) => (
+              <NotFoundPage {...props} />
             )}/>
           </Switch>
         </div>

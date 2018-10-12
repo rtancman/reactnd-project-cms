@@ -15,7 +15,11 @@ const PostPage = (props) => {
 
   return (
     <div className="content">
-      <Post history={history} postId={match.params.id} />
+      <Post 
+        history={history} 
+        postId={match.params.id} 
+        caregoryPath={match.params.category}
+      />
     </div>
   )
 }

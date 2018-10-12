@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { categoryPostsFetchData } from './actions';
-import { ListContent } from 'components/layout/List'
+import { ListContent } from '../layout/List'
+import NotFoundPage from '../pages/NotFoundPage'
+
 class Category extends Component {
   static propTypes = {
     categoryId: PropTypes.string.isRequired,
@@ -48,6 +50,10 @@ class Category extends Component {
       )
     } else if ( items.length > 0 ) {
       content = (<ListContent title='Posts' items={items} />)
+    }
+
+    if (content === '') {
+      return(<NotFoundPage/>)
     }
 
     return (

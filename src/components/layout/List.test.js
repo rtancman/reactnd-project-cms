@@ -34,7 +34,7 @@ describe('List Component', () => {
       const item = wrapper.find('.list_content__item').first()
       expect(item.text()).toBe('item 4')
       expect(item.find('Link').length).toBe(1)
-      expect(item.find('Link').instance().props.to).toBe('/category/4')
+      expect(item.find('Link').instance().props.to).toBe('/4')
     })
   })
 
@@ -85,7 +85,7 @@ describe('List Component', () => {
         const item = wrapper.find('.list_content__item').first()
         expect(item.text()).toBe('item 4')
         expect(item.find('Link').length).toBe(1)
-        expect(item.find('Link').instance().props.to).toBe('/category/4')
+        expect(item.find('Link').instance().props.to).toBe('/4')
       })
   
       it('in option Name render list sorted by path', () => {
@@ -118,7 +118,7 @@ describe('List Component', () => {
         const item = wrapper.find('.list_content__item').first()
         expect(item.text()).toBe('item 1')
         expect(item.find('Link').length).toBe(1)
-        expect(item.find('Link').instance().props.to).toBe('/category/1')
+        expect(item.find('Link').instance().props.to).toBe('/1')
       })
     })
   })
@@ -166,11 +166,11 @@ describe('ListContent Component', () => {
       const itemTitle = item.find('.list_content__item__title')
       expect(itemTitle.text()).toBe('Udacity is the best place to learn React')
       expect(itemTitle.find('Link').length).toBe(1)
-      expect(itemTitle.find('Link').instance().props.to).toBe('/posts/8xf0y6ziyjabvozdd253nd')
+      expect(itemTitle.find('Link').instance().props.to).toBe('/react/8xf0y6ziyjabvozdd253nd')
       const itemInfo = item.find('.list_content__item__info')
       expect(itemInfo.text()).toBe('date 06-28-2016 - in react - by thingtwo')
       expect(itemInfo.find('Link').length).toBe(1)
-      expect(itemInfo.find('Link').instance().props.to).toBe('/category/react')
+      expect(itemInfo.find('Link').instance().props.to).toBe('/react')
     })
   })
 
@@ -215,11 +215,11 @@ describe('ListContent Component', () => {
         const itemTitle = item.find('.list_content__item__title')
         expect(itemTitle.text()).toBe('Learn Redux in 10 minutes!')
         expect(itemTitle.find('Link').length).toBe(1)
-        expect(itemTitle.find('Link').instance().props.to).toBe('/posts/6ni6ok3ym7mf1p33lnez')
+        expect(itemTitle.find('Link').instance().props.to).toBe('/redux/6ni6ok3ym7mf1p33lnez')
         const itemInfo = item.find('.list_content__item__info')
         expect(itemInfo.text()).toBe('date 07-14-2016 - in redux - by lala')
         expect(itemInfo.find('Link').length).toBe(1)
-        expect(itemInfo.find('Link').instance().props.to).toBe('/category/redux')
+        expect(itemInfo.find('Link').instance().props.to).toBe('/redux')
       })
     })
 
@@ -253,8 +253,8 @@ describe('ListContent Component', () => {
           title: 'Title list',
         }
         const expected = [
-          {title: 'Udacity is the best place to learn React', linkTitle: '/posts/8xf0y6ziyjabvozdd253nd', info: 'date 06-28-2016 - in react - by thingtwo', linkInfo: '/category/react'},
-          {title: 'Learn Redux in 10 minutes!', linkTitle: '/posts/6ni6ok3ym7mf1p33lnez', info: 'date 07-14-2016 - in redux - by lala', linkInfo: '/category/redux'},
+          {title: 'Udacity is the best place to learn React', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: 'date 06-28-2016 - in react - by thingtwo', linkInfo: '/react'},
+          {title: 'Learn Redux in 10 minutes!', linkTitle: '/redux/6ni6ok3ym7mf1p33lnez', info: 'date 07-14-2016 - in redux - by lala', linkInfo: '/redux'},
         ]
 
         const wrapper = mount(
@@ -317,9 +317,9 @@ describe('ListContent Component', () => {
           title: 'Title list',
         }
         const expected = [
-          {title: 'teste 3', linkTitle: '/posts/1468479767190', info: 'date 10-08-2018 - in oieee - by lele', linkInfo: '/category/oieee'},
-          {title: 'Learn Redux in 10 minutes!', linkTitle: '/posts/6ni6ok3ym7mf1p33lnez', info: 'date 10-08-2018 - in redux - by lala', linkInfo: '/category/redux'},
-          {title: 'Udacity is the best place to learn React', linkTitle: '/posts/8xf0y6ziyjabvozdd253nd', info: 'date 07-14-2016 - in react - by thingtwo', linkInfo: '/category/react'},
+          {title: 'teste 3', linkTitle: '/oieee/1468479767190', info: 'date 10-08-2018 - in oieee - by lele', linkInfo: '/oieee'},
+          {title: 'Learn Redux in 10 minutes!', linkTitle: '/redux/6ni6ok3ym7mf1p33lnez', info: 'date 10-08-2018 - in redux - by lala', linkInfo: '/redux'},
+          {title: 'Udacity is the best place to learn React', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: 'date 07-14-2016 - in react - by thingtwo', linkInfo: '/react'},
         ]
         const wrapper = mount(
           <MemoryRouter>
@@ -381,9 +381,9 @@ describe('ListContent Component', () => {
           title: 'Title list',
         }
         const expected = [
-          {title: 'Learn Redux in 10 minutes!', linkTitle: '/posts/6ni6ok3ym7mf1p33lnez', info: 'date 10-08-2018 - in redux - by lala', linkInfo: '/category/redux'},
-          {title: 'Udacity is the best place to learn React', linkTitle: '/posts/8xf0y6ziyjabvozdd253nd', info: 'date 07-14-2016 - in react - by thingtwo', linkInfo: '/category/react'},
-          {title: 'teste 3', linkTitle: '/posts/1468479767190', info: 'date 10-08-2018 - in oieee - by lele', linkInfo: '/category/oieee'},
+          {title: 'Learn Redux in 10 minutes!', linkTitle: '/redux/6ni6ok3ym7mf1p33lnez', info: 'date 10-08-2018 - in redux - by lala', linkInfo: '/redux'},
+          {title: 'Udacity is the best place to learn React', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: 'date 07-14-2016 - in react - by thingtwo', linkInfo: '/react'},
+          {title: 'teste 3', linkTitle: '/oieee/1468479767190', info: 'date 10-08-2018 - in oieee - by lele', linkInfo: '/oieee'},
         ]
 
         const wrapper = mount(

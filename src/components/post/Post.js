@@ -8,8 +8,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { postFetchData, postCommentsFetchData, removePostFetch } from './actions';
 import { Link } from "react-router-dom";
-import Comment from 'components/comment'
-import Vote from 'components/vote'
+import Comment from '../comment'
+import Vote from '../vote'
+import NotFoundPage from '../pages/NotFoundPage'
 
 class Post extends Component {
   static propTypes = {
@@ -17,6 +18,7 @@ class Post extends Component {
     remove: PropTypes.func.isRequired,
     fetchCommentsData: PropTypes.func.isRequired,
     postId: PropTypes.string.isRequired,
+    caregoryPath: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
     didInvalidate: PropTypes.bool.isRequired,
     content: PropTypes.object.isRequired,
@@ -42,7 +44,7 @@ class Post extends Component {
   render() {
     let content = ''
     const postContent = this.props.content
-    const { isFetching, didInvalidate, comment, postId, history } = this.props
+    const { isFetching, didInvalidate, comment, postId, history, caregoryPath } = this.props
 
     if (didInvalidate) {
       content = (
@@ -59,14 +61,14 @@ class Post extends Component {
           </div>
         </div>
       )
-    } else if ( postContent ) {
+    } else if ( postContent.id && postContent.category === caregoryPath) {
       content = (
         <div>
           <div className="content__head">
             <div className="container">
               <h1 className="content__title">{ postContent.title }</h1>
               <p>
-                date { moment(postContent.timestamp).format('MM-DD-YYYY') } - in <Link className="link" to={`/category/${postContent.category}`}>{ postContent.category }</Link> - by <span className="content__title__info--author">{ postContent.author }</span> 
+                date { moment(postContent.timestamp).format('MM-DD-YYYY') } - in <Link className="link" to={`/${postContent.category}`}>{ postContent.category }</Link> - by <span className="content__title__info--author">{ postContent.author }</span> 
               </p>
               <hr />
               <div className="content__title__actions">
@@ -112,6 +114,10 @@ class Post extends Component {
           </div>
         </div>
       )
+    }
+
+    if (content === '') {
+      return(<NotFoundPage/>)
     }
 
     return (

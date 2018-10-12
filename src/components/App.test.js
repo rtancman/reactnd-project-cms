@@ -16,12 +16,13 @@ describe('App Component', () => {
   const middlewares = [thunk]
   const mockStore = configureStore(middlewares)
   const categoryId = 'd98340dc-ca67-11e8-9479-1866dafe6ab0'
+  const categoryPath = 'lala'
   const postId = '2cd9c540-cc47-11e8-882f-fcaa142a9210'
   let store
   fetchMock.getOnce(listCategoriesUrl, { body: {categories: categoriesMock.categories} })
   fetchMock.getOnce(listPostsUrl, { body: listPostsMock })
   fetchMock.getOnce(categoryPostsUrl(categoryId), { body: categoryPostsMock })
-  fetchMock.getOnce(postUrl(postId), { body: postMock })
+  fetchMock.getOnce(postUrl(postId), { body: {...postMock, category: categoryPath }  })
   fetchMock.getOnce(postCommentsUrl(postId), { body: postCommentsMock })
 
   
@@ -65,7 +66,7 @@ describe('App Component', () => {
       const root = mount(
         <Provider store={store}>
           <MemoryRouter 
-            initialEntries={[`/category/${categoryId}`]}
+            initialEntries={[`/${categoryId}`]}
             initialIndex={0}
           >
             <App />
