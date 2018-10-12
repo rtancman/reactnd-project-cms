@@ -5,8 +5,8 @@ import * as actions from './actions'
 import * as types from './constants/ActionTypes'
 import { initialListPostState, initialPostState } from './constants/ReducersInitialState'
 import { listPostsMock, postMock, postCommentsMock } from './constants/Fixtures'
-import { commentMock }  from 'components/comment/constants/Fixtures'
-import { listPostsUrl, headers, postUrl, postCreateUrl, postCommentsUrl } from 'api/cms';
+import { commentMock }  from '../comment/constants/Fixtures'
+import { listPostsUrl, headers, postUrl, postCreateUrl, postCommentsUrl } from '../../api/cms';
 
 
 describe('actions', () => {

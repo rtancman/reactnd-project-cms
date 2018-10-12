@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { createCommentFetch } from 'api/cms'
+import { createCommentFetch } from '../../api/cms'
 import CommentForm from './CommentForm'
-import { pushListComments } from 'components/post/actions'
-import { ShowMessage } from 'components/layout/Message.js'
+import { pushListComments } from '../post/actions'
+import { ShowMessage } from '../layout/Message.js'
 
 class AddComment extends Component {
   static propTypes = {

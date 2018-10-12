@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import { MemoryRouter } from 'react-router'
-import { ShowMessage } from 'components/layout/Message'
+import { ShowMessage } from './Message'
 
 describe('ShowMessage Component', () => {
   describe('when component renders', () => {

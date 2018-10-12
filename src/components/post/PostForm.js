@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import uuidv4 from 'uuid/v4'
 import { ValidatorForm, TextValidator, SelectValidator} from 'react-material-ui-form-validator';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { ShowMessage } from 'components/layout/Message.js'
+import { ShowMessage } from '../layout/Message.js'
 
 const styles = theme => ({
   textField: {

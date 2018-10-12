@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createPostFetch } from './actions';
-import { categoriesFetchData } from 'components/category/actions'
+import { categoriesFetchData } from '../category/actions'
 import PostForm from './PostForm'
-import { ShowMessage } from 'components/layout/Message.js'
+import { ShowMessage } from '../layout/Message.js'
 
 class AddPost extends Component {
   static propTypes = {

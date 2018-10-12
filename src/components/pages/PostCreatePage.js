@@ -1,5 +1,5 @@
 import React from 'react';
-import AddPost from 'components/post/AddPost'
+import AddPost from '../post/AddPost'
 
 const PostCreatePage = (props) => {
   return (

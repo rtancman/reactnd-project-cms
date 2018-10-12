@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import { MemoryRouter } from 'react-router'
-import { List, ListContent } from 'components/layout/List'
+import { List, ListContent } from './List'
 
 describe('List Component', () => {
   describe('when component renders', () => {

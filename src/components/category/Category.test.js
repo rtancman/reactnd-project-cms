@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import Category from './Category'
 import { initialCategoryPostsState } from './constants/ReducersInitialState'
 import { categoryPostsMock } from './constants/Fixtures'
-import { categoryPostsUrl } from 'api/cms';
+import { categoryPostsUrl } from '../../api/cms';
 import { Provider } from 'react-redux';
 
 

@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment'
-import CommentForm from './CommentForm'
-import { pushListComments } from 'components/post/actions'
-import { ShowMessage } from 'components/layout/Message.js'
-import { removeCommentFetch, editCommentFetch } from './actions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import CancelIcon from '@material-ui/icons/Cancel';
-import Vote from 'components/vote'
+import CommentForm from './CommentForm'
+import { pushListComments } from '../post/actions'
+import { ShowMessage } from '../layout/Message.js'
+import { removeCommentFetch, editCommentFetch } from './actions';
+import Vote from '../vote'
 
 class EditComment extends Component {
   static propTypes = {

@@ -2,7 +2,7 @@ import { posts, post, removePost } from './reducers'
 import * as types from './constants/ActionTypes'
 import { initialListPostState, initialPostState, initialRemovePostState } from './constants/ReducersInitialState'
 import { postsMock, postMock, postCommentsMock } from './constants/Fixtures'
-import { commentMock } from 'components/comment/constants/Fixtures'
+import { commentMock } from '../comment/constants/Fixtures'
 
 
 describe('reducers', () => {

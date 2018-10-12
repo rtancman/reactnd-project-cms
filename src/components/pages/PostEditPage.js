@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EditPost from 'components/post/EditPost'
+import EditPost from '../post/EditPost'
 
 const PostEditPage = (props) => {
   const { match } = props

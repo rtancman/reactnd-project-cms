@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { postFetchData, editPostFetch } from './actions';
-import { categoriesFetchData } from 'components/category/actions'
+import { categoriesFetchData } from '../category/actions'
 import PostForm from './PostForm'
-import { ShowMessage } from 'components/layout/Message.js'
+import { ShowMessage } from '../layout/Message.js'
 
 class EditPost extends Component {
   static propTypes = {
@@ -77,7 +77,7 @@ class EditPost extends Component {
           <div className="content__head">
             <div className="container">
               <h1 className="content__title">Edit Post</h1>
-              <Link className='link' to={`/posts/${post.content.id}`}>View Post</Link>
+              <Link className='link' to={`/${post.content.category}/${post.content.id}`}>View Post</Link>
               <hr />
             </div>
           </div>

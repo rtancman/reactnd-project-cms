@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
-import Search from 'components/search'
+import Search from './'
 import { MemoryRouter } from 'react-router';
 import Input from '@material-ui/core/Input';
 

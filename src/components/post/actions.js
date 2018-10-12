@@ -1,5 +1,5 @@
 import * as types from './constants/ActionTypes'
-import { headers, listPostsUrl, postUrl, postCreateUrl, postCommentsUrl } from 'api/cms';
+import { headers, listPostsUrl, postUrl, postCreateUrl, postCommentsUrl } from '../../api/cms';
 
 export const invalidatePosts = (bool) => {
   return {

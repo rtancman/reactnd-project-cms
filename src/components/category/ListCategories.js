@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { List } from 'components/layout/List'
+import { List } from '../layout/List'
 
 class ListCategories extends Component {
   static propTypes = {

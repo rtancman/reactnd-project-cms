@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import ListCategories from 'components/category/ListCategories'
-import ListPosts from 'components/post/ListPosts'
+import ListCategories from '../category/ListCategories'
+import ListPosts from '../post/ListPosts'
 
 
 const styles = theme => ({

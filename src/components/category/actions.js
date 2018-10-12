@@ -1,5 +1,5 @@
 import * as types from './constants/ActionTypes'
-import { headers, listCategoriesUrl, categoryPostsUrl } from 'api/cms';
+import { headers, listCategoriesUrl, categoryPostsUrl } from '../../api/cms';
 
 export const receiveCategories = (data) => {
   return {

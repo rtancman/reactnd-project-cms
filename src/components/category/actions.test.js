@@ -5,7 +5,7 @@ import * as actions from './actions'
 import * as types from './constants/ActionTypes'
 import { initialCategoriesState, initialCategoryPostsState } from './constants/ReducersInitialState'
 import { categoriesMock, categoryPostsMock } from './constants/Fixtures'
-import { headers, listCategoriesUrl, categoryPostsUrl } from 'api/cms';
+import { headers, listCategoriesUrl, categoryPostsUrl } from '../../api/cms';
 
 describe('actions', () => {
   const middlewares = [thunk]

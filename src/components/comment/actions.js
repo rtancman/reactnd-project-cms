@@ -1,6 +1,6 @@
 import * as types from './constants/ActionTypes'
-import { commentCreateUrl, headers, commentUrl } from 'api/cms'
-import { pushListComments, removeCommentInListComments, updateCommentInListComments } from 'components/post/actions'
+import { commentCreateUrl, headers, commentUrl } from '../../api/cms'
+import { pushListComments, removeCommentInListComments, updateCommentInListComments } from '../post/actions'
 
 export const invalidateCreateComment = (bool) => {
   return {

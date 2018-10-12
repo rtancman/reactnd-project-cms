@@ -1,10 +1,10 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import fetchMock from 'fetch-mock'
-import { PUSH_LIST_COMMENTS, REMOVE_COMMENT_IN_LIST_COMMENTS } from 'components/post/constants/ActionTypes'
+import { PUSH_LIST_COMMENTS, REMOVE_COMMENT_IN_LIST_COMMENTS } from '../post/constants/ActionTypes'
 import * as types from './constants/ActionTypes'
 import * as actions from './actions'
-import { commentCreateUrl, commentUrl } from 'api/cms'
+import { commentCreateUrl, commentUrl } from '../../api/cms'
 import { commentMock } from './constants/Fixtures'
 
 describe('actions', () => {
