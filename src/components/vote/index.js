@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { connect } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { postVoteFetch, postUrl, commentUrl } from '../../api/cms'
+import { commentUrl } from '../../api/cms'
+import { postVoteFetch, commentVoteFetch } from '../post/actions'
 import './Vote.css'
 
 class Vote extends Component {
@@ -13,6 +14,7 @@ class Vote extends Component {
     total: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    postVoteFetch: PropTypes.func.isRequired,
   }
 
   state = {
@@ -22,14 +24,14 @@ class Vote extends Component {
     didInvalidate: false,
   }
   
-  voteUrl() {
+  voteFetchByType() {
     switch (this.props.type) {
       case 'comment':
-        return commentUrl(this.props.id)
+        return this.props.commentVoteFetch
         break;
     
       case 'post':
-        return postUrl(this.props.id)
+        return this.props.postVoteFetch
         break;
     
       default:
@@ -44,23 +46,32 @@ class Vote extends Component {
       created: false,
       didInvalidate: false,
     }))
-
-    postVoteFetch(this.voteUrl(), option)
-    .then(body => {
-      this.setState((state) => ({
-        isFetching: false,
-        didInvalidate: false,
-        created: true,
-        total: option === 'upVote'? state.total + 1 : state.total - 1
-      }))
-    })
-    .catch(ex => {
+    
+    const voteFunc = this.voteFetchByType()
+    if ( voteFunc === false ){
       this.setState((state) => ({
         didInvalidate: true,
         created: false,
         isFetching: false,
       }))
-    })
+    }else{
+      voteFunc(this.props.id, option)
+      .then(body => {
+        this.setState((state) => ({
+          isFetching: false,
+          didInvalidate: false,
+          created: true,
+          total: option === 'upVote'? state.total + 1 : state.total - 1
+        }))
+      })
+      .catch(ex => {
+        this.setState((state) => ({
+          didInvalidate: true,
+          created: false,
+          isFetching: false,
+        }))
+      })
+    }
   }
 
   render() {
@@ -94,4 +105,15 @@ class Vote extends Component {
   }
 }
 
-export default Vote
+const mapStateToProps = () => {
+  return {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postVoteFetch: (postId, option) => dispatch(postVoteFetch(postId, option)),
+    commentVoteFetch: (commentId, option) => dispatch(commentVoteFetch(commentId, option)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Vote);

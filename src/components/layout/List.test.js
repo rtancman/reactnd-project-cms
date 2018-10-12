@@ -1,6 +1,9 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import { MemoryRouter } from 'react-router'
+import thunk from 'redux-thunk'
+import configureStore from 'redux-mock-store'
+import { Provider } from 'react-redux'
 import { List, ListContent } from './List'
 
 describe('List Component', () => {
@@ -125,11 +128,20 @@ describe('List Component', () => {
 })
 
 describe('ListContent Component', () => {
+  const middlewares = [thunk]
+  const mockStore = configureStore(middlewares)
+  let store
+
+  beforeEach(() => {
+    store = mockStore({})
+  })
+
   describe('when component renders', () => {
     it('without crashing', () => {
       const props = {
         items: [],
         title: 'Title list content',
+        store: store,
       }
       const wrapper = shallow(<ListContent {...props} />)
 
@@ -154,9 +166,11 @@ describe('ListContent Component', () => {
         title: 'Title list content',
       }
       const wrapper = mount(
-        <MemoryRouter>
-          <ListContent {...props} />
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter>
+            <ListContent {...props} />
+          </MemoryRouter>
+        </Provider>
       )
 
       expect(wrapper.find('.list_content h2').length).toBe(1)
@@ -205,9 +219,11 @@ describe('ListContent Component', () => {
           title: 'Title list content',
         }
         const wrapper = mount(
-          <MemoryRouter>
-            <ListContent {...props} />
-          </MemoryRouter>
+          <Provider store={store}>
+            <MemoryRouter>
+              <ListContent {...props} />
+            </MemoryRouter>
+          </Provider>
         )
   
         expect(wrapper.find('ListContent').instance().state.orderBy).toEqual('-voteScore')
@@ -258,9 +274,11 @@ describe('ListContent Component', () => {
         ]
 
         const wrapper = mount(
+          <Provider store={store}>
           <MemoryRouter>
             <ListContent {...props} />
           </MemoryRouter>
+          </Provider>
         )
   
         wrapper.find('div.list_content__filter__item[data-filter-option-value="category"]').simulate('click')
@@ -322,9 +340,11 @@ describe('ListContent Component', () => {
           {title: 'Udacity is the best place to learn React 6', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: '07/14/2016  2 - in react - by thingtwo', linkInfo: '/react'},
         ]
         const wrapper = mount(
+          <Provider store={store}>
           <MemoryRouter>
             <ListContent {...props} />
           </MemoryRouter>
+          </Provider>
         )
 
         wrapper.find('div.list_content__filter__item[data-filter-option-value="-timestamp"]').simulate('click')
@@ -387,9 +407,11 @@ describe('ListContent Component', () => {
         ]
 
         const wrapper = mount(
+          <Provider store={store}>
           <MemoryRouter>
             <ListContent {...props} />
           </MemoryRouter>
+          </Provider>
         )
 
         wrapper.find('div.list_content__filter__item[data-filter-option-value="-voteScore"]').simulate('click')

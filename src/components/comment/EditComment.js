@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import CancelIcon from '@material-ui/icons/Cancel';
+import EventIcon from '@material-ui/icons/Event';
 import CommentForm from './CommentForm'
 import { pushListComments } from '../post/actions'
 import { ShowMessage } from '../layout/Message.js'
@@ -118,7 +119,7 @@ class EditComment extends Component {
           <div className="content__comment__body__info">
             <AccountCircle className="content__comment__body__info--avatar"/>
             <p className="content__comment__body__info--author">{ comment.author }</p>
-            <span className="content__comment__body__info--date">date { moment(comment.timestamp).format('MM-DD-YYYY') }</span>
+            <span className="content__comment__body__info--date"><EventIcon style={{ fontSize: 12 }} title='Date' alt='Date' /> { moment(comment.timestamp).format('MM-DD-YYYY') }</span>
           </div>
           {content}
         </div>

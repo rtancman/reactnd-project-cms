@@ -6,7 +6,7 @@ import * as types from './constants/ActionTypes'
 import { initialListPostState, initialPostState } from './constants/ReducersInitialState'
 import { listPostsMock, postMock, postCommentsMock } from './constants/Fixtures'
 import { commentMock }  from '../comment/constants/Fixtures'
-import { listPostsUrl, headers, postUrl, postCreateUrl, postCommentsUrl } from '../../api/cms';
+import { listPostsUrl, postUrl, postCreateUrl, postCommentsUrl, commentUrl } from '../../api/cms';
 
 
 describe('actions', () => {
@@ -145,6 +145,17 @@ describe('actions', () => {
           expect(store.getActions()).toEqual(expectedActions)
         })
       })
+
+      it('creates UPDATE_COMMENT_IN_LIST_COMNENTS when commentVoteFetch has been done', () => {
+        fetchMock.post(commentUrl(commentMock.id), { body: commentMock })
+        const expectedActions = [
+          { type: types.UPDATE_COMMENT_IN_LIST_COMNENTS, comment: commentMock },
+        ]
+        const store = mockStore({})
+        return store.dispatch(actions.commentVoteFetch(commentMock.id, {option: 'upVote'})).then(() => {
+          expect(store.getActions()).toEqual(expectedActions)
+        })
+      })
     })
   })
 
@@ -269,6 +280,17 @@ describe('actions', () => {
         ]
         const store = mockStore({ posts: {...initialListPostState, items: [post]} })
         return store.dispatch(actions.editPostFetch(post.id, post)).then(() => {
+          expect(store.getActions()).toEqual(expectedActions)
+        })
+      })
+
+      it('creates UPDATE_POST_IN_LIST_POSTS when postVoteFetch has been done', () => {
+        fetchMock.post(postUrl(post.id), { body: post })
+        const expectedActions = [
+          { type: types.UPDATE_POST_IN_LIST_POSTS, post },
+        ]
+        const store = mockStore({ posts: {...initialListPostState, items: [post]} })
+        return store.dispatch(actions.postVoteFetch(post.id, {option: 'upVote'})).then(() => {
           expect(store.getActions()).toEqual(expectedActions)
         })
       })

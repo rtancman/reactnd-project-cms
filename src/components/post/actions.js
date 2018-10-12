@@ -1,5 +1,5 @@
 import * as types from './constants/ActionTypes'
-import { headers, listPostsUrl, postUrl, postCreateUrl, postCommentsUrl } from '../../api/cms';
+import { headers, listPostsUrl, postUrl, postCreateUrl, postCommentsUrl, commentUrl } from '../../api/cms';
 
 export const invalidatePosts = (bool) => {
   return {
@@ -219,5 +219,45 @@ export const updateCommentInListComments = (comment) => {
         deleted: comment.deleted,
         parentDeleted: comment.parentDeleted,
       }
+  }
+}
+
+export function postVoteFetch(postId, option) {
+  return dispatch => {
+    return fetch(postUrl(postId), {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({option})
+    })
+    .then(res => res.json())
+    .then(body => {
+      dispatch(updatePostInListPost(body))
+      return new Promise(function(resolve) {
+        resolve(body);
+      })
+    })
+  }
+}
+
+export function commentVoteFetch(commentId, option) {
+  return dispatch => {
+    return fetch(commentUrl(commentId), {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({option})
+    })
+    .then(res => res.json())
+    .then(body => {
+      dispatch(updateCommentInListComments(body))
+      return new Promise(function(resolve) {
+        resolve(body);
+      })
+    })
   }
 }
