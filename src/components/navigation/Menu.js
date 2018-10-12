@@ -35,8 +35,8 @@ class Menu extends Component {
   }
 
   makeListSearch(){
-    const listPosts = this.props.posts.items.map((p) => {return {name: p.title, path: `/posts/${p.id}`}})
-    const listCategories = this.props.categories.items.map((c) => {return {name: c.name, path: `/category/${c.path}`}})
+    const listPosts = this.props.posts.items.map((p) => {return {name: p.title, path: `/${p.category}/${p.id}`}})
+    const listCategories = this.props.categories.items.map((c) => {return {name: c.name, path: `/${c.path}`}})
     return [...listCategories, ...listPosts]
   }
 
