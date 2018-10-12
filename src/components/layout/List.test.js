@@ -68,11 +68,11 @@ describe('List Component', () => {
       it('in option Default render list like props.items', () => {
         const props = {
           items: [
-            { path: '4', name: 'item 4', },
             { path: '1', name: 'item 1', },
-            { path: '5', name: 'item 5', },
-            { path: '3', name: 'item 3', },
             { path: '2', name: 'item 2', },
+            { path: '3', name: 'item 3', },
+            { path: '4', name: 'item 4', },
+            { path: '5', name: 'item 5', },
           ],
           title: 'Title list',
         }
@@ -82,16 +82,15 @@ describe('List Component', () => {
           </MemoryRouter>
         )
   
-        wrapper.find('div.list_content__filter__item[data-filter-option-value=false]').simulate('click')
         expect(wrapper.find('List').props().items).toEqual(props.items)
-        expect(wrapper.find('List').instance().state.orderBy).toEqual(false)
+        expect(wrapper.find('List').instance().state.orderBy).toEqual('path')
         const item = wrapper.find('.list_content__item').first()
-        expect(item.text()).toBe('item 4')
+        expect(item.text()).toBe('item 1')
         expect(item.find('Link').length).toBe(1)
-        expect(item.find('Link').instance().props.to).toBe('/4')
+        expect(item.find('Link').instance().props.to).toBe('/1')
       })
   
-      it('in option Name render list sorted by path', () => {
+      it('in option Name A-Z render list sorted by path', () => {
         const sortedByPath = [
           { path: '1', name: 'item 1', },
           { path: '2', name: 'item 2', },
@@ -122,6 +121,39 @@ describe('List Component', () => {
         expect(item.text()).toBe('item 1')
         expect(item.find('Link').length).toBe(1)
         expect(item.find('Link').instance().props.to).toBe('/1')
+      })
+
+      it('in option Name Z-A render list sorted by -path', () => {
+        const sortedByPath = [
+          { path: '5', name: 'item 5', },
+          { path: '4', name: 'item 4', },
+          { path: '3', name: 'item 3', },
+          { path: '2', name: 'item 2', },
+          { path: '1', name: 'item 1', },
+        ]
+        const props = {
+          items: [
+            { path: '4', name: 'item 4', },
+            { path: '1', name: 'item 1', },
+            { path: '5', name: 'item 5', },
+            { path: '3', name: 'item 3', },
+            { path: '2', name: 'item 2', },
+          ],
+          title: 'Title list',
+        }
+        const wrapper = mount(
+          <MemoryRouter>
+            <List {...props} />
+          </MemoryRouter>
+        )
+  
+        wrapper.find('div.list_content__filter__item[data-filter-option-value="-path"]').simulate('click')
+        expect(wrapper.find('List').props().items).toEqual(sortedByPath)
+        expect(wrapper.find('List').instance().state.orderBy).toEqual('-path')
+        const item = wrapper.find('.list_content__item').first()
+        expect(item.text()).toBe('item 5')
+        expect(item.find('Link').length).toBe(1)
+        expect(item.find('Link').instance().props.to).toBe('/5')
       })
     })
   })

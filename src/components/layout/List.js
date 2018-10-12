@@ -79,10 +79,14 @@ class ListContent extends BaseList {
 }
 
 const orderByCategoryOptions = [
-  {label: 'Default', value: false},
-  {label: 'Name', value: 'path'},
+  {label: 'Name A-Z', value: 'path'},
+  {label: 'Name Z-A', value: '-path'},
 ]
 class List extends BaseList {
+  state = {
+    orderBy: 'path',
+  }
+
   render() {
     const { items, title } = this.props
     const { orderBy } = this.state

@@ -28,20 +28,20 @@ ShallowWrapper {
 >
           <div
                     className="col-xs list_content__filter__item list_content__filter__item--selected"
-                    data-filter-option-value={false}
-                    onClick={[Function]}
-          >
-                    <span>
-                              Default
-                    </span>
-          </div>
-          <div
-                    className="col-xs list_content__filter__item "
                     data-filter-option-value="path"
                     onClick={[Function]}
           >
                     <span>
-                              Name
+                              Name A-Z
+                    </span>
+          </div>
+          <div
+                    className="col-xs list_content__filter__item "
+                    data-filter-option-value="-path"
+                    onClick={[Function]}
+          >
+                    <span>
+                              Name Z-A
                     </span>
           </div>
 </div>,
@@ -70,20 +70,20 @@ ShallowWrapper {
           "children": Array [
             <div
               className="col-xs list_content__filter__item list_content__filter__item--selected"
-              data-filter-option-value={false}
-              onClick={[Function]}
->
-              <span>
-                            Default
-              </span>
-</div>,
-            <div
-              className="col-xs list_content__filter__item "
               data-filter-option-value="path"
               onClick={[Function]}
 >
               <span>
-                            Name
+                            Name A-Z
+              </span>
+</div>,
+            <div
+              className="col-xs list_content__filter__item "
+              data-filter-option-value="-path"
+              onClick={[Function]}
+>
+              <span>
+                            Name Z-A
               </span>
 </div>,
           ],
@@ -93,39 +93,13 @@ ShallowWrapper {
         "rendered": Array [
           Object {
             "instance": null,
-            "key": "false",
-            "nodeType": "host",
-            "props": Object {
-              "children": <span>
-                Default
-</span>,
-              "className": "col-xs list_content__filter__item list_content__filter__item--selected",
-              "data-filter-option-value": false,
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Default",
-              },
-              "ref": null,
-              "rendered": "Default",
-              "type": "span",
-            },
-            "type": "div",
-          },
-          Object {
-            "instance": null,
             "key": "path",
             "nodeType": "host",
             "props": Object {
               "children": <span>
-                Name
+                Name A-Z
 </span>,
-              "className": "col-xs list_content__filter__item ",
+              "className": "col-xs list_content__filter__item list_content__filter__item--selected",
               "data-filter-option-value": "path",
               "onClick": [Function],
             },
@@ -135,10 +109,36 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Name",
+                "children": "Name A-Z",
               },
               "ref": null,
-              "rendered": "Name",
+              "rendered": "Name A-Z",
+              "type": "span",
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": "-path",
+            "nodeType": "host",
+            "props": Object {
+              "children": <span>
+                Name Z-A
+</span>,
+              "className": "col-xs list_content__filter__item ",
+              "data-filter-option-value": "-path",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Name Z-A",
+              },
+              "ref": null,
+              "rendered": "Name Z-A",
               "type": "span",
             },
             "type": "div",
@@ -164,20 +164,20 @@ ShallowWrapper {
 >
             <div
                         className="col-xs list_content__filter__item list_content__filter__item--selected"
-                        data-filter-option-value={false}
-                        onClick={[Function]}
-            >
-                        <span>
-                                    Default
-                        </span>
-            </div>
-            <div
-                        className="col-xs list_content__filter__item "
                         data-filter-option-value="path"
                         onClick={[Function]}
             >
                         <span>
-                                    Name
+                                    Name A-Z
+                        </span>
+            </div>
+            <div
+                        className="col-xs list_content__filter__item "
+                        data-filter-option-value="-path"
+                        onClick={[Function]}
+            >
+                        <span>
+                                    Name Z-A
                         </span>
             </div>
 </div>,
@@ -206,20 +206,20 @@ ShallowWrapper {
             "children": Array [
               <div
                 className="col-xs list_content__filter__item list_content__filter__item--selected"
-                data-filter-option-value={false}
-                onClick={[Function]}
->
-                <span>
-                                Default
-                </span>
-</div>,
-              <div
-                className="col-xs list_content__filter__item "
                 data-filter-option-value="path"
                 onClick={[Function]}
 >
                 <span>
-                                Name
+                                Name A-Z
+                </span>
+</div>,
+              <div
+                className="col-xs list_content__filter__item "
+                data-filter-option-value="-path"
+                onClick={[Function]}
+>
+                <span>
+                                Name Z-A
                 </span>
 </div>,
             ],
@@ -229,39 +229,13 @@ ShallowWrapper {
           "rendered": Array [
             Object {
               "instance": null,
-              "key": "false",
-              "nodeType": "host",
-              "props": Object {
-                "children": <span>
-                  Default
-</span>,
-                "className": "col-xs list_content__filter__item list_content__filter__item--selected",
-                "data-filter-option-value": false,
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Default",
-                },
-                "ref": null,
-                "rendered": "Default",
-                "type": "span",
-              },
-              "type": "div",
-            },
-            Object {
-              "instance": null,
               "key": "path",
               "nodeType": "host",
               "props": Object {
                 "children": <span>
-                  Name
+                  Name A-Z
 </span>,
-                "className": "col-xs list_content__filter__item ",
+                "className": "col-xs list_content__filter__item list_content__filter__item--selected",
                 "data-filter-option-value": "path",
                 "onClick": [Function],
               },
@@ -271,10 +245,36 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "Name",
+                  "children": "Name A-Z",
                 },
                 "ref": null,
-                "rendered": "Name",
+                "rendered": "Name A-Z",
+                "type": "span",
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": "-path",
+              "nodeType": "host",
+              "props": Object {
+                "children": <span>
+                  Name Z-A
+</span>,
+                "className": "col-xs list_content__filter__item ",
+                "data-filter-option-value": "-path",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Name Z-A",
+                },
+                "ref": null,
+                "rendered": "Name Z-A",
                 "type": "span",
               },
               "type": "div",
