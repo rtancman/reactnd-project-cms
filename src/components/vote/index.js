@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { postVoteFetch, postUrl, commentUrl } from '../../api/cms'
 import './Vote.css'
 
@@ -86,7 +87,7 @@ class Vote extends Component {
     }
     return(
       <div className="vote__bar">
-        <span className="vote__bar__total">score { total || 0 }</span>
+        <span className="vote__bar__total"><FavoriteIcon style={{ fontSize: 12 }} title='Total score' alt='Total score'/> { total || 0 }</span>
         { content }
       </div>
     )

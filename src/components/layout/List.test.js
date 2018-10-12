@@ -164,11 +164,11 @@ describe('ListContent Component', () => {
       expect(wrapper.find('.list_content__item').length).toBe(1)
       const item = wrapper.find('.list_content__item').first()
       const itemTitle = item.find('.list_content__item__title')
-      expect(itemTitle.text()).toBe('Udacity is the best place to learn React')
+      expect(itemTitle.text()).toBe('Udacity is the best place to learn React 6')
       expect(itemTitle.find('Link').length).toBe(1)
       expect(itemTitle.find('Link').instance().props.to).toBe('/react/8xf0y6ziyjabvozdd253nd')
       const itemInfo = item.find('.list_content__item__info')
-      expect(itemInfo.text()).toBe('date 06-28-2016 - in react - by thingtwo')
+      expect(itemInfo.text().trim()).toBe('06/28/2016  2 - in react - by thingtwo')
       expect(itemInfo.find('Link').length).toBe(1)
       expect(itemInfo.find('Link').instance().props.to).toBe('/react')
     })
@@ -213,11 +213,11 @@ describe('ListContent Component', () => {
         expect(wrapper.find('ListContent').instance().state.orderBy).toEqual('-voteScore')
         const item = wrapper.find('.list_content__item').first()
         const itemTitle = item.find('.list_content__item__title')
-        expect(itemTitle.text()).toBe('Learn Redux in 10 minutes!')
+        expect(itemTitle.text()).toBe('Learn Redux in 10 minutes! 105')
         expect(itemTitle.find('Link').length).toBe(1)
         expect(itemTitle.find('Link').instance().props.to).toBe('/redux/6ni6ok3ym7mf1p33lnez')
         const itemInfo = item.find('.list_content__item__info')
-        expect(itemInfo.text()).toBe('date 07-14-2016 - in redux - by lala')
+        expect(itemInfo.text().trim()).toBe('07/14/2016  0 - in redux - by lala')
         expect(itemInfo.find('Link').length).toBe(1)
         expect(itemInfo.find('Link').instance().props.to).toBe('/redux')
       })
@@ -253,8 +253,8 @@ describe('ListContent Component', () => {
           title: 'Title list',
         }
         const expected = [
-          {title: 'Udacity is the best place to learn React', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: 'date 06-28-2016 - in react - by thingtwo', linkInfo: '/react'},
-          {title: 'Learn Redux in 10 minutes!', linkTitle: '/redux/6ni6ok3ym7mf1p33lnez', info: 'date 07-14-2016 - in redux - by lala', linkInfo: '/redux'},
+          {title: 'Udacity is the best place to learn React 6', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: '06/28/2016  2 - in react - by thingtwo', linkInfo: '/react'},
+          {title: 'Learn Redux in 10 minutes! 105', linkTitle: '/redux/6ni6ok3ym7mf1p33lnez', info: '07/14/2016  0 - in redux - by lala', linkInfo: '/redux'},
         ]
 
         const wrapper = mount(
@@ -271,7 +271,7 @@ describe('ListContent Component', () => {
           expect(itemTitle.find('Link').length).toBe(1)
           expect(itemTitle.find('Link').instance().props.to).toBe(expected[i].linkTitle)
           let itemInfo = node.find('.list_content__item__info')
-          expect(itemInfo.text()).toBe(expected[i].info)
+          expect(itemInfo.text().trim()).toBe(expected[i].info)
           expect(itemInfo.find('Link').length).toBe(1)
           expect(itemInfo.find('Link').instance().props.to).toBe(expected[i].linkInfo)
         });
@@ -317,9 +317,9 @@ describe('ListContent Component', () => {
           title: 'Title list',
         }
         const expected = [
-          {title: 'teste 3', linkTitle: '/oieee/1468479767190', info: 'date 10-08-2018 - in oieee - by lele', linkInfo: '/oieee'},
-          {title: 'Learn Redux in 10 minutes!', linkTitle: '/redux/6ni6ok3ym7mf1p33lnez', info: 'date 10-08-2018 - in redux - by lala', linkInfo: '/redux'},
-          {title: 'Udacity is the best place to learn React', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: 'date 07-14-2016 - in react - by thingtwo', linkInfo: '/react'},
+          {title: 'teste 3 6', linkTitle: '/oieee/1468479767190', info: '10/08/2018  2 - in oieee - by lele', linkInfo: '/oieee'},
+          {title: 'Learn Redux in 10 minutes! 105', linkTitle: '/redux/6ni6ok3ym7mf1p33lnez', info: '10/08/2018  0 - in redux - by lala', linkInfo: '/redux'},
+          {title: 'Udacity is the best place to learn React 6', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: '07/14/2016  2 - in react - by thingtwo', linkInfo: '/react'},
         ]
         const wrapper = mount(
           <MemoryRouter>
@@ -335,7 +335,7 @@ describe('ListContent Component', () => {
           expect(itemTitle.find('Link').length).toBe(1)
           expect(itemTitle.find('Link').instance().props.to).toBe(expected[i].linkTitle)
           let itemInfo = node.find('.list_content__item__info')
-          expect(itemInfo.text()).toBe(expected[i].info)
+          expect(itemInfo.text().trim()).toBe(expected[i].info)
           expect(itemInfo.find('Link').length).toBe(1)
           expect(itemInfo.find('Link').instance().props.to).toBe(expected[i].linkInfo)
         });
@@ -381,9 +381,9 @@ describe('ListContent Component', () => {
           title: 'Title list',
         }
         const expected = [
-          {title: 'Learn Redux in 10 minutes!', linkTitle: '/redux/6ni6ok3ym7mf1p33lnez', info: 'date 10-08-2018 - in redux - by lala', linkInfo: '/redux'},
-          {title: 'Udacity is the best place to learn React', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: 'date 07-14-2016 - in react - by thingtwo', linkInfo: '/react'},
-          {title: 'teste 3', linkTitle: '/oieee/1468479767190', info: 'date 10-08-2018 - in oieee - by lele', linkInfo: '/oieee'},
+          {title: 'Learn Redux in 10 minutes! 1005', linkTitle: '/redux/6ni6ok3ym7mf1p33lnez', info: '10/08/2018  0 - in redux - by lala', linkInfo: '/redux'},
+          {title: 'Udacity is the best place to learn React 611', linkTitle: '/react/8xf0y6ziyjabvozdd253nd', info: '07/14/2016  2 - in react - by thingtwo', linkInfo: '/react'},
+          {title: 'teste 3 42', linkTitle: '/oieee/1468479767190', info: '10/08/2018  2 - in oieee - by lele', linkInfo: '/oieee'},
         ]
 
         const wrapper = mount(
@@ -400,7 +400,7 @@ describe('ListContent Component', () => {
           expect(itemTitle.find('Link').length).toBe(1)
           expect(itemTitle.find('Link').instance().props.to).toBe(expected[i].linkTitle)
           let itemInfo = node.find('.list_content__item__info')
-          expect(itemInfo.text()).toBe(expected[i].info)
+          expect(itemInfo.text().trim()).toBe(expected[i].info)
           expect(itemInfo.find('Link').length).toBe(1)
           expect(itemInfo.find('Link').instance().props.to).toBe(expected[i].linkInfo)
         });

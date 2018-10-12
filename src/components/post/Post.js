@@ -5,6 +5,9 @@ import moment from 'moment'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CommentIcon from '@material-ui/icons/Comment';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import EventIcon from '@material-ui/icons/Event';
 import EditIcon from '@material-ui/icons/Edit';
 import { postFetchData, postCommentsFetchData, removePostFetch } from './actions';
 import { Link } from "react-router-dom";
@@ -68,7 +71,7 @@ class Post extends Component {
             <div className="container">
               <h1 className="content__title">{ postContent.title }</h1>
               <p>
-                date { moment(postContent.timestamp).format('MM-DD-YYYY') } - in <Link className="link" to={`/${postContent.category}`}>{ postContent.category }</Link> - by <span className="content__title__info--author">{ postContent.author }</span> 
+                <EventIcon style={{ fontSize: 12 }} title='Create at' alt='Create at' /> { moment(postContent.timestamp).format('MM/DD/YYYY') } <CommentIcon style={{ fontSize: 12 }} title='Total comments' alt='Total comments' /> { postContent.commentCount } <FavoriteIcon style={{ fontSize: 12 }} title='Total score' alt='Total score' /> { postContent.voteScore } - in <Link className="link" to={`/${postContent.category}`}>{ postContent.category }</Link> - by by <span className="content__title__info--author">{ postContent.author }</span>
               </p>
               <hr />
               <div className="content__title__actions">

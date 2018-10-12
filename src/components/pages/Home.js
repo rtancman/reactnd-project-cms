@@ -23,10 +23,10 @@ const Home = (props) => {
   return (
     <div className="page_home">
       <div className="row">
-        <div className="col-xs-6">
+        <div className="col-xs-12 col-md-6">
           <ListCategories />
         </div>
-        <div className="col-xs-6">
+        <div className="col-xs-12 col-md-6">
           <ListPosts />
         </div>
       </div>

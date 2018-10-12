@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import { Link } from "react-router-dom"
 import moment from 'moment'
 import sortBy from 'sort-by'
+import CommentIcon from '@material-ui/icons/Comment';
+import EventIcon from '@material-ui/icons/Event';
 import './List.css'
+import Vote from '../vote'
 
 const orderByOptions = [
   {label: 'Popular', value: '-voteScore'},
@@ -55,10 +58,17 @@ class ListContent extends BaseList {
           <div className="list_content__item" key={item.id}>
             <div className="list_content__item__title">
               <Link className="link" to={`/${item.category}/${item.id}`}>{item.title}</Link>
+              <div className="list_content__item__title--vote">
+                <Vote
+                  type='post' 
+                  id={item.id}
+                  total={item.voteScore || 0}
+                />
+              </div>
             </div>
             <div className="list_content__item__info">
               <p>
-                date { moment(item.timestamp).format('MM-DD-YYYY') } - in <Link className="link" to={`/${item.category}`}>{ item.category }</Link> - by <span className="list_posts__item__info--author">{ item.author }</span> 
+                <EventIcon style={{ fontSize: 10 }} title='Create at' alt='Create at' /> { moment(item.timestamp).format('MM/DD/YYYY') } <CommentIcon style={{ fontSize: 10 }} title='Total comments' alt='Total comments' /> { item.commentCount } - in <Link className="link" to={`/${item.category}`}>{ item.category }</Link> - by <span className="list_posts__item__info--author">{ item.author }</span>
               </p>
             </div>
           </div>
